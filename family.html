@@ -3,46 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Krigstiden - En Interaktiv Bok</title>
+    <title>Responsiv Bla-Bok</title>
     
     <script src="https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.min.js"></script>
 
     <style>
+        /* 1. MOBILE-FIRST: CSS som gjelder for ALLE (mobilen er standarden) */
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            margin: 0;
+            height: 100vh;
+            overflow: hidden; 
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
-            overflow: hidden; /* Skjuler skrolling på siden */
+            background-color: #f0f0f0; /* Mobil bakgrunn */
         }
 
-        /* 2. En container for å holde og sentrere boken */
         .bok-container {
-            width: 80vw; 
-            height: 90vh;
-            max-width: 1000px;
-            max-height: 700px;
+            width: 100vw;   
+            height: 100vh;  
+            max-width: 100%;
+            max-height: 100%;
+            box-shadow: none; 
         }
-
-        /* 3. Selve boken. */
+        
         #min-bok {
             width: 100%;
             height: 100%;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
 
-        /* 4. Stil for HVER ENKELT side i boken */
         .side {
             background-color: #fff;
-            padding: 40px;
+            padding: 20px; 
             box-sizing: border-box;
-            border: 1px solid #c9c9c9;
-            overflow: hidden; 
+            overflow-y: auto; 
         }
 
+        /* Innhold for mobil (stakket) */
+        .side-innhold {
+            display: flex;
+            flex-direction: column; 
+            height: 100%;
+            justify-content: flex-start; /* Justerer innholdet mot toppen */
+            align-items: center;
+        }
+
+        .side-bilde, .side-tekst {
+            flex-shrink: 0; /* Hindrer krymping på mobil */
+            padding: 10px 0;
+            width: 100%; /* Begge tar full bredde på mobil */
+            text-align: center;
+        }
+
+        .side-bilde img {
+            max-width: 90%;
+            height: auto;
+            border-radius: 4px;
+            display: block; /* For å sentrere bildet bedre */
+            margin: 0 auto;
+        }
+
+        .side-tekst h2 {
+            margin-top: 10px; /* Litt avstand på mobil */
+            font-size: 1.5rem;
+        }
+        .side-tekst p {
+            font-size: 1rem;
+            text-align: left; /* Teksten kan være venstrejustert på mobil også */
+            padding: 0 10px; /* Litt mer padding på sidene for tekst */
+        }
+
+        /* Forside/Bakside stil */
         .side.forside {
             background-color: #4a4a4a;
             color: white;
