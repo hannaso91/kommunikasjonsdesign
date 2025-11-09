@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krigstiden - En Interaktiv Bok</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden; /* Skjuler skrolling på siden */
+        }
+
+        /* 2. En container for å holde og sentrere boken */
+        .bok-container {
+            width: 80vw; 
+            height: 90vh;
+            max-width: 1000px;
+            max-height: 700px;
+        }
+
+        /* 3. Selve boken. */
+        #min-bok {
+            width: 100%;
+            height: 100%;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 4. Stil for HVER ENKELT side i boken */
+        .side {
+            background-color: #fff;
+            padding: 40px;
+            box-sizing: border-box;
+            border: 1px solid #c9c9c9;
+            overflow: hidden; 
+        }
+
+        .side.forside {
+            background-color: #4a4a4a;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .side.forside h1 { font-size: 3rem; margin: 0; }
+        .side h2 { color: #333; border-bottom: 2px solid #e0e0e0; padding-bottom: 10px; }
+        .side p { font-size: 1rem; line-height: 1.6; color: #555; }
+        .side.-left { text-align: left; }
+        .side.-right { text-align: right; }
+
+    </style>
+</head>
+<body>
+
+    <div class="bok-container">
+        
+        <div id="min-bok">
+            
+            <div class="side forside">
+                <h1>Krigstiden i Norge</h1>
+                <p>1940 - 1945</p>
+                <p style="margin-top: 50px;">(Bruk musehjulet for å bla)</p>
+            </div>
+
+            <div class="side">
+                <h2>Kapittel 1: Invasjonen</h2>
+                <p>Natten til 9. april 1940 ble Norge angrepet av Tyskland...</p>
+                <p>Side 2</p>
+            </div>
+
+            <div class="side">
+                <h2>Senkingen av "Blücher"</h2>
+                <p>Et av de mest dramatiske øyeblikkene...</p>
+                <p>Side 3</p>
+            </div>
+
+            <div class="side">
+                <h2>Kapittel 2: Hverdagslivet</h2>
+                <p>Livet under okkupasjonen var preget av rasjonering...</p>
+                <p>Side 4</p>
+            </div>
+
+            <div class="side">
+                <p>Radioapparatene ble inndratt...</p>
+                <p>Side 5</p>
+            </div>
+
+            <div class="side forside">
+                <h2>Slutt</h2>
+            </div>
+            
+        </div>
+    </div>
+
+
+    <script type="text/javascript">
+        
+        // Vent til siden er lastet inn
+        document.addEventListener('DOMContentLoaded', function() {
+
+            // Finn bok-elementet og containeren
+            const bokContainer = document.querySelector('.bok-container');
+            const bokElement = document.getElementById('min-bok');
+            
+            // Lag et nytt PageFlip-objekt
+            const pageFlip = new St.PageFlip(
+                bokElement,
+                {
+                    width: bokContainer.clientWidth, 
+                    height: bokContainer.clientHeight,
+                    showCover: true, 
+                    maxShadowOpacity: 0.5 
+                }
+            );
+
+            // Last inn sidene fra HTML
+            pageFlip.loadFromHTML(document.querySelectorAll('.side'));
+
+            // ----------------------------------------------------
+            // NY KODE FOR SKROLLE-BLAING STARTER HER
+            // ----------------------------------------------------
+
+            // En "lås" for å hindre for rask blaing
+            let isFlipping = false;
+
+            // Funksjonen som håndterer skrolling
+            function handleScrollFlip(event) {
+                // Hindrer at hele nettsiden skroller
+                event.preventDefault();
+
+                // Hvis vi allerede er i ferd med å bla, stopp her
+                if (isFlipping) {
+                    return;
+                }
+
+                // Hent skrolleretningen (deltaY er positiv for ned, negativ for opp)
+                const scrollDirection = event.deltaY;
+
+                if (scrollDirection > 0) {
+                    // Bruker skroller NED -> Bla til NESTE side
+                    pageFlip.flipNext();
+                } else if (scrollDirection < 0) {
+                    // Bruker skroller OPP -> Bla til FORRIGE side
+                    pageFlip.flipPrev();
+                }
+
+                // 1. Sett "låsen"
+                isFlipping = true;
+
+                // 2. Frigi "låsen" etter 1 sekund (1000ms).
+                // Dette gir animasjonen tid til å fullføre.
+                setTimeout(() => {
+                    isFlipping = false;
+                }, 1000); 
+            }
+
+            // 3. Legg til selve "lytteren" på bok-containeren.
+            // Vi lytter etter 'wheel'-eventen (musehjulet).
+            // { passive: false } er viktig for å tillate oss å bruke event.preventDefault()
+            bokContainer.addEventListener('wheel', handleScrollFlip, { passive: false });
+
+            // ----------------------------------------------------
+            // NY KODE SLUTTER HER
+            // ----------------------------------------------------
+
+            // Oppdaterer størrelsen på boken hvis vinduet endres
+            window.addEventListener('resize', function() {
+                pageFlip.updateSize(bokContainer.clientWidth, bokContainer.clientHeight);
+            });
+        });
+
+    </script>
+    
+</body>
+</html>
