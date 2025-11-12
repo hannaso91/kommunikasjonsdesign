@@ -357,8 +357,6 @@
                 <p>Grim tjener godt på å promotere gambling for gamblingnettsiden CSGO Roll.</p>
                 <img src="Bilder/Rivallogoenmothverandre.png" alt="Pixelert bilde av to rivaliserende logoer"/>
            </div>
-           
-            
             
            <details class="dropdown">
                 <summary>Hva skjer mellom roll og empire?</summary>
@@ -434,7 +432,6 @@
     
     <script>
         gsap.registerPlugin(ScrollTrigger);
-
     
         gsap.utils.toArray("video").forEach((video) => {
 
@@ -454,7 +451,6 @@
             });
         });
 
-        
         gsap.utils.toArray(".cow-slide").forEach((slide, i) => {
             const text = slide.querySelector('.imgText');
             
@@ -492,7 +488,6 @@
             });
         });
 
-      
         gsap.utils.toArray(".dropdown").forEach((dropdown, i) => {
             const direction = i % 2 === 0 ? -50 : 50;
             
@@ -509,8 +504,6 @@
             });
         });
 
-      
-       
         gsap.utils.toArray("#secondPart .content-box, #backtocow .content-box, #caselaunch .content-box").forEach(box => {
             gsap.from(box, {
                 y: 50,
@@ -524,7 +517,6 @@
             });
         });
         
-
         gsap.from("#secondPart img", {
             scale: 0.5,
             opacity: 0,
