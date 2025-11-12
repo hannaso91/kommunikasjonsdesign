@@ -73,6 +73,12 @@ body{
 .page .figure img{width:100%; height:auto; border-radius:10px; display:block}
 .page .figure figcaption{font-size:13px; color:var(--ink-soft)}
 
+.figure_portrait img{width:40%; height:auto; border-radius:10px; display:block}
+    figcaption {
+      font-size: 13px;
+      color: var(--ink-soft)
+    }
+
 .page--right{right:0; transform-origin: left center;}
 .page--left{left:0; transform-origin: right center;}
 
