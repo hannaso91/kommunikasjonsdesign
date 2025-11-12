@@ -6,7 +6,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Press+Start+2P&display=swap" rel="stylesheet">
-    <title>Kusaken - Ryddigere Scrollytelling</title>
+    <title>Kusaken - Scrollytelling Spesial</title>
 
     <style>
         /* Grunnleggende Reset og Fonter */
@@ -25,7 +25,7 @@
             font-size: 11px;
             line-height: 1.5;
             color: #fff;
-            transition: background-color 0.5s ease; /* For fargeoverganger */
+            transition: background-color 0.5s ease;
         }
 
         /* --- Felles Oppsett for Tekst --- */
@@ -37,7 +37,7 @@
             justify-content: center;
             align-items: center;
             position: relative;
-            z-index: 10; /* Sikrer at innholdet ligger over body-bakgrunnen */
+            z-index: 10;
         }
 
         .content-box {
@@ -45,10 +45,10 @@
             max-width: 700px;
             margin: 1.5rem auto;
             padding: 2rem;
-            background: rgba(255, 255, 255, 0.9); /* Klar, hvit bakgrunn for lesbarhet */
+            background: rgba(255, 255, 255, 0.9);
             border-radius: 15px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-            color: #000; /* Svart tekst på hvit boks */
+            color: #000;
             transition: transform 0.3s ease;
         }
 
@@ -57,7 +57,7 @@
             margin: 3rem auto;
             font-weight: bold;
             color: #fff;
-            text-shadow: 3px 3px #cc0000; /* Rød skygge for spill-effekt */
+            text-shadow: 3px 3px #cc0000;
         }
         
         /* Titler i content-box */
@@ -82,7 +82,7 @@
         /* --- AKT I: Kua's Reise (Sticky Slideshow) --- */
         #cow-wrapper {
             padding: 0;
-            min-height: 350vh; /* Lengre scroll for å se overgangene */
+            min-height: 350vh;
             background-color: #000;
         }
 
@@ -102,7 +102,7 @@
             height: 100%;
             object-fit: cover;
             border-radius: 0;
-            opacity: 1; /* Starter synlig */
+            opacity: 1; 
         }
 
         .imgText {
@@ -116,68 +116,111 @@
             max-width: 500px;
             font-size: 14px;
             z-index: 20;
-            opacity: 0; /* Starter usynlig for animasjon */
+            opacity: 0;
         }
 
-        /* --- AKT II: Grim og Spillet (Centering & Sticky Video) --- */
+        /* --- AKT II: Grim og Spillet (Sticky Video) --- */
         #firstPart {
             background-color: transparent;
+            z-index: 10; 
         }
 
         .dropdown {
             border: 2px solid #000;
             background-color: rgba(128, 208, 16, 0.9);
             color: #000;
-            margin: 3rem 0;
-            opacity: 0;
+            margin: 10rem auto;
             transform: translateX(0);
         }
         .dropdown summary { color: #000; }
         .dropdown p { font-family: 'Pixelify Sans', sans-serif; color: #000; }
 
         #video-container {
-            height: 200vh;
+            height: 250vh; 
+            position: relative; /* Beholder relative */
+            background: rgba(0, 0, 0, 0.8);
+            margin: 4rem auto;
+            width: 90%;
+            max-width: 700px;
+            border-radius: 15px;
+            overflow: hidden;
+            /* Legg til Flex for å sentrere innhold vertikalt (valgfritt, men nyttig) */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around; /* Fordeler plassen mellom video og tekst */
+            align-items: center;
+        }  
+
+        /* NY og ENKLERE Video Container */
+        #video-display {
+            /* Fjerner 250vh og beholderen blir kun så høy som innholdet */
+            height: auto; 
             position: relative;
             background: rgba(0, 0, 0, 0.8);
             margin: 4rem auto;
             width: 90%;
             max-width: 700px;
             border-radius: 15px;
+            overflow: hidden;
+            padding: 20px 0; /* Litt padding for å holde videoen vekk fra kanten */
         }
         #Video {
-            position: sticky;
-            top: 15vh;
+            /* Videoen fyller containeren og sentreres */
+            position: relative; /* Ikke absolutt */
+            top: auto;
+            left: auto;
+            transform: none;
             width: 90%;
             max-height: 70vh;
             object-fit: contain;
             z-index: 1;
+            margin: 0 auto; /* Sentrerer den */
+            display: block;
         }
+
+        /* Fjerner de gamle, kompliserte reglene for video-overlay-text: */
         .video-overlay-text {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90%;
-            height: 200vh;
-            z-index: 2;
-            color: #fff;
-            text-shadow: 1px 1px #000;
+            display: none; /* Deaktiverer den gamle overlay-teksten helt */
         }
+        /* Fjerner også .video-overlay-text p regelen */
+
+        .video-overlay-text {
+            /* FJERN absolutt posisjonering */
+            position: relative; 
+            top: auto;
+            left: auto; 
+            width: 100%;
+            height: auto; /* Ikke 100% height, la innholdet bestemme */
+            z-index: 3;
+            pointer-events: none;
+            padding: 10px; /* Litt padding */
+        }
+
         .video-overlay-text p {
-             background: rgba(0, 0, 0, 0.7);
-             padding: 15px;
-             border-radius: 8px;
-             margin: 20px auto;
-             width: 100%;
-             max-width: 400px;
-             text-align: center;
-             font-size: 10px;
-             opacity: 0;
+            /* FJERN absolutt posisjonering */
+            position: relative;
+            top: auto; 
+            left: auto; 
+            transform: none; 
+            
+            /* Beholder styling */
+            background: rgba(0, 0, 0, 0.9);
+            padding: 15px;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+            font-size: 10px;
+            opacity: 0;
+            margin: 2rem auto; /* Sentrerer p-elementet */
+            color: #fff;
+            pointer-events: auto;
         }
 
         /* --- AKT III: Rivalisering (Enkelt Bilde Reveal) --- */
         #secondPart {
             background-color: transparent;
+            padding-top: 5vh; 
         }
         #secondPart img {
             max-width: 60%;
@@ -249,18 +292,22 @@
                 </p>
             </details>
 
-            <div id="video-container">
-                <video id="Video" controls playsinline muted>
+            <div id="video-display">
+                <video id="Video" controls playsinline>
                     <source src="Bilder/Case_spin_video_1080x1920.mp4" type="video/mp4">
                 </video>
-                <div class="video-overlay-text">
-                    <p data-scroll-start="40">
-                        På videoene åpner han cases hvor våpen med høy verdi flyr forbi på skjermen. Spenningen er til å føle på.
-                    </p>
-                    <p data-scroll-start="120">
-                        Det er akkurat som casino maskinene i Las Vegas, men det er bare ett tastetrykk unna. Det er mange som liker å se på disse videoene, og mange av dem er mindreårige.
-                    </p>
-                </div>
+            </div>
+            
+            <div class="content-box" data-text-step="1">
+                <p>
+                    På videoene åpner han cases hvor våpen med høy verdi flyr forbi på skjermen. Spenningen er til å føle på.
+                </p>
+            </div>
+            
+            <div class="content-box" data-text-step="2">
+                <p>
+                    Det er akkurat som casino maskinene i Las Vegas, men det er bare ett tastetrykk unna. Det er mange som liker å se på disse videoene, og mange av dem er mindreårige.
+                </p>
             </div>
 
             <details class="dropdown">
@@ -336,25 +383,37 @@
     <script>
         gsap.registerPlugin(ScrollTrigger);
 
-        // Funksjon for å sikre at videoer starter automatisk (uten lyd)
-        document.addEventListener('DOMContentLoaded', () => {
-            document.querySelectorAll('video').forEach(video => {
-                video.addEventListener('loadedmetadata', () => {
-                    video.muted = true;
-                    video.play().catch(e => console.log("Video autoplay blocked."));
-                });
+        // ----------------------------------------------------
+        // Video Kontroll (Play/Pause ved Scroll)
+        // ----------------------------------------------------
+        gsap.utils.toArray("video").forEach((video) => {
+            // Hvis videoen er den første, sett den til å starte dempet (nettleserkrav)
+            if(video.id === 'Video') {
+                video.muted = true;
+            }
+            
+            ScrollTrigger.create({
+                trigger: video,
+                start: "top center", // Starter når toppen av videoen er i midten av viewporten
+                end: "bottom center", // Pauser når bunnen av videoen er i midten av viewporten
+                
+                // Starter avspilling (med lyden på om den ikke er dempet)
+                onEnter: () => video.play().catch(e => console.log("Video Play Blocked")), 
+                // Pauser når vi scroller ned og ut
+                onLeave: () => video.pause(),
+                // Starter avspilling igjen når vi scroller opp og inn
+                onEnterBack: () => video.play().catch(e => console.log("Video Play Blocked")),
+                // Pauser når vi scroller opp og ut
+                onLeaveBack: () => video.pause() 
             });
         });
 
         // ----------------------------------------------------
-        // AKT I: Kua's Reise (Sticky Slideshow)
-        // Fikset logikk for å hindre svart skjerm
+        // AKT I: Kua's Reise (Sticky Slideshow) - STABIL
         // ----------------------------------------------------
         gsap.utils.toArray(".cow-slide").forEach((slide, i) => {
-            const img = slide.querySelector('img');
             const text = slide.querySelector('.imgText');
             
-            // Starter den første teksten synlig, de andre usynlige
             if (i === 0) {
                 gsap.set(text, { opacity: 1 });
             }
@@ -366,25 +425,20 @@
                 pin: true,
                 pinSpacing: false,
 
-                // Animer inn teksten når elementet når toppen
                 onEnter: () => {
                     gsap.fromTo(text, 
                         { opacity: 0, y: 50 }, 
                         { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }
                     );
                 },
-                // Animer ut teksten når brukeren scroller videre
                 onUpdate: (self) => {
                     if (self.progress > 0.8 && self.direction === 1) {
                          gsap.to(text, { opacity: 0, y: -50, duration: 0.4 });
                     }
                 },
-                // Animer ut teksten når brukeren scroller tilbake
                 onLeaveBack: () => {
-                    // Skjuler teksten raskt
                     gsap.to(text, { opacity: 0, y: 50, duration: 0.3 });
                 },
-                // Animer inn teksten ved tilbakescroll
                 onEnterBack: () => {
                     gsap.fromTo(text, 
                         { opacity: 0, y: 50 }, 
@@ -395,16 +449,16 @@
         });
 
         // ----------------------------------------------------
-        // AKT II: Grim og Spillet (Dropdowns og Sticky Video)
+        // AKT II: Grim og Spillet (Dropdowns Fiks)
         // ----------------------------------------------------
         
-        // Fly-inn animasjon for dropdowns (fra motsatt side for hver)
+        // Fly-inn animasjon for dropdowns (Nå med initial opacity: 0 i GSAP)
         gsap.utils.toArray(".dropdown").forEach((dropdown, i) => {
-            const direction = i % 2 === 0 ? -50 : 50; // Annethvert element fra venstre/høyre
+            const direction = i % 2 === 0 ? -50 : 50;
             
             gsap.from(dropdown, {
                 x: direction,
-                opacity: 0,
+                opacity: 0, // Setter opacity til 0 her i GSAP
                 duration: 0.6,
                 ease: "power2.out",
                 scrollTrigger: {
@@ -415,19 +469,9 @@
             });
         });
 
-        // Sticky Video Overlay Text (Enkel animasjon)
-        gsap.utils.toArray(".video-overlay-text p").forEach(textBlock => {
-            ScrollTrigger.create({
-                trigger: "#video-container",
-                start: `top+=${textBlock.getAttribute('data-scroll-start')} top`,
-                end: `top+=${parseInt(textBlock.getAttribute('data-scroll-start')) + 50} top`,
-                onEnter: () => gsap.to(textBlock, { opacity: 1, duration: 0.5 }),
-                onLeave: () => gsap.to(textBlock, { opacity: 0, duration: 0.5 }),
-                onEnterBack: () => gsap.to(textBlock, { opacity: 1, duration: 0.5 }),
-                onLeaveBack: () => gsap.to(textBlock, { opacity: 0, duration: 0.5 }),
-            });
-        });
-
+        
+        
+        
         // ----------------------------------------------------
         // AKT III/IV: Element-innflyvninger og avsløring
         // ----------------------------------------------------
@@ -469,7 +513,6 @@
             pin: launchImage, 
             pinSpacing: false,
             
-            // Zoom-inn effekt på bildet
             onEnter: () => {
                 gsap.fromTo(launchImage, 
                     { scale: 0.9, opacity: 0.5 }, 
