@@ -128,7 +128,7 @@
             border: 2px solid #000;
             background-color: rgba(128, 208, 16, 0.9);
             color: #000;
-            margin: 10rem auto;
+            margin: 10rem auto 5rem auto;
             transform: translateX(0);
             padding: 2rem;
         }
@@ -218,7 +218,7 @@
             padding-top: 5vh; 
         }
         #secondPart img {
-            max-width: 60%;
+            max-width: 100%;
         }
 
         #caselaunch {
@@ -247,6 +247,36 @@
         @keyframes glitch-anim {
             0% { text-shadow: 2px 2px #00ffc8, -2px -2px #ff00ff; transform: translate(2px, 2px); }
             100% { text-shadow: -2px -2px #00ffc8, 2px 2px #ff00ff; transform: translate(-2px, -2px); }
+        }
+
+        #dmodeldesktop {
+            display: none;
+        }
+
+        #dmodelmobil {
+            display: block;
+        }
+
+        @media (min-width: 1024px) {
+
+            .dropdown {
+                max-width: 600px;
+            }
+
+            #desktopcontainer {
+                margin-top: 100px;
+            }
+
+            #dmodelmobil {
+                display: none !important;
+            }
+
+            #dmodeldesktop {
+                display: flex !important; 
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
         }
     </style>
 </head>
@@ -282,7 +312,7 @@
 
             <details class="dropdown">
                 <summary>Hva er skins?</summary>
-                <p>
+                <p style="margin-top: 30rem;">
                     Skins er kosmetiske endringer på karakterer eller våpen i et spill. Dette konseptet blir også brukt i skytespillet Counter Strike (CS). 
                     I CS bruker spillere ekte penger på å skaffe seg disse skinsene. Prisen på et skins påvirkes av to faktorer, hvor sjeldent det er og hvor stor etterspørselen er. 
                     Dette gjør at skins kan få høy verdi. Per dags dato er det dyreste i skinet i CS kalt Karambit Case Hardened (Pattern 387 "Blue Gem") verdt 1.5 millioner dollar. 
@@ -325,9 +355,10 @@
            <div class="content-box">
                 <h2>Rivaliseringen starter</h2>
                 <p>Grim tjener godt på å promotere gambling for gamblingnettsiden CSGO Roll.</p>
+                <img src="Bilder/Rivallogoenmothverandre.png" alt="Pixelert bilde av to rivaliserende logoer"/>
            </div>
            
-            <img src="Bilder/Rivallogoenmothverandre.png" alt="Pixelert bilde av to rivaliserende logoer"/>
+            
             
            <details class="dropdown">
                 <summary>Hva skjer mellom roll og empire?</summary>
@@ -386,9 +417,14 @@
             </div>
         </section>
         
-        <section id="3dmodel" style="background-color: #000; min-height: 50vh;">
-            <video id="final-video" controls playsinline muted preload="auto">
+        <section id="dmodelmobil" >
+            <video id="final-video-mobil" controls playsinline muted preload="auto">
                 <source src="Bilder/Kusaken_video_1080x1920.mp4" type="video/mp4">
+            </video>
+        </section>
+        <section id="dmodeldesktop" >
+            <video id="final-video-desktop" controls playsinline muted preload="auto">
+                <source src="Bilder/Kusaken_video_1080p.mp4" type="video/mp4">
             </video>
         </section>
     </main>
