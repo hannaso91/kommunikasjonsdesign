@@ -78,6 +78,14 @@
             margin: 2rem auto;
             border-radius: 10px;
         }
+
+
+        #video-display-desktop {
+            display: none;
+        }
+        #video-display-mobile {
+            display: block;
+        }
         
    
         #cow-wrapper {
@@ -259,14 +267,6 @@
 
         @media (min-width: 1024px) {
 
-            .dropdown {
-                max-width: 600px;
-            }
-
-            #desktopcontainer {
-                margin-top: 100px;
-            }
-
             #dmodelmobil {
                 display: none !important;
             }
@@ -276,6 +276,88 @@
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
+            }
+
+            body {
+                font-size: 13px; 
+                line-height: 1.6;
+            }
+
+            h1 {
+                font-size: 60px; 
+            }
+
+            .content-box {
+                max-width: 800px; 
+                padding: 3rem; 
+                font-size: 14px; 
+            }
+
+         
+            section {
+                padding: 10vh 10vw; 
+            }
+
+           
+            .cow-slide img {
+                width: 100vw; 
+                height: 100vh;
+            }
+
+            .imgText {
+                max-width: 700px; 
+                font-size: 16px; 
+                padding: 30px;
+            }
+
+            .dropdown {
+                max-width: 800px; 
+                margin: 10rem auto 7rem auto;
+                padding: 3rem;
+                font-size: 14px;
+            }
+            .dropdown p {
+                margin-top: 1rem !important; 
+            }
+
+            #video-display {
+                width: 80%; 
+                max-width: 800px;
+                padding: 30px 0;
+            }
+            
+            #Video {
+                max-height: 80vh; 
+                width: 95%; 
+            }
+
+            #secondPart .content-box, #backtocow .content-box {
+                max-width: 800px; 
+            }
+
+            #backtocow h2, #caselaunch h2 {
+                font-size: 30px;
+            }
+
+            #caselaunch {
+                min-height: 250vh; 
+                padding-top: 5vh; 
+            }
+            #caselaunch img {
+                top: 10vh; 
+                width: 80%;
+                max-width: 900px; 
+            }
+            .reveal-text {
+ 
+                padding-top: 150vh; 
+            }
+
+            #video-display-desktop {
+                display: block;
+            }
+            #video-display-mobile {
+                display: none;
             }
         }
     </style>
@@ -320,9 +402,14 @@
                 </p>
             </details>
 
-            <div id="video-display">
+            <div id="video-display-mobile">
                 <video id="Video" controls playsinline>
                     <source src="Bilder/Case_spin_video_1080x1920.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div id="video-display-desktop">
+                <video id="Video" controls playsinline>
+                    <source src="Bilder/Case_spin_video_1920x1080.mp4" type="video/mp4">
                 </video>
             </div>
             
