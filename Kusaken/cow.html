@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="kusaken.scss">
+    <title>Kusaken</title>
+</head>
+<body>
+    <!-- Retro Loading (always on top) -->
+<div class="top-loader" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+  <div class="tl-text">LOADING...</div>
+  <div class="tl-bar">
+    <div class="tl-fill"></div>
+    <div class="tl-cells" aria-hidden="true"></div>
+  </div>
+</div>
+
+    <div id="containerOpacity">
+        <header>
+    
+        </header>
+        <main>
+            <div id="cow-wrapper">
+                <section class="cowcontainer">
+                    <div class="imgContainer">
+                        <p class="imgText">Se for deg livet som en ung ku. Du bruker dagene dine på å drøvtygge gress sammen med andre kuer på gården du bor på et sted i Romerriket.</p>
+                        <img src="Bilder/Kyr_norskenaturen.png" alt="Pixelert bilde av noen kuer som gresser i den norske naturen"/>
+                    </div>
+
+                    <div class="imgContainer">
+                        <p class="imgText">En kald dag i januar står du inne i det varme fjøset, også kommer det noen fremmede til gården som snakker et språk du ikke forstår</p>
+                        <img src="Bilder/cow_barn.png" alt="Pixelert bilde av en ku som står inne i et fjøs"/>
+                    </div>
+
+                    <div class="imgContainer">
+                        <p class="imgText">De har penger og plutselig blir du dratt fra det varme fjøset og inn i en henger bak en bil. Du skal ikke bli burger, du er på vei til å bli en internettkjendis</p>
+                        <img src="Bilder/cow_transport.png" alt="Pixelert bilde av en ku som blir transportert i en henger"/>
+                    </div>
+                </section>
+            </div>
+            <section id="firstPart">
+                <h1>Grims ku</h1>
+                <p>
+                    Det var en helt vanlig onsdag for Sebastian Ring Gjerlaugsen. 
+                    Gjerlaugsen kjøpte en enebolig for 8 500 000 kr i Tistedal i slutten av året 2022. Hvordan har han råd til det? 
+                    Han er en Youtuber og streamer under aliaset Grim. På sine kanaler som nå er fjernet, lager han videoer hvor han gambler med ekte penger på skins. 
+                </p>
+                <details class="dropdown">
+                    <summary>Hva er skins?</summary>
+                    <p>
+                        Skins er kosmetiske endringer på karakterer eller våpen i et spill. Dette konseptet blir også brukt i skytespillet Counter Strike (CS). 
+                        I CS bruker spillere ekte penger på å skaffe seg disse skinsene. Prisen på et skins påvirkes av to faktorer, hvor sjeldent det er og hvor stor etterspørselen er. 
+                        Dette gjør at skins kan få høy verdi. Per dags dato er det dyreste i skinet i CS kalt Karambit Case Hardened (Pattern 387 "Blue Gem") verdt 1.5 millioner dollar. 
+                        Samtidig som noen skins kan bare være verdt noen ører. 
+                    </p>
+                </details>
+                <video class="video" id="Video" controls playsinline>
+                    <source src="Bilder/Våpen spinner CS.mp4" type="video/mp4"> 
+                </video>
+                <p>
+                    På videoene åpner han cases hvor våpen med høy verdi flyr forbi på skjermen. Spenningen er til å føle på. 
+                    Det er akkurat som casino maskinene i Las Vegas, men det er bare ett tastetrykk unna. Det er mange som liker å se på disse videoene, og mange av dem er mindreårige. 
+                </p>
+                <details class="dropdown">
+                    <summary>Hva er case?</summary>
+                    <p>
+                        Cases er en måte å skaffe seg skins på CS. Spillere får et case i uka hvis de spiller nok.  
+                        Du må kjøpe en nøkkel til et case for å kunne åpne det. Dette koster rundt 30 kr. 
+                        Caset har skins som varierer fra vannlige verdt under én krone  til veldig sjeldnere verdt flere tusen kroner. 
+                        Det er tilfeldig hvilket skin du får, men sannsynligheten for å få et vanlig skin er veldig mye høyere enn et sjeldent skin. 
+                        Dette skaper spenning som ligner på gambling. 
+                    </p>
+                </details>
+            </section>
+            
+            <section id="secondPart">
+               <p>Grim tjener godt på å promotere gambling for gamblingnettsiden CSGO Roll. </p> 
+               <details class="dropdown">
+                    <summary>Hva er rivalisering?</summary>
+                    <p>
+                        Må fylle inn her
+                    </p>
+                </details>
+                <p></p>
+            </section>
+        </main>
+        <footer>
+
+        </footer>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+        <script src="cow.js"></script>
+    </div>    
+</body>
+</html>

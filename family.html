@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsiv Bla-Bok</title>
+    <title>Responsiv Bok - Endelig Fiks</title>
     
     <script src="https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.min.js"></script>
 
     <style>
-        /* 1. MOBILE-FIRST: CSS som gjelder for ALLE (mobilen er standarden) */
+        /* ============================================== */
+        /* 1. GRUNNLEGGENDE STILER (Mobile-First)         */
+        /* ============================================== */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -17,7 +19,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #f0f0f0; /* Mobil bakgrunn */
+            background-color: #f0f0f0;
         }
 
         .bok-container {
@@ -26,6 +28,7 @@
             max-width: 100%;
             max-height: 100%;
             box-shadow: none; 
+            touch-action: pan-y; /* Tillat vertikal scroll på touch */
         }
         
         #min-bok {
@@ -40,40 +43,24 @@
             overflow-y: auto; 
         }
 
-        /* Innhold for mobil (stakket) */
-        .side-innhold {
+        /* Standard (Mobil): Skjul desktop-innhold */
+        .desktop-content {
+            display: none; 
+        }
+
+        /* MOBIL INNHOLD STYLING (Stablet) */
+        .mobile-content {
             display: flex;
             flex-direction: column; 
             height: 100%;
-            justify-content: flex-start; /* Justerer innholdet mot toppen */
+            justify-content: flex-start; 
             align-items: center;
         }
-
-        .side-bilde, .side-tekst {
-            flex-shrink: 0; /* Hindrer krymping på mobil */
-            padding: 10px 0;
-            width: 100%; /* Begge tar full bredde på mobil */
-            text-align: center;
-        }
-
-        .side-bilde img {
+        .mobile-content img {
             max-width: 90%;
             height: auto;
-            border-radius: 4px;
-            display: block; /* For å sentrere bildet bedre */
-            margin: 0 auto;
         }
-
-        .side-tekst h2 {
-            margin-top: 10px; /* Litt avstand på mobil */
-            font-size: 1.5rem;
-        }
-        .side-tekst p {
-            font-size: 1rem;
-            text-align: left; /* Teksten kan være venstrejustert på mobil også */
-            padding: 0 10px; /* Litt mer padding på sidene for tekst */
-        }
-
+        
         /* Forside/Bakside stil */
         .side.forside {
             background-color: #4a4a4a;
@@ -83,56 +70,47 @@
             align-items: center;
             flex-direction: column;
             text-align: center;
-            padding: 40px;
         }
 
-        /* 2. DESKTOP OVERSTYRING: Bruk Media Query for større skjermer */
+        /* ============================================== */
+        /* 2. DESKTOP OVERSTYRING (> 1024px)              */
+        /* ============================================== */
         @media (min-width: 1024px) {
             body {
                 background-color: #d0d0d0; 
             }
             .bok-container {
-                /* STØRRE BOK: Nå med mer plass */
-                width: 1500px; /* Eksempelbredde, juster etter behov */
-                height: 850px; /* Eksempelhøyde, juster etter behov */
-                max-width: 95vw; /* Fyller nesten hele viewport-bredden */
-                max-height: 95vh; /* Fyller nesten hele viewport-høyden */
+                /* VELDIG STOR BOK for å fremtvinge to sider */
+                width: 1800px; 
+                height: 950px; 
+                max-width: 95vw; 
+                max-height: 95vh; 
                 box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3); 
             }
             .side {
-                padding: 30px; /* Justert padding på desktop */
+                padding: 50px 30px; 
                 overflow-y: hidden; 
             }
             
-            /* Innhold: To kolonner på desktop for HVER SIDE */
-            .side-innhold {
-                flex-direction: row; /* Legg kolonnene ved siden av hverandre */
-                gap: 20px; /* Mellomrom mellom bilde og tekst */
+            /* VIS OG SKJUL INNHOLD FOR DESKTOP */
+            .mobile-content {
+                display: none; 
+            }
+            .desktop-content {
+                display: flex; 
+                flex-direction: column; 
+                height: 100%;
+                justify-content: flex-start;
+                align-items: flex-start;
+            }
+             /* Sentrer bilde på bilde-side */
+            .desktop-content.bilde-side {
                 justify-content: center;
-                align-items: flex-start; /* Juster innholdet til toppen av siden */
+                align-items: center;
             }
-            .side-bilde {
-                width: 50%; /* Bildekolonnen tar 50% av SIDENS bredde */
-                padding: 0;
-                text-align: center; /* Sentrer bilde inni sin egen kolonne */
-            }
-            .side-tekst {
-                width: 50%; /* Tekstkolonnen tar 50% av SIDENS bredde */
-                padding: 0;
-                text-align: left;
-            }
-
-            .side-bilde img {
-                max-width: 100%; /* La bildet fylle sin kolonne */
-                height: auto;
-                margin: 0; /* Fjern autosentrering fra mobil */
-            }
-            .side-tekst h2 {
-                margin-top: 0; /* Fjern ekstra margin på desktop */
-                font-size: 2rem;
-            }
-            .side-tekst p {
-                font-size: 1.1rem;
+            .desktop-content .side-bilde img {
+                max-width: 100%; 
+                max-height: 85vh; 
             }
         }
     </style>
@@ -149,33 +127,39 @@
             </div>
 
             <div class="side">
-                <div class="side-innhold">
-                    <div class="side-bilde">
-                        <img src="https://picsum.photos/400/500?random=1" alt="Bilde av invasjonen">
-                        <p style="font-size: 0.8em; margin-top: 10px;">Figur 1: Tysk invasjon i april 1940.</p>
-                    </div>
+                <div class="mobile-content side-innhold">
+                    <div class="side-bilde"><img src="https://picsum.photos/400/500?random=1" alt="Invasjon"></div>
                     <div class="side-tekst">
                         <h2>Invasjonen starter</h2>
-                        <p>Natten til 9. april 1940 ble Norge angrepet av Tyskland. Overraskelsen var total, og de norske styrkene var dårlig forberedt. Dette var starten på fem lange år med okkupasjon.</p>
-                        <p>Angrepet kom sjøveien mot de viktigste kystbyene, fra Oslo til Narvik, samtidig som fallskjermsoldater ble sluppet over Fornebu og Sola. Kampene var harde, spesielt i Sør-Norge og Nord-Norge.</p>
+                        <p>Mobilvisning: Innhold stables og kan scrolles hvis nødvendig.</p>
                     </div>
                 </div>
-            </div>
-
-            <div class="side">
-                <div class="side-innhold">
+                
+                <div class="desktop-content side-innhold bilde-side">
                     <div class="side-bilde">
-                        <img src="https://picsum.photos/400/500?random=2" alt="Bilde fra okkupasjonen">
-                        <p style="font-size: 0.8em; margin-top: 10px;">Figur 2: Hverdagsliv under okkupasjonen.</p>
-                    </div>
-                    <div class="side-tekst">
-                        <h2>Livet under okkupasjonen</h2>
-                        <p>Livet under okkupasjonen var preget av rasjonering, mørklegging og frykt. Matmangel ble en del av hverdagen, og folk måtte være kreative for å skaffe nok mat, ofte gjennom svartebørshandel og byttehandel.</p>
-                        <p>Radioapparatene ble inndratt, og all informasjon ble strengt sensurert av de tyske myndighetene. Illegale aviser ble produsert i hemmelighet for å spre nyheter fra London og opprettholde motet.</p>
+                        <img src="https://picsum.photos/800/900?random=1" alt="Bilde av invasjonen">
                     </div>
                 </div>
             </div>
             
+            <div class="side">
+                <div class="mobile-content side-innhold">
+                    <div class="side-bilde"><img src="https://picsum.photos/400/500?random=2" alt="Okkupasjon"></div>
+                    <div class="side-tekst">
+                        <h2>Livet under okkupasjonen</h2>
+                        <p>Mobilvisning: Innhold stables og kan scrolles hvis nødvendig.</p>
+                    </div>
+                </div>
+                
+                <div class="desktop-content side-innhold">
+                    <div class="side-tekst">
+                        <h2>Livet under okkupasjonen</h2>
+                        <p>Livet under okkupasjonen var preget av rasjonering, mørklegging og frykt. Matmangel ble en del av hverdagen.</p>
+                        <p>Radioapparatene ble inndratt, og all informasjon ble strengt sensurert av de tyske myndighetene.</p>
+                    </div>
+                </div>
+            </div>
+
             <div class="side forside">
                 <h2>Slutt</h2>
                 <p>Kilde: Historien</p>
@@ -191,10 +175,17 @@
             
             const desktopQuery = window.matchMedia('(min-width: 1024px)');
             
-            function shouldShowTwoPage() {
+            function isDesktop() {
                 return desktopQuery.matches;
             }
 
+            // FEILSØKING: Sjekk om elementene eksisterer
+            if (!bokElement) {
+                console.error("Feil: #min-bok elementet ble ikke funnet!");
+                return;
+            }
+
+            // --- 1. Initialiser PageFlip ---
             const pageFlip = new St.PageFlip(
                 bokElement,
                 {
@@ -202,27 +193,43 @@
                     height: bokContainer.clientHeight,
                     showCover: true, 
                     maxShadowOpacity: 0.5,
-                    showTwoPage: shouldShowTwoPage() 
+                    showTwoPage: isDesktop() 
                 }
             );
 
             pageFlip.loadFromHTML(document.querySelectorAll('.side'));
+            console.log("PageFlip er lastet inn."); // Sjekk om innlasting skjedde
 
+            // --- 2. Responsiv Oppdatering ---
             function updateBookDisplay() {
+                // Sjekk om PageFlip-objektet eksisterer før oppdatering
+                if (!pageFlip) return; 
+
                 pageFlip.updateSize(bokContainer.clientWidth, bokContainer.clientHeight);
-                pageFlip.setPageOrientation(shouldShowTwoPage() ? 'portrait' : 'landscape');
+                
+                // Tvinger 2 sider på desktop ('landscape') og 1 side på mobil ('portrait')
+                if (isDesktop()) {
+                    pageFlip.setPageOrientation('landscape'); 
+                } else {
+                    pageFlip.setPageOrientation('portrait'); 
+                }
+                console.log(`Visning oppdatert. Tosidig: ${isDesktop()}`);
             }
 
+            updateBookDisplay(); 
             window.addEventListener('resize', updateBookDisplay);
             desktopQuery.addEventListener('change', updateBookDisplay);
 
 
+            // --- 3. Bla-logikk (KORRIGERT og GJENINNSATT) ---
             let isFlipping = false;
-            const flipCooldown = 1000;
+            const flipCooldown = 800; // Litt raskere cooldown
 
+            // Desktop Skroll/Hjul
             function handleScrollFlip(event) {
                 event.preventDefault();
-                if (isFlipping) return;
+                if (isFlipping || !pageFlip) return;
+
                 const scrollDirection = event.deltaY;
                 if (scrollDirection > 0) {
                     pageFlip.flipNext();
@@ -232,40 +239,38 @@
                 isFlipping = true;
                 setTimeout(() => { isFlipping = false; }, flipCooldown); 
             }
+            // Kobles til bokContainer for å fange skrolling
             bokContainer.addEventListener('wheel', handleScrollFlip, { passive: false });
 
+            // Mobil Sveip/Touch
             let touchStartX = 0;
-            let touchMoveX = 0;
             const swipeThreshold = 50; 
 
             function handleTouchStart(event) {
-                if (isFlipping) return;
+                if (isFlipping || !pageFlip) return;
                 touchStartX = event.touches[0].clientX;
             }
-            function handleTouchMove(event) {
-                if (isFlipping) return;
-                touchMoveX = event.touches[0].clientX;
-            }
-            function handleTouchEnd() {
-                if (isFlipping) return;
-                const swipeDistance = touchStartX - touchMoveX;
+            function handleTouchEnd(event) {
+                if (isFlipping || !pageFlip) return;
+                
+                // Hent sluttposisjonen fra den siste registrerte touchen
+                const touchEndX = event.changedTouches[0].clientX;
+                const swipeDistance = touchStartX - touchEndX; // Positiv = sveip mot venstre (Neste side)
                 const swipeDistanceAbs = Math.abs(swipeDistance);
 
                 if (swipeDistanceAbs > swipeThreshold) {
                     if (swipeDistance > 0) {
-                        pageFlip.flipNext();
+                        pageFlip.flipNext(); 
                     } else {
-                        pageFlip.flipPrev();
+                        pageFlip.flipPrev(); 
                     }
                     isFlipping = true;
                     setTimeout(() => { isFlipping = false; }, flipCooldown);
                 }
-                touchStartX = 0;
-                touchMoveX = 0;
             }
 
+            // Kobles til bokContainer for å fange sveip
             bokContainer.addEventListener('touchstart', handleTouchStart, { passive: true });
-            bokContainer.addEventListener('touchmove', handleTouchMove, { passive: true });
             bokContainer.addEventListener('touchend', handleTouchEnd, { passive: true });
         });
     </script>
