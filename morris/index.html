@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Morris – Krigsmemoarer (page‑flip v5)</title>
+  <meta name="description" content="Interaktiv flipbook-longread om Morris – politimannen som hjalp folk over grensen under andre verdenskrig."/>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <header class="site-header">
+    <h1>Morris – krigsmemoarer</h1>
+    <p class="sub">Interaktiv blabok • tast ⟵ ⟶, klikk, eller dra i hjørnet</p>
+  </header>
+
+  <main class="stage">
+    <div class="book-wrap">
+      <div class="book hardcover" id="book" aria-label="Interaktiv bok">
+
+        <section class="page page--right cover front" data-index="0" aria-label="Forside">
+          <div class="inner">
+            <div class="cover-art">
+              <h2 class="title">MORRIS</h2>
+              <p class="strap">Politimannen som skrev falske grensebevis</p>
+              <div class="ornament"></div>
+              <p class="byline">En familiehistorie</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="page page--right" data-index="1" aria-label="Introduksjon">
+          <div class="inner">
+            <h3>Introduksjon</h3>
+            <p>Under okkupasjonen valgte Morris – da politimann – å hjelpe mennesker som trengte å komme seg i sikkerhet. Han skrev <em>falske grensebevis</em> som lot dem passere kontrollposter mot Sverige. Dette er vår families fortelling, rekonstruert gjennom samtaler med besteforeldre og bevarte notater.</p>
+            <p class="note">Kildepraksis: Sitater og konkrete opplysninger refereres fortløpende som [intervju, dato] eller [dokument, kilde].</p>
+          </div>
+        </section>
+
+        <section class="page page--right" data-index="2" aria-label="Bakgrunn">
+          <div class="inner">
+            <h3>Bakgrunn</h3>
+            <p>(Plasser ~90–120 ord. Etabler kontekst: by/område, politiets rolle, kontrollregime. Marker fakta med korte kildehenvisninger i løpende tekst.)</p>
+            <blockquote>«Kort sitat fra intervju som etablerer motivasjonen.» [Intervju – navn, dato]</blockquote>
+          </div>
+        </section>
+
+        <section class="page page--right" data-index="3" aria-label="Falske grensebevis">
+          <div class="inner">
+            <h3>Falske grensebevis</h3>
+            <figure class="figure">
+              <img src="assets/paper.jpg" alt="Nærbilde av gammelt grensebevis med stempel (illustrasjon)"/>
+              <figcaption>Eksempel på dokumenttype/stempler. [Arkivfoto]</figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section class="page page--right" data-index="4" aria-label="Tidslinje">
+          <div class="inner">
+            <h3>Tidslinje</h3>
+            <ul class="timeline">
+              <li><strong>År–mnd</strong> Første kjente forfalskning. [Intervju]</li>
+              <li><strong>År–mnd</strong> Strengere kontroller lokalt. [Forordning]</li>
+              <li><strong>År–mnd</strong> Mistanke mot politiet. [Sekundærkilde]</li>
+              <li><strong>År–mnd</strong> Morris må gå i dekning. [Intervju]</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="page page--right" data-index="5" aria-label="Rute mot Sverige">
+          <div class="inner">
+            <h3>Rute mot Sverige</h3>
+            <figure class="figure">
+              <img src="assets/route.svg" alt="Kartskisse over fluktrute"/>
+              <figcaption>Skisse: start → mellomstopp → grense. [Egen SVG + intervju]</figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section class="page page--right" data-index="6" aria-label="Vignett">
+          <div class="inner">
+            <h3>Vignett</h3>
+            <p>(Scene i presens – sansedetaljer, personer, sted.)</p>
+          </div>
+        </section>
+
+        <section class="page page--right" data-index="7" aria-label="Konsekvensene">
+          <div class="inner">
+            <h3>Konsekvensene</h3>
+            <p>(Hva stod på spill, hvor mange pass, tidsrom – bruk harde tall der det finnes.)</p>
+          </div>
+        </section>
+
+        <section class="page page--right" data-index="8" aria-label="Da mistanken ble konkret">
+          <div class="inner">
+            <h3>Da mistanken ble konkret</h3>
+            <p>(Hendelsen som utløste flukten.)</p>
+          </div>
+        </section>
+
+        <section class="page page--right" data-index="9" aria-label="Årene i Sverige">
+          <div class="inner">
+            <h3>Årene i Sverige</h3>
+            <p>(Hvor bodde han, arbeid/venting, nettverk.)</p>
+          </div>
+        </section>
+
+        <section class="page page--right" data-index="10" aria-label="Etter krigen">
+          <div class="inner">
+            <h3>Etter krigen</h3>
+            <p>(Retur 2 år etter krigens slutt.)</p>
+          </div>
+        </section>
+
+        <section class="page page--right" data-index="11" aria-label="Ettermæle">
+          <div class="inner">
+            <h3>Ettermæle</h3>
+            <p>(Hva sier familien i dag? Læringspoeng.)</p>
+          </div>
+        </section>
+
+        <section class="page page--right cover back" data-index="12" aria-label="Bakperm">
+          <div class="inner">
+            <div class="cover-art back">
+              <p class="colophon">Produsert i Kommunikasjonsdesign, HIOF</p>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+
+    <nav class="controls" aria-label="Navigasjon">
+      <button id="prev" class="btn" aria-label="Forrige side">◀</button>
+      <button id="next" class="btn" aria-label="Neste side">▶</button>
+      <span id="status" class="status">Side 1 av 13</span>
+    </nav>
+  </main>
+
+  <script src="main.js"></script>
+</body>
+</html>

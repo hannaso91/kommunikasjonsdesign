@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <defs>
+    <style>
+      .bg{fill:#efeae4;}
+      .line{fill:none;stroke:#3a6ea5;stroke-width:6;stroke-linecap:round;stroke-linejoin:round;}
+      .dot{fill:#6d4f2f;}
+      .label{font: 24px Georgia, serif; fill:#2f2a25;}
+    </style>
+  </defs>
+  <rect class="bg" x="0" y="0" width="1200" height="800"/>
+  <path class="line" d="M150,650 C300,600 450,520 600,480 750,440 900,360 1050,220"/>
+  <circle class="dot" cx="150" cy="650" r="10"/>
+  <circle class="dot" cx="600" cy="480" r="10"/>
+  <circle class="dot" cx="1050" cy="220" r="10"/>
+  <text class="label" x="130" y="690">Start</text>
+  <text class="label" x="580" y="520">Mellomstopp</text>
+  <text class="label" x="980" y="210">Grense</text>
+</svg>
