@@ -9,7 +9,7 @@
     <title>Kusaken - Scrollytelling Spesial</title>
 
     <style>
-        /* Grunnleggende Reset og Fonter */
+  
         * {
             margin: 0;
             padding: 0;
@@ -28,7 +28,7 @@
             transition: background-color 0.5s ease;
         }
 
-        /* --- Felles Oppsett for Tekst --- */
+     
         section {
             padding: 10vh 5vw;
             min-height: 100vh;
@@ -60,7 +60,7 @@
             text-shadow: 3px 3px #cc0000;
         }
         
-        /* Titler i content-box */
+   
         .content-box h2 {
             color: #000;
             text-shadow: none;
@@ -79,7 +79,7 @@
             border-radius: 10px;
         }
         
-        /* --- AKT I: Kua's Reise (Sticky Slideshow) --- */
+   
         #cow-wrapper {
             padding: 0;
             min-height: 350vh;
@@ -119,7 +119,6 @@
             opacity: 0;
         }
 
-        /* --- AKT II: Grim og Spillet (Sticky Video) --- */
         #firstPart {
             background-color: transparent;
             z-index: 10; 
@@ -129,31 +128,30 @@
             border: 2px solid #000;
             background-color: rgba(128, 208, 16, 0.9);
             color: #000;
-            margin: 10rem auto;
+            margin: 10rem auto 5rem auto;
             transform: translateX(0);
+            padding: 2rem;
         }
         .dropdown summary { color: #000; }
-        .dropdown p { font-family: 'Pixelify Sans', sans-serif; color: #000; }
+        .dropdown p { font-family: 'Press start 2P', sans-serif; color: #000;  }
 
         #video-container {
             height: 250vh; 
-            position: relative; /* Beholder relative */
+            position: relative;
             background: rgba(0, 0, 0, 0.8);
             margin: 4rem auto;
             width: 90%;
             max-width: 700px;
             border-radius: 15px;
             overflow: hidden;
-            /* Legg til Flex for å sentrere innhold vertikalt (valgfritt, men nyttig) */
             display: flex;
             flex-direction: column;
-            justify-content: space-around; /* Fordeler plassen mellom video og tekst */
+            justify-content: space-around; 
             align-items: center;
         }  
 
-        /* NY og ENKLERE Video Container */
+
         #video-display {
-            /* Fjerner 250vh og beholderen blir kun så høy som innholdet */
             height: auto; 
             position: relative;
             background: rgba(0, 0, 0, 0.8);
@@ -162,11 +160,10 @@
             max-width: 700px;
             border-radius: 15px;
             overflow: hidden;
-            padding: 20px 0; /* Litt padding for å holde videoen vekk fra kanten */
+            padding: 20px 0;
         }
         #Video {
-            /* Videoen fyller containeren og sentreres */
-            position: relative; /* Ikke absolutt */
+            position: relative;
             top: auto;
             left: auto;
             transform: none;
@@ -174,36 +171,34 @@
             max-height: 70vh;
             object-fit: contain;
             z-index: 1;
-            margin: 0 auto; /* Sentrerer den */
+            margin: 0 auto; 
             display: block;
         }
 
-        /* Fjerner de gamle, kompliserte reglene for video-overlay-text: */
+  
         .video-overlay-text {
-            display: none; /* Deaktiverer den gamle overlay-teksten helt */
+            display: none; 
         }
-        /* Fjerner også .video-overlay-text p regelen */
-
+     
         .video-overlay-text {
-            /* FJERN absolutt posisjonering */
             position: relative; 
             top: auto;
             left: auto; 
             width: 100%;
-            height: auto; /* Ikke 100% height, la innholdet bestemme */
+            height: auto; 
             z-index: 3;
             pointer-events: none;
-            padding: 10px; /* Litt padding */
+            padding: 10px; 
         }
 
         .video-overlay-text p {
-            /* FJERN absolutt posisjonering */
+       
             position: relative;
             top: auto; 
             left: auto; 
             transform: none; 
             
-            /* Beholder styling */
+           
             background: rgba(0, 0, 0, 0.9);
             padding: 15px;
             border-radius: 8px;
@@ -212,21 +207,20 @@
             text-align: center;
             font-size: 10px;
             opacity: 0;
-            margin: 2rem auto; /* Sentrerer p-elementet */
+            margin: 2rem auto; 
             color: #fff;
             pointer-events: auto;
         }
 
-        /* --- AKT III: Rivalisering (Enkelt Bilde Reveal) --- */
+
         #secondPart {
             background-color: transparent;
             padding-top: 5vh; 
         }
         #secondPart img {
-            max-width: 60%;
+            max-width: 100%;
         }
 
-        /* --- AKT IV: Avsløring (Zoom/Glitch) --- */
         #caselaunch {
             min-height: 200vh;
         }
@@ -254,6 +248,36 @@
             0% { text-shadow: 2px 2px #00ffc8, -2px -2px #ff00ff; transform: translate(2px, 2px); }
             100% { text-shadow: -2px -2px #00ffc8, 2px 2px #ff00ff; transform: translate(-2px, -2px); }
         }
+
+        #dmodeldesktop {
+            display: none;
+        }
+
+        #dmodelmobil {
+            display: block;
+        }
+
+        @media (min-width: 1024px) {
+
+            .dropdown {
+                max-width: 600px;
+            }
+
+            #desktopcontainer {
+                margin-top: 100px;
+            }
+
+            #dmodelmobil {
+                display: none !important;
+            }
+
+            #dmodeldesktop {
+                display: flex !important; 
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+        }
     </style>
 </head>
 <body>
@@ -263,17 +287,17 @@
         <div id="cow-wrapper">
             <div class="cow-slide" data-slide="1">
                 <img src="Bilder/Kyr_norskenaturen.png" alt="Pixelert bilde av noen kuer som gresser i den norske naturen"/>
-                <p class="imgText">Se for deg livet som en ung ku. Du bruker dagene dine på å drøvtygge gress sammen med andre kuer på gården du bor på et sted i Romeriket.</p>
+                <p class="imgText">Se for deg livet som en ung ku. Du bruker dagene dine på drøvtygge gress sammen med andre kuer på gården du bor på et sted i Romerriket</p>
             </div>
 
             <div class="cow-slide" data-slide="2">
                 <img src="Bilder/cow_barn.png" alt="Pixelert bilde av en ku som står inne i et fjøs"/>
-                <p class="imgText">En kald dag i januar står du inne i det varme fjøset, også kommer det noen fremmede til gården som snakker et språk du ikke forstår</p>
+                <p class="imgText"> En kald dag i januar hvor du står inne i det varme fjøset kommer det noen fremmede til gården som snakker et språk du ikke forstår.</p>
             </div>
 
             <div class="cow-slide" data-slide="3">
                 <img src="Bilder/cow_transport.png" alt="Pixelert bilde av en ku som blir transportert i en henger"/>
-                <p class="imgText">De har penger og plutselig blir du dratt fra det varme fjøset og inn i en henger bak en bil. Du skal ikke bli burger, du er på vei til å bli en **internettkjendis**</p>
+                <p class="imgText">De har penger og plutselig blir du dratt fra det varme fjøset og inn i en henger bak en bil. Du skal ikke bli burger, du er på vei til å bli en internettkjendis. </p>
             </div>
         </div>
         
@@ -281,14 +305,18 @@
             <h1>GRIMS KU</h1>
             <div class="content-box">
                 <p>
-                    Det var en helt vanlig onsdag for Sebastian Ring Gjerlaugsen. Han er en Youtuber og streamer under aliaset **Grim**. På sine kanaler, lager han videoer hvor han **gambler** med ekte penger på skins.
+                    Det var en helt vanlig onsdag for Sebastian Ring Gjerlaugsen. Gjerlaugsen kjøpte en enebolig for 8 500 000 kr i Tistedal i slutten av året 2022. 
+                    Hvordan har han råd til det? Han  er en Youtuber og streamer under aliaset Grim. På sine kanaler som nå er fjernet, lager han videoer hvor han gambler med ekte penger på skins.
                 </p>
             </div>
 
             <details class="dropdown">
                 <summary>Hva er skins?</summary>
-                <p>
-                    Skins er kosmetiske endringer på karakterer eller våpen i et spill. Prisen påvirkes av sjeldenhet og etterspørsel, noe som gjør at skins kan få høy verdi. Det dyreste skinet er verdt 1.5 millioner dollar.
+                <p style="margin-top: 30rem;">
+                    Skins er kosmetiske endringer på karakterer eller våpen i et spill. Dette konseptet blir også brukt i skytespillet Counter Strike (CS). 
+                    I CS bruker spillere ekte penger på å skaffe seg disse skinsene. Prisen på et skins påvirkes av to faktorer, hvor sjeldent det er og hvor stor etterspørselen er. 
+                    Dette gjør at skins kan få høy verdi. Per dags dato er det dyreste i skinet i CS kalt Karambit Case Hardened (Pattern 387 "Blue Gem") verdt 1.5 millioner dollar. 
+                    Samtidig som noen skins kan bare være verdt noen ører
                 </p>
             </details>
 
@@ -300,7 +328,9 @@
             
             <div class="content-box" data-text-step="1">
                 <p>
-                    På videoene åpner han cases hvor våpen med høy verdi flyr forbi på skjermen. Spenningen er til å føle på.
+                    På videoene åpner han cases hvor våpen med høy verdi flyr forbi på skjermen. 
+                    Spenningen er til å føle på. Det er akkurat som casino maskinene i Las Vegas, men det er bare ett tastetrykk unna. 
+                    Det er mange som liker å se på disse videoene, og mange av dem er mindreårige
                 </p>
             </div>
             
@@ -313,25 +343,38 @@
             <details class="dropdown">
                 <summary>Hva er case?</summary>
                 <p>
-                    Cases er en måte å skaffe seg skins på CS. Du må kjøpe en nøkkel for rundt 30 kr for å åpne. Sannsynligheten for å få et sjeldent skin er veldig lav, noe som skaper spenning som ligner på gambling.
+                    Cases er en måte å skaffe seg skins på CS. Spillere får et case i uka hvis de spiller nok.  
+                    Du må kjøpe en nøkkel til et case for å kunne åpne det. Dette koster rundt 30 kr. 
+                    Caset har skins som varierer fra vannlige verdt under én krone  til veldig sjeldnere verdt flere tusen kroner. 
+                    Det er tilfeldig hvilket skin du får, men sannsynligheten for å få et vanlig skin er veldig mye høyere enn et sjeldent skin. 
+                    Dette skaper spenning som ligner på gambling. 
                 </p>
             </details>
         </section>
-
         <section id="secondPart">
            <div class="content-box">
                 <h2>Rivaliseringen starter</h2>
-                <p>Grim tjener godt på å promotere gambling for gamblingnettsiden CSGO Roll. Dette liker ikke rivalen Empire.</p>
+                <p>Grim tjener godt på å promotere gambling for gamblingnettsiden CSGO Roll.</p>
+                <img src="Bilder/Rivallogoenmothverandre.png" alt="Pixelert bilde av to rivaliserende logoer"/>
            </div>
            
-            <img src="Bilder/Rivallogoenmothverandre.png" alt="Pixelert bilde av to rivaliserende logoer"/>
             
+            
+           <details class="dropdown">
+                <summary>Hva skjer mellom roll og empire?</summary>
+                <p>
+                    Det er et annet selskap som ikke er så fornøyd med at Roll blir promotert. 
+                    Dette er Roll sin erkefiende CSGO Empire. Begge disse selskapene driver nettsider hvor brukere kan gamble skins og penger for å prøve å få bedre skins som da er verdt mer. 
+                    Gambling er veldig stort innen Counter Strike og nesten alle de profesjonelle e-sportlagene har en gambling sponsor. Det hjelper heller ikke at gambling er en del av selve spillet. 
+                    Dette skaper et stort marked med folk som er villige til å legge igjen mye penger. Det er disse Empire og Roll sloss om.
+                </p>
+            </details>
+        
             <div class="content-box">
                 <p>
-                    Empire slo til med en **svartekampanje** i oktober 2023. Deres tilhengere reiser til Tistedal i Halden med banner og flyvers.
-                </p>
-                <p>
-                    Den fredelige gaten fylles høylytte protester fra mennesker iført finnlandshetter.
+                    Empire hadde en svartekampanjen i oktober 2023 mot Grim. 
+                    Deres tilhengere reiser til Halden med banner og flyvers som de sprer utover Halden. 
+                    Den fredelige gaten i Tistedal fylles høylytte protester fra mennesker iført finnlandshetter og med høygaffler i hendene.
                 </p>
             </div>
         </section>
@@ -339,12 +382,14 @@
         <section id="backtocow">
             <div class="content-box">
                 <h2>DET ABSURDE HØYDEPUNKTET</h2>
-                <p>Hva har alt dette med kuen som reiste fra Romeriket å gjøre? </p>
+                <p><b>Hva har dette å gjøre med kuen som er på reisefot fra gården sin i Romeriket 1,5 år senere?</b></p>
+                <img src="Bilder/cowtram.png" />
                 <p>
-                    Den finnes **bundet til en trapp** som tilhører en enebolig i Tistedal. Eieren av denne boligen? Sebastian Ring Gjerlaugsen aka Grim.
-                </p>
-                <p>
-                    Saken ble henlagt da verken kueier eller Gjerlaugsen hadde lyst til å anmelde og Mattilsynet konkluderte med at det ikke hadde skjedd brudd på dyrevelferden. **Kuas eventyr var over... eller var det?**
+                    For det er ikke hvilket som helst sted denne kua havner. Den finnes bundet til en trapp som tilhører en enebolig i Tistedal. 
+                    Eieren av denne boligen? Sebastian Ring Gjerlaugsen aka Grim. Politiet blir kontaktet og kuen blir sendt til en lokal bonde før eieren av kua kommer og henter den. 
+                    Kuen var i god form og nok fornøyd med å være tilbake til det varme fjøset på en gård i Romeriket et sted. 
+                    Saken ble henlagt da verken kueier eller Gjerlaugsen hadde lyst til å anmelde og Mattilsynet konkluderte med at det ikke hadde skjedd brudd på dyrevelferden. 
+                    Den unge kua sitt eventyr var over, men det digitale fotspor hadde strukket seg enda lengre enn avisartikkelen som dekket saken. 
                 </p>
             </div>
         </section>
@@ -354,25 +399,32 @@
             <div class="reveal-text">
                 <div class="content-box">
                     <p>
-                        12. februar 2025 lanserer CSGO Empire sine nye cases. Blant de nye casene er det et av dem som ser ekstra interessant ut.
-                    </p>
-                    <p>
-                        Caset med navnet **“Man”** viser en ku satt sammen med et moderne hus som ligner på Grim's hus.
-                    </p>
-                    <p>
-                        Inne på Empire sin egen side kan du se at ett element skiller seg ut. Det er ikke et skin, **det er en ku**.
+                        12. februar 2025 lanserer CSGO Empire sine nye cases på X (tidligere twitter). Blant de nye casene er det et av dem som ser ekstra interessant ut. 
+                        Caset med navnet “Man” når du ser nærmere ser du bilde av en ku satt sammen med et moderne hus som ligner på et kjent hus i Tistedalsveien.
                     </p>
                     <h2 class="glitch-title">GRIM’S COW: $5 000</h2>
                     <p>
-                        Grim’s cow er verdt **5 000 dollar** og har en **0,07% sjanse** for å droppe. Kua ble et våpen i rivaliseringen.
+                        Inne på Empire sin egen side kan du se hvilke skins du kan få i casen. Det er et skin som skiller seg ut, for det er ikke et skin, det er en ku. 
+                        Navnet? Grim’s cow verdt 5 000 dollar og med en 0,07% sjanse skal det litt til for at den blir din. 
                     </p>
+                    <p>
+                       Med disse bevisene kan vi bare anta at det var Empire som sto bak hele reisen til kua. 
+                        Empire har ikke ønsket å kommentere på saken og vi kan derfor ikke bekrefte 100% at de står bak, men sannsynligheten er ganske høy. 
+                        Hvordan kua har det vet vi heller ikke. Vi klarte ikke å spore ned bonden som eieren den
+                    </p>
+                    
                 </div>
             </div>
         </section>
         
-        <section id="3dmodel" style="background-color: #000; min-height: 50vh;">
-            <video id="final-video" controls playsinline>
+        <section id="dmodelmobil" >
+            <video id="final-video-mobil" controls playsinline muted preload="auto">
                 <source src="Bilder/Kusaken_video_1080x1920.mp4" type="video/mp4">
+            </video>
+        </section>
+        <section id="dmodeldesktop" >
+            <video id="final-video-desktop" controls playsinline muted preload="auto">
+                <source src="Bilder/Kusaken_video_1080p.mp4" type="video/mp4">
             </video>
         </section>
     </main>
@@ -383,34 +435,26 @@
     <script>
         gsap.registerPlugin(ScrollTrigger);
 
-        // ----------------------------------------------------
-        // Video Kontroll (Play/Pause ved Scroll)
-        // ----------------------------------------------------
+    
         gsap.utils.toArray("video").forEach((video) => {
-            // Hvis videoen er den første, sett den til å starte dempet (nettleserkrav)
+
             if(video.id === 'Video') {
                 video.muted = true;
             }
             
             ScrollTrigger.create({
                 trigger: video,
-                start: "top center", // Starter når toppen av videoen er i midten av viewporten
-                end: "bottom center", // Pauser når bunnen av videoen er i midten av viewporten
+                start: "top center", 
+                end: "bottom center", 
                 
-                // Starter avspilling (med lyden på om den ikke er dempet)
                 onEnter: () => video.play().catch(e => console.log("Video Play Blocked")), 
-                // Pauser når vi scroller ned og ut
                 onLeave: () => video.pause(),
-                // Starter avspilling igjen når vi scroller opp og inn
                 onEnterBack: () => video.play().catch(e => console.log("Video Play Blocked")),
-                // Pauser når vi scroller opp og ut
                 onLeaveBack: () => video.pause() 
             });
         });
 
-        // ----------------------------------------------------
-        // AKT I: Kua's Reise (Sticky Slideshow) - STABIL
-        // ----------------------------------------------------
+        
         gsap.utils.toArray(".cow-slide").forEach((slide, i) => {
             const text = slide.querySelector('.imgText');
             
@@ -448,17 +492,13 @@
             });
         });
 
-        // ----------------------------------------------------
-        // AKT II: Grim og Spillet (Dropdowns Fiks)
-        // ----------------------------------------------------
-        
-        // Fly-inn animasjon for dropdowns (Nå med initial opacity: 0 i GSAP)
+      
         gsap.utils.toArray(".dropdown").forEach((dropdown, i) => {
             const direction = i % 2 === 0 ? -50 : 50;
             
             gsap.from(dropdown, {
                 x: direction,
-                opacity: 0, // Setter opacity til 0 her i GSAP
+                opacity: 0,
                 duration: 0.6,
                 ease: "power2.out",
                 scrollTrigger: {
@@ -469,14 +509,8 @@
             });
         });
 
-        
-        
-        
-        // ----------------------------------------------------
-        // AKT III/IV: Element-innflyvninger og avsløring
-        // ----------------------------------------------------
-        
-        // Fly-inn for content-boxene
+      
+       
         gsap.utils.toArray("#secondPart .content-box, #backtocow .content-box, #caselaunch .content-box").forEach(box => {
             gsap.from(box, {
                 y: 50,
@@ -490,7 +524,7 @@
             });
         });
         
-        // Bilde i Akt III
+
         gsap.from("#secondPart img", {
             scale: 0.5,
             opacity: 0,
@@ -503,7 +537,6 @@
             }
         });
         
-        // Sticky Zoom på Case Launch bilde
         const launchImage = document.querySelector('#caselaunch img');
         
         ScrollTrigger.create({
