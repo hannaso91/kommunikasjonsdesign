@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styletolate.scss">
+
+    <title>Se på meg, jeg gir faen i alle andre</title>
+</head>
+<body>
+    <div class="parallax-bg" aria-hidden="true"></div>
+    <div class="site-wrapper">
+        <div class="desktop-side-bar left-bar"></div> 
+        <div class="desktop-side-bar right-bar"></div> 
+        
+        <img src="forsentkomming/Asset 3buss.svg" id="busicon" alt="en buss illustrasjon hvor bussen kjører over skjermen basert på scrolling"/>
+
+        <header>
+            <video id="introVideoMobil" controls playsinline>
+                <source src="forsentkomming/Komme_for_sent_9x16.mp4" type="video/mp4"> 
+            </video>
+            <video id="introVideoDesktop" controls playsinline>
+                <source src="forsentkomming/Komme_for_sent_kommuniksjonsdesign(1).mp4" type="video/mp4"> 
+            </video>
+        </header>
+        <div id="read-progress" aria-hidden="true"></div>
+        <main>
+            <section id="main_heading">
+                <h1 ><b>«Se på meg, jeg gir faen i alle andre»</b></h1>
+                <p>Tekst: Signe-Sofie Jansen</p>
+                <p>Dato: 30.09.2025</p>
+            </section>
+            <section id="intro">
+                <p class="introlede reveal">
+                    Hvorfor kommer noen for sent – og hvor mye ødelegger det egentlig for resten av rommet?
+                </p>
+                <article>
+                    <p class="dropcap">
+                    <strong>Stig Henning Johansen</strong>, foreleser ved Høgskolen i Østfold, peker på …
+                    </p>
+                <article>
+                    <p>
+                        <b>Stig Henning Johansen, som er foreleser innen IT og kommunikasjon ved Høgskolen i Østfold, mener dette er problemet til studenter som kommer for sent. 
+                        «Jeg skulle ønske studenter forsto at når du kommer for sent så gjør du en personal statement, <em>«Se på meg, jeg gir faen i alle andre»»</em></b>
+                    </p>
+                    <div id="firstPart" class="hiddenText">
+                        <p >
+                            Johansen, har mange meninger om dagens studenter. Ifølge han og flere andre forelesere på huset så er forsentkommingene blitt normalisert. 
+                            En anonym spørreundersøkelse viser at flere forelesere har respekt for forsentkomminger på reelt grunnlag. <em>«Det er alltid noen gode grunner, vi er alle mennesker og det kan skje noe uventet»</em>
+                            kommer det fram i undersøkelsen.
+                        </p>
+                        <figure>
+                            <img src="forsentkomming/Stig.jpg" alt="bilde av foreleser Stig" id="stigpicture"/>
+                            <figcaption class="figcaption">Stig Henning Johansen</figcaption>
+                        </figure>
+                    </div>
+                    <div id="pictureContainer">
+                        <div class="stickyFrame">
+                            <img src="forsentkomming/signe.jpg" alt="bilde av en student som kommer for sent til forelesning" class="stickyImage"/>
+                            <div class="quotes">
+                                <p class="backgroundText" id="quote-1">«Man kan være avhengig av å ta en buss med en ruteplan som passer dårlig med forelesningstidspunktene.»</p>
+                                <p class="backgroundText" id="quote-2">«Noen få kommer for seint fordi de har omsorgsansvar for barn og da er det mange ting som ikke går som planlagt»</p>
+                                <p class="backgroundText" id="quote-3">«Men det er mye irritasjon rundt studentens forsentkomming. «95% av all forsentkomming er noe de ønsker å gjøre, det er et valg og ikke livet»</p>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                <div id="cardcontainer">
+                    <article id="card-swipe" >
+                        <p>"Jeg har ingen forventing om at man skal sitte å vente fra kl 6 om morgenen, men utover dagen bør man være på plass i god tid" - Ann-Charlott Karlsen</p>
+                        <p>"På det verste har jeg måttet kaste folk ut og be de komme inn i pausen, da var det opp til 10 forstyrrelser på under 30 min" - Ann-Charlott Karlsen</p>
+                        <p>"Du føler du må ta tak i problemene da det påvirker studentene som sitter og følger med" - Ann-Charlott Karlsen</p>
+                        <p>"Det er ikke mange, men de som kommer for sent ødelegger så mye for alle oss andre" - Ann-Charlott Karlsen</p>
+                    </article>
+                    <div class="swipe-navigastion">
+                        <button class="nav-button" id="prev-btn">Tilbake</button>
+                        <button class="nav-button" id="next-btn">Frem</button> 
+                    </div>
+                    
+                </div>
+                <article id="preventLate">
+                    <h2>Så kommer spørsmålet: hva kan gjøres for å forhindre at studenter kommer for sent?</h2>
+                    
+                    <div class="prevent-late-sticky-container">
+                        <figure class="sticky-image-section">
+                            <img src="forsentkomming/dom-fou-YRMWVcdyhmI-unsplash.jpg" alt="bilde av en foreleseningssalg på en skole med høyere utdanning" class="image-universityroom"/>
+                            <figcaption class="figcaption">Klasserommet: Der kampen foregår</figcaption>
+                        </figure>
+                    </div>
+
+                    <div class="text-after-sticky">
+                        <p>
+                            Johansen svarer her at det er en del av dagens studentkultur. 
+                            Han mener at studenter må holde andre studenter ansvarlig for å forstyrre forelesningen. <em>«Drit i læreren, tenk på oss. Du forstyrrer for medstudenter»</em>
+                        </p>
+                        <p>
+                            Johansen deler at det på en dårlig dag kan gjøre at han føler seg lite verdsatt 
+                        </p>
+                        <p>
+                            «Jeg blir irritert det forstyrrer flyten jeg har. Jeg har brukt tid på å planlegge og når det blir avbrytelser da så får jeg ikke ut det jeg vil. 
+                            Mangel på respekt, det er en avtale mellom parter at vi starter da. Jeg blir negativ i hue mitt så det påvirker kvalitet, motivasjon og humør. 
+                            Skjer det ofte og du har en kjip dag så føler du deg mindre verdsatt og at det du gjør som foreleser ikke er bra nok. Det kan tas personlig. 
+                            Treffer meg som foreleser, meg personlig og forelesningen.»
+                        </p>
+                        <p>
+                            Nettopp dette er det flere som nevner i den anonyme undersøkelsen. Selv de som ikke lar seg forstyrre av dette selv så ser de at det <em>«tydelig forstyrrer og distraherer andre studenter som allerede er på plass.»</em> 
+                            Få av foreleserne har tro på at skolen kan gjøre stort med dette problemet, men Ann-Charlott Karlsen mener en ide kan være lys eller en info skjerm for å indikere at det foregår forelesninger i de ulike rommene. 
+                            I tillegg til å påvirke medelever kan det tyde på at dette påvirker forelesernes mentale helse. <em>«Man føler seg litt liten»</em> kan Karlsen fortelle.
+                        </p>
+                        <h2 style="text-align: center; margin-top: 3rem; font-size: 1.8rem;">
+                            HANDLER DET EGENTLIG OM TID? ELLER HOLDNING?
+                        </h2>
+                        
+                    </div>
+                </article>
+            </section>
+            <section>
+                <div id="questionContainer">
+                    <p id="question">Hva tenker du? Er det greit å komme for sent til forelesning?</p>
+                    <button class="buttonSvar" >Ja</button>
+                    <button class="buttonSvar" >Nei</button>
+                    <p id="result"></p>
+                </div>
+            </section>
+        </main>
+        <footer>
+        </footer>
+    </div>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+    <script src="tolate.js"></script>
+</body>
+</html>

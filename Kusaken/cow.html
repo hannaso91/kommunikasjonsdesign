@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <title>Kusaken - Ryddigere Scrollytelling</title>
+
+    <style>
+        /* Grunnleggende Reset og Fonter */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #000;
+            background-image: url('Bilder/Bakgrunnsbilde.png');
+            background-attachment: fixed;
+            background-size: cover;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 11px;
+            line-height: 1.5;
+            color: #fff;
+            transition: background-color 0.5s ease; /* For fargeoverganger */
+        }
+
+        /* --- Felles Oppsett for Tekst --- */
+        section {
+            padding: 10vh 5vw;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 10; /* Sikrer at innholdet ligger over body-bakgrunnen */
+        }
+
+        .content-box {
+            width: 90%;
+            max-width: 700px;
+            margin: 1.5rem auto;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.9); /* Klar, hvit bakgrunn for lesbarhet */
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            color: #000; /* Svart tekst på hvit boks */
+            transition: transform 0.3s ease;
+        }
+
+        h1, h2 {
+            text-align: center;
+            margin: 3rem auto;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 3px 3px #cc0000; /* Rød skygge for spill-effekt */
+        }
+        
+        /* Titler i content-box */
+        .content-box h2 {
+            color: #000;
+            text-shadow: none;
+            margin-top: 1rem;
+        }
+
+        p {
+            margin: 1rem 0;
+        }
+
+        img, video {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2rem auto;
+            border-radius: 10px;
+        }
+        
+        /* --- AKT I: Kua's Reise (Sticky Slideshow) --- */
+        #cow-wrapper {
+            padding: 0;
+            min-height: 350vh; /* Lengre scroll for å se overgangene */
+            background-color: #000;
+        }
+
+        .cow-slide {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .cow-slide img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 0;
+            opacity: 1; /* Starter synlig */
+        }
+
+        .imgText {
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #ffffff;
+            padding: 20px;
+            border-radius: 6px;
+            text-align: center;
+            width: 80%;
+            max-width: 500px;
+            font-size: 14px;
+            z-index: 20;
+            opacity: 0; /* Starter usynlig for animasjon */
+        }
+
+        /* --- AKT II: Grim og Spillet (Centering & Sticky Video) --- */
+        #firstPart {
+            background-color: transparent;
+        }
+
+        .dropdown {
+            border: 2px solid #000;
+            background-color: rgba(128, 208, 16, 0.9);
+            color: #000;
+            margin: 3rem 0;
+            opacity: 0;
+            transform: translateX(0);
+        }
+        .dropdown summary { color: #000; }
+        .dropdown p { font-family: 'Pixelify Sans', sans-serif; color: #000; }
+
+        #video-container {
+            height: 200vh;
+            position: relative;
+            background: rgba(0, 0, 0, 0.8);
+            margin: 4rem auto;
+            width: 90%;
+            max-width: 700px;
+            border-radius: 15px;
+        }
+        #Video {
+            position: sticky;
+            top: 15vh;
+            width: 90%;
+            max-height: 70vh;
+            object-fit: contain;
+            z-index: 1;
+        }
+        .video-overlay-text {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            height: 200vh;
+            z-index: 2;
+            color: #fff;
+            text-shadow: 1px 1px #000;
+        }
+        .video-overlay-text p {
+             background: rgba(0, 0, 0, 0.7);
+             padding: 15px;
+             border-radius: 8px;
+             margin: 20px auto;
+             width: 100%;
+             max-width: 400px;
+             text-align: center;
+             font-size: 10px;
+             opacity: 0;
+        }
+
+        /* --- AKT III: Rivalisering (Enkelt Bilde Reveal) --- */
+        #secondPart {
+            background-color: transparent;
+        }
+        #secondPart img {
+            max-width: 60%;
+        }
+
+        /* --- AKT IV: Avsløring (Zoom/Glitch) --- */
+        #caselaunch {
+            min-height: 200vh;
+        }
+        #caselaunch img {
+             position: sticky;
+             top: 5vh;
+             width: 90%;
+             max-width: 800px;
+             z-index: 1;
+        }
+        .reveal-text {
+            position: relative;
+            z-index: 2;
+            padding-top: 100vh;
+        }
+        
+        .glitch-title {
+            color: #cc0000;
+            font-size: 24px;
+            margin: 2rem auto;
+            text-shadow: 4px 4px #000;
+            animation: glitch-anim 0.5s infinite alternate steps(2);
+        }
+        @keyframes glitch-anim {
+            0% { text-shadow: 2px 2px #00ffc8, -2px -2px #ff00ff; transform: translate(2px, 2px); }
+            100% { text-shadow: -2px -2px #00ffc8, 2px 2px #ff00ff; transform: translate(-2px, -2px); }
+        }
+    </style>
+</head>
+<body>
+
+    <main>
+        
+        <div id="cow-wrapper">
+            <div class="cow-slide" data-slide="1">
+                <img src="Bilder/Kyr_norskenaturen.png" alt="Pixelert bilde av noen kuer som gresser i den norske naturen"/>
+                <p class="imgText">Se for deg livet som en ung ku. Du bruker dagene dine på å drøvtygge gress sammen med andre kuer på gården du bor på et sted i Romeriket.</p>
+            </div>
+
+            <div class="cow-slide" data-slide="2">
+                <img src="Bilder/cow_barn.png" alt="Pixelert bilde av en ku som står inne i et fjøs"/>
+                <p class="imgText">En kald dag i januar står du inne i det varme fjøset, også kommer det noen fremmede til gården som snakker et språk du ikke forstår</p>
+            </div>
+
+            <div class="cow-slide" data-slide="3">
+                <img src="Bilder/cow_transport.png" alt="Pixelert bilde av en ku som blir transportert i en henger"/>
+                <p class="imgText">De har penger og plutselig blir du dratt fra det varme fjøset og inn i en henger bak en bil. Du skal ikke bli burger, du er på vei til å bli en **internettkjendis**</p>
+            </div>
+        </div>
+        
+        <section id="firstPart">
+            <h1>GRIMS KU</h1>
+            <div class="content-box">
+                <p>
+                    Det var en helt vanlig onsdag for Sebastian Ring Gjerlaugsen. Han er en Youtuber og streamer under aliaset **Grim**. På sine kanaler, lager han videoer hvor han **gambler** med ekte penger på skins.
+                </p>
+            </div>
+
+            <details class="dropdown">
+                <summary>Hva er skins?</summary>
+                <p>
+                    Skins er kosmetiske endringer på karakterer eller våpen i et spill. Prisen påvirkes av sjeldenhet og etterspørsel, noe som gjør at skins kan få høy verdi. Det dyreste skinet er verdt 1.5 millioner dollar.
+                </p>
+            </details>
+
+            <div id="video-container">
+                <video id="Video" controls playsinline muted>
+                    <source src="Bilder/Case_spin_video_1080x1920.mp4" type="video/mp4">
+                </video>
+                <div class="video-overlay-text">
+                    <p data-scroll-start="40">
+                        På videoene åpner han cases hvor våpen med høy verdi flyr forbi på skjermen. Spenningen er til å føle på.
+                    </p>
+                    <p data-scroll-start="120">
+                        Det er akkurat som casino maskinene i Las Vegas, men det er bare ett tastetrykk unna. Det er mange som liker å se på disse videoene, og mange av dem er mindreårige.
+                    </p>
+                </div>
+            </div>
+
+            <details class="dropdown">
+                <summary>Hva er case?</summary>
+                <p>
+                    Cases er en måte å skaffe seg skins på CS. Du må kjøpe en nøkkel for rundt 30 kr for å åpne. Sannsynligheten for å få et sjeldent skin er veldig lav, noe som skaper spenning som ligner på gambling.
+                </p>
+            </details>
+        </section>
+
+        <section id="secondPart">
+           <div class="content-box">
+                <h2>Rivaliseringen starter</h2>
+                <p>Grim tjener godt på å promotere gambling for gamblingnettsiden CSGO Roll. Dette liker ikke rivalen Empire.</p>
+           </div>
+           
+            <img src="Bilder/Rivallogoenmothverandre.png" alt="Pixelert bilde av to rivaliserende logoer"/>
+            
+            <div class="content-box">
+                <p>
+                    Empire slo til med en **svartekampanje** i oktober 2023. Deres tilhengere reiser til Tistedal i Halden med banner og flyvers.
+                </p>
+                <p>
+                    Den fredelige gaten fylles høylytte protester fra mennesker iført finnlandshetter.
+                </p>
+            </div>
+        </section>
+        
+        <section id="backtocow">
+            <div class="content-box">
+                <h2>DET ABSURDE HØYDEPUNKTET</h2>
+                <p>Hva har alt dette med kuen som reiste fra Romeriket å gjøre? </p>
+                <p>
+                    Den finnes **bundet til en trapp** som tilhører en enebolig i Tistedal. Eieren av denne boligen? Sebastian Ring Gjerlaugsen aka Grim.
+                </p>
+                <p>
+                    Saken ble henlagt da verken kueier eller Gjerlaugsen hadde lyst til å anmelde og Mattilsynet konkluderte med at det ikke hadde skjedd brudd på dyrevelferden. **Kuas eventyr var over... eller var det?**
+                </p>
+            </div>
+        </section>
+        
+        <section id="caselaunch">
+            <img src="Bilder/Bilde av Case launchen.png" alt="bilde av en tweet som annonserer lanseringen av et nytt case"/>
+            <div class="reveal-text">
+                <div class="content-box">
+                    <p>
+                        12. februar 2025 lanserer CSGO Empire sine nye cases. Blant de nye casene er det et av dem som ser ekstra interessant ut.
+                    </p>
+                    <p>
+                        Caset med navnet **“Man”** viser en ku satt sammen med et moderne hus som ligner på Grim's hus.
+                    </p>
+                    <p>
+                        Inne på Empire sin egen side kan du se at ett element skiller seg ut. Det er ikke et skin, **det er en ku**.
+                    </p>
+                    <h2 class="glitch-title">GRIM’S COW: $5 000</h2>
+                    <p>
+                        Grim’s cow er verdt **5 000 dollar** og har en **0,07% sjanse** for å droppe. Kua ble et våpen i rivaliseringen.
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="3dmodel" style="background-color: #000; min-height: 50vh;">
+            <video id="final-video" controls playsinline>
+                <source src="Bilder/Kusaken_video_1080x1920.mp4" type="video/mp4">
+            </video>
+        </section>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Funksjon for å sikre at videoer starter automatisk (uten lyd)
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('video').forEach(video => {
+                video.addEventListener('loadedmetadata', () => {
+                    video.muted = true;
+                    video.play().catch(e => console.log("Video autoplay blocked."));
+                });
+            });
+        });
+
+        // ----------------------------------------------------
+        // AKT I: Kua's Reise (Sticky Slideshow)
+        // Fikset logikk for å hindre svart skjerm
+        // ----------------------------------------------------
+        gsap.utils.toArray(".cow-slide").forEach((slide, i) => {
+            const img = slide.querySelector('img');
+            const text = slide.querySelector('.imgText');
+            
+            // Starter den første teksten synlig, de andre usynlige
+            if (i === 0) {
+                gsap.set(text, { opacity: 1 });
+            }
+
+            ScrollTrigger.create({
+                trigger: slide,
+                start: "top top",
+                end: "+=120%", 
+                pin: true,
+                pinSpacing: false,
+
+                // Animer inn teksten når elementet når toppen
+                onEnter: () => {
+                    gsap.fromTo(text, 
+                        { opacity: 0, y: 50 }, 
+                        { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }
+                    );
+                },
+                // Animer ut teksten når brukeren scroller videre
+                onUpdate: (self) => {
+                    if (self.progress > 0.8 && self.direction === 1) {
+                         gsap.to(text, { opacity: 0, y: -50, duration: 0.4 });
+                    }
+                },
+                // Animer ut teksten når brukeren scroller tilbake
+                onLeaveBack: () => {
+                    // Skjuler teksten raskt
+                    gsap.to(text, { opacity: 0, y: 50, duration: 0.3 });
+                },
+                // Animer inn teksten ved tilbakescroll
+                onEnterBack: () => {
+                    gsap.fromTo(text, 
+                        { opacity: 0, y: 50 }, 
+                        { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }
+                    );
+                },
+            });
+        });
+
+        // ----------------------------------------------------
+        // AKT II: Grim og Spillet (Dropdowns og Sticky Video)
+        // ----------------------------------------------------
+        
+        // Fly-inn animasjon for dropdowns (fra motsatt side for hver)
+        gsap.utils.toArray(".dropdown").forEach((dropdown, i) => {
+            const direction = i % 2 === 0 ? -50 : 50; // Annethvert element fra venstre/høyre
+            
+            gsap.from(dropdown, {
+                x: direction,
+                opacity: 0,
+                duration: 0.6,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: dropdown,
+                    start: "top 80%",
+                    toggleActions: "play none none reverse"
+                }
+            });
+        });
+
+        // Sticky Video Overlay Text (Enkel animasjon)
+        gsap.utils.toArray(".video-overlay-text p").forEach(textBlock => {
+            ScrollTrigger.create({
+                trigger: "#video-container",
+                start: `top+=${textBlock.getAttribute('data-scroll-start')} top`,
+                end: `top+=${parseInt(textBlock.getAttribute('data-scroll-start')) + 50} top`,
+                onEnter: () => gsap.to(textBlock, { opacity: 1, duration: 0.5 }),
+                onLeave: () => gsap.to(textBlock, { opacity: 0, duration: 0.5 }),
+                onEnterBack: () => gsap.to(textBlock, { opacity: 1, duration: 0.5 }),
+                onLeaveBack: () => gsap.to(textBlock, { opacity: 0, duration: 0.5 }),
+            });
+        });
+
+        // ----------------------------------------------------
+        // AKT III/IV: Element-innflyvninger og avsløring
+        // ----------------------------------------------------
+        
+        // Fly-inn for content-boxene
+        gsap.utils.toArray("#secondPart .content-box, #backtocow .content-box, #caselaunch .content-box").forEach(box => {
+            gsap.from(box, {
+                y: 50,
+                opacity: 0,
+                duration: 0.8,
+                scrollTrigger: {
+                    trigger: box,
+                    start: "top 85%",
+                    toggleActions: "play none none reverse"
+                }
+            });
+        });
+        
+        // Bilde i Akt III
+        gsap.from("#secondPart img", {
+            scale: 0.5,
+            opacity: 0,
+            duration: 1.0,
+            ease: "elastic.out(1, 0.3)",
+            scrollTrigger: {
+                trigger: "#secondPart img",
+                start: "top 80%",
+                toggleActions: "play none none reverse"
+            }
+        });
+        
+        // Sticky Zoom på Case Launch bilde
+        const launchImage = document.querySelector('#caselaunch img');
+        
+        ScrollTrigger.create({
+            trigger: "#caselaunch",
+            start: "top top",
+            end: "bottom 50%",
+            pin: launchImage, 
+            pinSpacing: false,
+            
+            // Zoom-inn effekt på bildet
+            onEnter: () => {
+                gsap.fromTo(launchImage, 
+                    { scale: 0.9, opacity: 0.5 }, 
+                    { scale: 1, opacity: 1, duration: 0.8, ease: "power2.out" }
+                );
+            },
+        });
+
+    </script>
+</body>
+</html>
