@@ -9,7 +9,7 @@
     <title>Kusaken - Scrollytelling Spesial</title>
 
     <style>
-  
+
         * {
             margin: 0;
             padding: 0;
@@ -26,9 +26,11 @@
             line-height: 1.5;
             color: #fff;
             transition: background-color 0.5s ease;
+            max-width: 1920px; /* Lagt til for konsistens på VELDIG store skjermer */
+            margin: 0 auto; /* Sentrerer body på VELDIG store skjermer */
         }
 
-     
+
         section {
             padding: 10vh 5vw;
             min-height: 100vh;
@@ -59,8 +61,8 @@
             color: #fff;
             text-shadow: 3px 3px #cc0000;
         }
-        
-   
+
+
         .content-box h2 {
             color: #000;
             text-shadow: none;
@@ -80,14 +82,6 @@
         }
 
 
-        #video-display-desktop {
-            display: none;
-        }
-        #video-display-mobile {
-            display: block;
-        }
-        
-   
         #cow-wrapper {
             padding: 0;
             min-height: 350vh;
@@ -110,7 +104,7 @@
             height: 100%;
             object-fit: cover;
             border-radius: 0;
-            opacity: 1; 
+            opacity: 1;
         }
 
         .imgText {
@@ -129,7 +123,7 @@
 
         #firstPart {
             background-color: transparent;
-            z-index: 10; 
+            z-index: 10;
         }
 
         .dropdown {
@@ -144,7 +138,7 @@
         .dropdown p { font-family: 'Press start 2P', sans-serif; color: #000;  }
 
         #video-container {
-            height: 250vh; 
+            height: 250vh;
             position: relative;
             background: rgba(0, 0, 0, 0.8);
             margin: 4rem auto;
@@ -154,13 +148,13 @@
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            justify-content: space-around; 
+            justify-content: space-around;
             align-items: center;
-        }  
+        }
 
 
         #video-display {
-            height: auto; 
+            height: auto;
             position: relative;
             background: rgba(0, 0, 0, 0.8);
             margin: 4rem auto;
@@ -179,34 +173,34 @@
             max-height: 70vh;
             object-fit: contain;
             z-index: 1;
-            margin: 0 auto; 
+            margin: 0 auto;
             display: block;
         }
 
-  
+
         .video-overlay-text {
-            display: none; 
+            display: none;
         }
-     
+
         .video-overlay-text {
-            position: relative; 
+            position: relative;
             top: auto;
-            left: auto; 
+            left: auto;
             width: 100%;
-            height: auto; 
+            height: auto;
             z-index: 3;
             pointer-events: none;
-            padding: 10px; 
+            padding: 10px;
         }
 
         .video-overlay-text p {
-       
+
             position: relative;
-            top: auto; 
-            left: auto; 
-            transform: none; 
-            
-           
+            top: auto;
+            left: auto;
+            transform: none;
+
+
             background: rgba(0, 0, 0, 0.9);
             padding: 15px;
             border-radius: 8px;
@@ -215,7 +209,7 @@
             text-align: center;
             font-size: 10px;
             opacity: 0;
-            margin: 2rem auto; 
+            margin: 2rem auto;
             color: #fff;
             pointer-events: auto;
         }
@@ -223,7 +217,7 @@
 
         #secondPart {
             background-color: transparent;
-            padding-top: 5vh; 
+            padding-top: 5vh;
         }
         #secondPart img {
             max-width: 100%;
@@ -234,7 +228,7 @@
         }
         #caselaunch img {
              position: sticky;
-             top: 5vh;
+             top: 2vh; /* Justert fra 5vh til 2vh for å flytte bildet høyere opp */
              width: 90%;
              max-width: 800px;
              z-index: 1;
@@ -244,7 +238,7 @@
             z-index: 2;
             padding-top: 100vh;
         }
-        
+
         .glitch-title {
             color: #cc0000;
             font-size: 24px;
@@ -265,99 +259,25 @@
             display: block;
         }
 
-        @media (min-width: 768px) {
+        @media (min-width: 768px) { /* Endret fra 1024px til 768px for bedre desktop-konsistens */
+
+            .dropdown {
+                max-width: 600px;
+            }
+
+            #desktopcontainer {
+                margin-top: 100px;
+            }
 
             #dmodelmobil {
-                display: none !important;
+                 display: none !important;
             }
 
             #dmodeldesktop {
-                display: flex !important; 
+                display: flex !important;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-            }
-
-            body {
-                font-size: 13px; 
-                line-height: 1.6;
-            }
-
-            h1 {
-                font-size: 60px; 
-            }
-
-            .content-box {
-                max-width: 800px; 
-                padding: 3rem; 
-                font-size: 14px; 
-            }
-
-         
-            section {
-                padding: 10vh 10vw; 
-            }
-
-           
-            .cow-slide img {
-                width: 100vw; 
-                height: 100vh;
-            }
-
-            .imgText {
-                max-width: 700px; 
-                font-size: 16px; 
-                padding: 30px;
-            }
-
-            .dropdown {
-                max-width: 800px; 
-                margin: 10rem auto 7rem auto;
-                padding: 3rem;
-                font-size: 14px;
-            }
-            .dropdown p {
-                margin-top: 1rem !important; 
-            }
-
-            #video-display {
-                width: 80%; 
-                max-width: 800px;
-                padding: 30px 0;
-            }
-            
-            #Video {
-                max-height: 80vh; 
-                width: 95%; 
-            }
-
-            #secondPart .content-box, #backtocow .content-box {
-                max-width: 800px; 
-            }
-
-            #backtocow h2, #caselaunch h2 {
-                font-size: 30px;
-            }
-
-            #caselaunch {
-                min-height: 250vh; 
-                padding-top: 5vh; 
-            }
-            #caselaunch img {
-                top: 10vh; 
-                width: 80%;
-                max-width: 900px; 
-            }
-            .reveal-text {
- 
-                padding-top: 150vh; 
-            }
-
-            #video-display-desktop {
-                display: block;
-            }
-            #video-display-mobile {
-                display: none;
             }
         }
     </style>
@@ -365,7 +285,7 @@
 <body>
 
     <main>
-        
+
         <div id="cow-wrapper">
             <div class="cow-slide" data-slide="1">
                 <img src="Bilder/Kyr_norskenaturen.png" alt="Pixelert bilde av noen kuer som gresser i den norske naturen"/>
@@ -382,44 +302,40 @@
                 <p class="imgText">De har penger og plutselig blir du dratt fra det varme fjøset og inn i en henger bak en bil. Du skal ikke bli burger, du er på vei til å bli en internettkjendis. </p>
             </div>
         </div>
-        
+
         <section id="firstPart">
             <h1>GRIMS KU</h1>
             <div class="content-box">
                 <p>
-                    Det var en helt vanlig onsdag for Sebastian Ring Gjerlaugsen. Gjerlaugsen kjøpte en enebolig for 8 500 000 kr i Tistedal i slutten av året 2022. 
+                    Det var en helt vanlig onsdag for Sebastian Ring Gjerlaugsen. Gjerlaugsen kjøpte en enebolig for 8 500 000 kr i Tistedal i slutten av året 2022.
                     Hvordan har han råd til det? Han  er en Youtuber og streamer under aliaset Grim. På sine kanaler som nå er fjernet, lager han videoer hvor han gambler med ekte penger på skins.
                 </p>
             </div>
 
             <details class="dropdown">
-                <summary><b>Hva er skins?</b></summary>
-                <p>
-                    Skins er kosmetiske endringer på karakterer eller våpen i et spill. Dette konseptet blir også brukt i skytespillet Counter Strike (CS). 
-                    I CS bruker spillere ekte penger på å skaffe seg disse skinsene. Prisen på et skins påvirkes av to faktorer, hvor sjeldent det er og hvor stor etterspørselen er. 
-                    Dette gjør at skins kan få høy verdi. Per dags dato er det dyreste i skinet i CS kalt Karambit Case Hardened (Pattern 387 "Blue Gem") verdt 1.5 millioner dollar. 
+                <summary>Hva er skins?</summary>
+                <p style="margin-top: 30rem;">
+                    Skins er kosmetiske endringer på karakterer eller våpen i et spill. Dette konseptet blir også brukt i skytespillet Counter Strike (CS).
+                    I CS bruker spillere ekte penger på å skaffe seg disse skinsene. Prisen på et skins påvirkes av to faktorer, hvor sjeldent det er og hvor stor etterspørselen er.
+                    Dette gjør at skins kan få høy verdi. Per dags dato er det dyreste i skinet i CS kalt Karambit Case Hardened (Pattern 387 "Blue Gem") verdt 1.5 millioner dollar.
                     Samtidig som noen skins kan bare være verdt noen ører
                 </p>
             </details>
 
-            <div id="video-display-mobile">
+            <div id="video-display">
                 <video id="Video" controls playsinline>
                     <source src="Bilder/Case_spin_video_1080x1920.mp4" type="video/mp4">
                 </video>
             </div>
-            <div id="video-display-desktop">
-                <video id="Video" controls playsinline>
-                    <source src="Bilder/Case_spin_video_1920x1080.mp4" type="video/mp4">
-                </video>
-            </div>
-            
+
             <div class="content-box" data-text-step="1">
                 <p>
-                    På videoene åpner han cases hvor våpen med høy verdi flyr forbi på skjermen. 
-                    Spenningen er til å føle på. 
+                    På videoene åpner han cases hvor våpen med høy verdi flyr forbi på skjermen.
+                    Spenningen er til å føle på. Det er akkurat som casino maskinene i Las Vegas, men det er bare ett tastetrykk unna.
+                    Det er mange som liker å se på disse videoene, og mange av dem er mindreårige
                 </p>
             </div>
-            
+
             <div class="content-box" data-text-step="2">
                 <p>
                     Det er akkurat som casino maskinene i Las Vegas, men det er bare ett tastetrykk unna. Det er mange som liker å se på disse videoene, og mange av dem er mindreårige.
@@ -427,13 +343,13 @@
             </div>
 
             <details class="dropdown">
-                <summary><b>Hva er case?</b></summary>
+                <summary>Hva er case?</summary>
                 <p>
-                    Cases er en måte å skaffe seg skins på CS. Spillere får et case i uka hvis de spiller nok.  
-                    Du må kjøpe en nøkkel til et case for å kunne åpne det. Dette koster rundt 30 kr. 
-                    Caset har skins som varierer fra vannlige verdt under én krone  til veldig sjeldnere verdt flere tusen kroner. 
-                    Det er tilfeldig hvilket skin du får, men sannsynligheten for å få et vanlig skin er veldig mye høyere enn et sjeldent skin. 
-                    Dette skaper spenning som ligner på gambling. 
+                    Cases er en måte å skaffe seg skins på CS. Spillere får et case i uka hvis de spiller nok.
+                    Du må kjøpe en nøkkel til et case for å kunne åpne det. Dette koster rundt 30 kr.
+                    Caset har skins som varierer fra vannlige verdt under én krone  til veldig sjeldnere verdt flere tusen kroner.
+                    Det er tilfeldig hvilket skin du får, men sannsynligheten for å få et vanlig skin er veldig mye høyere enn et sjeldent skin.
+                    Dette skaper spenning som ligner på gambling.
                 </p>
             </details>
         </section>
@@ -443,71 +359,72 @@
                 <p>Grim tjener godt på å promotere gambling for gamblingnettsiden CSGO Roll.</p>
                 <img src="Bilder/Rivallogoenmothverandre.png" alt="Pixelert bilde av to rivaliserende logoer"/>
            </div>
-            
+
+
            <details class="dropdown">
-                <summary><b>Hva skjer mellom roll og empire?</b></summary>
+                <summary>Hva skjer mellom roll og empire?</summary>
                 <p>
-                    Det er et annet selskap som ikke er så fornøyd med at Roll blir promotert. 
-                    Dette er Roll sin erkefiende CSGO Empire. Begge disse selskapene driver nettsider hvor brukere kan gamble skins og penger for å prøve å få bedre skins som da er verdt mer. 
-                    Gambling er veldig stort innen Counter Strike og nesten alle de profesjonelle e-sportlagene har en gambling sponsor. Det hjelper heller ikke at gambling er en del av selve spillet. 
+                    Det er et annet selskap som ikke er så fornøyd med at Roll blir promotert.
+                    Dette er Roll sin erkefiende CSGO Empire. Begge disse selskapene driver nettsider hvor brukere kan gamble skins og penger for å prøve å få bedre skins som da er verdt mer.
+                    Gambling er veldig stort innen Counter Strike og nesten alle de profesjonelle e-sportlagene har en gambling sponsor. Det hjelper heller ikke at gambling er en del av selve spillet.
                     Dette skaper et stort marked med folk som er villige til å legge igjen mye penger. Det er disse Empire og Roll sloss om.
                 </p>
             </details>
-        
+
             <div class="content-box">
                 <p>
-                    Empire hadde en svartekampanjen i oktober 2023 mot Grim. 
-                    Deres tilhengere reiser til Halden med banner og flyvers som de sprer utover Halden. 
+                    Empire hadde en svartekampanjen i oktober 2023 mot Grim.
+                    Deres tilhengere reiser til Halden med banner og flyvers som de sprer utover Halden.
                     Den fredelige gaten i Tistedal fylles høylytte protester fra mennesker iført finnlandshetter og med høygaffler i hendene.
                 </p>
             </div>
         </section>
-        
+
         <section id="backtocow">
             <div class="content-box">
                 <h2>DET ABSURDE HØYDEPUNKTET</h2>
                 <p><b>Hva har dette å gjøre med kuen som er på reisefot fra gården sin i Romeriket 1,5 år senere?</b></p>
                 <img src="Bilder/cowtram.png" />
                 <p>
-                    For det er ikke hvilket som helst sted denne kua havner. Den finnes bundet til en trapp som tilhører en enebolig i Tistedal. 
-                    Eieren av denne boligen? Sebastian Ring Gjerlaugsen aka Grim. Politiet blir kontaktet og kuen blir sendt til en lokal bonde før eieren av kua kommer og henter den. 
-                    Kuen var i god form og nok fornøyd med å være tilbake til det varme fjøset på en gård i Romeriket et sted. 
-                    Saken ble henlagt da verken kueier eller Gjerlaugsen hadde lyst til å anmelde og Mattilsynet konkluderte med at det ikke hadde skjedd brudd på dyrevelferden. 
-                    Den unge kua sitt eventyr var over, men det digitale fotspor hadde strukket seg enda lengre enn avisartikkelen som dekket saken. 
+                    For det er ikke hvilket som helst sted denne kua havner. Den finnes bundet til en trapp som tilhører en enebolig i Tistedal.
+                    Eieren av denne boligen? Sebastian Ring Gjerlaugsen aka Grim. Politiet blir kontaktet og kuen blir sendt til en lokal bonde før eieren av kua kommer og henter den.
+                    Kuen var i god form og nok fornøyd med å være tilbake til det varme fjøset på en gård i Romeriket et sted.
+                    Saken ble henlagt da verken kueier eller Gjerlaugsen hadde lyst til å anmelde og Mattilsynet konkluderte med at det ikke hadde skjedd brudd på dyrevelferden.
+                    Den unge kua sitt eventyr var over, men det digitale fotspor hadde strukket seg enda lengre enn avisartikkelen som dekket saken.
                 </p>
             </div>
         </section>
-        
+
         <section id="caselaunch">
             <img src="Bilder/Bilde av Case launchen.png" alt="bilde av en tweet som annonserer lanseringen av et nytt case"/>
             <div class="reveal-text">
                 <div class="content-box">
                     <p>
-                        12. februar 2025 lanserer CSGO Empire sine nye cases på X (tidligere twitter). Blant de nye casene er det et av dem som ser ekstra interessant ut. 
+                        12. februar 2025 lanserer CSGO Empire sine nye cases på X (tidligere twitter). Blant de nye casene er det et av dem som ser ekstra interessant ut.
                         Caset med navnet “Man” når du ser nærmere ser du bilde av en ku satt sammen med et moderne hus som ligner på et kjent hus i Tistedalsveien.
                     </p>
                     <h2 class="glitch-title">GRIM’S COW: $5 000</h2>
                     <p>
-                        Inne på Empire sin egen side kan du se hvilke skins du kan få i casen. Det er et skin som skiller seg ut, for det er ikke et skin, det er en ku. 
-                        Navnet? Grim’s cow verdt 5 000 dollar og med en 0,07% sjanse skal det litt til for at den blir din. 
+                        Inne på Empire sin egen side kan du se hvilke skins du kan få i casen. Det er et skin som skiller seg ut, for det er ikke et skin, det er en ku.
+                        Navnet? Grim’s cow verdt 5 000 dollar og med en 0,07% sjanse skal det litt til for at den blir din.
                     </p>
                     <p>
-                        Med disse bevisene kan vi bare anta at det var Empire som sto bak hele reisen til kua. 
-                        Empire har ikke ønsket å kommentere på saken og vi kan derfor ikke bekrefte 100% at de står bak, men sannsynligheten er ganske høy. 
+                        Med disse bevisene kan vi bare anta at det var Empire som sto bak hele reisen til kua.
+                        Empire har ikke ønsket å kommentere på saken og vi kan derfor ikke bekrefte 100% at de står bak, men sannsynligheten er ganske høy.
                         Hvordan kua har det vet vi heller ikke. Vi klarte ikke å spore ned bonden som eieren den
                     </p>
-                    
+
                 </div>
             </div>
         </section>
-        
+
         <section id="dmodelmobil" >
             <video id="final-video-mobil" controls playsinline muted preload="auto">
                 <source src="Bilder/Kusaken_video_1080x1920.mp4" type="video/mp4">
             </video>
         </section>
         <section id="dmodeldesktop" >
-            <video id="final-video-desktop" controls playsinline muted preload="auto" style="margin-top: 16rem;">
+            <video id="final-video-desktop" controls playsinline muted preload="auto">
                 <source src="Bilder/Kusaken_video_1080p.mp4" type="video/mp4">
             </video>
         </section>
@@ -515,31 +432,33 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    
+
     <script>
         gsap.registerPlugin(ScrollTrigger);
-    
+
+
         gsap.utils.toArray("video").forEach((video) => {
 
             if(video.id === 'Video') {
                 video.muted = true;
             }
-            
+
             ScrollTrigger.create({
                 trigger: video,
-                start: "top center", 
-                end: "bottom center", 
-                
-                onEnter: () => video.play().catch(e => console.log("Video Play Blocked")), 
+                start: "top center",
+                end: "bottom center",
+
+                onEnter: () => video.play().catch(e => console.log("Video Play Blocked")),
                 onLeave: () => video.pause(),
                 onEnterBack: () => video.play().catch(e => console.log("Video Play Blocked")),
-                onLeaveBack: () => video.pause() 
+                onLeaveBack: () => video.pause()
             });
         });
 
+
         gsap.utils.toArray(".cow-slide").forEach((slide, i) => {
             const text = slide.querySelector('.imgText');
-            
+
             if (i === 0) {
                 gsap.set(text, { opacity: 1 });
             }
@@ -547,13 +466,13 @@
             ScrollTrigger.create({
                 trigger: slide,
                 start: "top top",
-                end: "+=120%", 
+                end: "+=120%",
                 pin: true,
                 pinSpacing: false,
 
                 onEnter: () => {
-                    gsap.fromTo(text, 
-                        { opacity: 0, y: 50 }, 
+                    gsap.fromTo(text,
+                        { opacity: 0, y: 50 },
                         { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }
                     );
                 },
@@ -566,17 +485,18 @@
                     gsap.to(text, { opacity: 0, y: 50, duration: 0.3 });
                 },
                 onEnterBack: () => {
-                    gsap.fromTo(text, 
-                        { opacity: 0, y: 50 }, 
+                    gsap.fromTo(text,
+                        { opacity: 0, y: 50 },
                         { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }
                     );
                 },
             });
         });
 
+
         gsap.utils.toArray(".dropdown").forEach((dropdown, i) => {
             const direction = i % 2 === 0 ? -50 : 50;
-            
+
             gsap.from(dropdown, {
                 x: direction,
                 opacity: 0,
@@ -590,6 +510,7 @@
             });
         });
 
+
         gsap.utils.toArray("#secondPart .content-box, #backtocow .content-box, #caselaunch .content-box").forEach(box => {
             gsap.from(box, {
                 y: 50,
@@ -602,7 +523,8 @@
                 }
             });
         });
-        
+
+
         gsap.from("#secondPart img", {
             scale: 0.5,
             opacity: 0,
@@ -614,19 +536,19 @@
                 toggleActions: "play none none reverse"
             }
         });
-        
+
         const launchImage = document.querySelector('#caselaunch img');
-        
+
         ScrollTrigger.create({
             trigger: "#caselaunch",
             start: "top top",
             end: "bottom 50%",
-            pin: launchImage, 
+            pin: launchImage,
             pinSpacing: false,
-            
+
             onEnter: () => {
-                gsap.fromTo(launchImage, 
-                    { scale: 0.9, opacity: 0.5 }, 
+                gsap.fromTo(launchImage,
+                    { scale: 0.9, opacity: 0.5 },
                     { scale: 1, opacity: 1, duration: 0.8, ease: "power2.out" }
                 );
             },
