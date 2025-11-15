@@ -41,6 +41,10 @@ p, blockquote, figcaption{
    
 }
 
+#mobilemorris{
+  display: none;
+}
+
 body {
   margin: 0;
   background:
@@ -181,6 +185,8 @@ body {
   will-change: transform;
   transition: transform .6s cubic-bezier(.2, .6, .2, 1);
 }
+
+
 
 /* Papir-kant på høyresiden */
 
@@ -329,26 +335,37 @@ blockquote {
 
 /* Illustrert bokcover (kan brukes selv om dere har eget bilde også) */
 
+.cover .inner {
+  display: grid;
+  place-items: center;
+  padding: 0; /* Fjern all padding fra inner-diven på forsiden/baksiden */
+}
+
 .cover .cover-art {
-  width: 558px;
-  height: 778px;
-  background:
-    radial-gradient(800px 400px at 40% 20%,
-      rgba(255, 255, 255, .5),
-      rgba(255, 255, 255, .08) 50%,
-      rgba(0, 0, 0, .06)),
-    linear-gradient(135deg, #6b5438, #3c2a1a 60%);
-  box-shadow:
-    inset 0 0 0 3px rgba(255, 255, 255, .15),
-    inset 0 8px 18px rgba(0, 0, 0, .25);
-  color: #f4ede2;
+  /* Fjern faste bredder/høyder og bakgrunner som ditt bilde erstatter */
+  width: 100%; /* Sørger for at den fyller plassen */
+  height: 100%; /* Sørger for at den fyller plassen */
+  background: none; /* Fjern all bakgrunnsstil herfra */
+  box-shadow: none; /* Fjern eventuell skygge fra denne containeren */
+  color: #f4ede2; /* Kan beholdes, men har ingen synlig effekt hvis bildet dekker */
   text-align: center;
-  padding: 24px 20px;
-  display: flex;
+  padding: 0; /* Fjern all padding herfra også */
+  display: flex; /* Behold disse for å sentrere innhold om du skulle legge til noe */
   flex-direction: column;
   justify-content: center;
   gap: 10px;
 }
+
+/* VIKTIG: Sørg for at SELVE bildet fyller sin container */
+.cover .cover-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Dette sikrer at bildet dekker hele området uten å strekkes */
+  border-radius: var(--radius); /* Bruk bokens standard radius for kanter */
+}
+
+/* ... (resten av .cover stilene, som .cover .title, .cover .strap etc. kan beholdes
+       hvis du skulle legge tekst OVER bildet via HTML, men basert på ditt bilde trengs de ikke nå) ... */
 
 .cover .title {
   font-size: 48px;
@@ -434,6 +451,16 @@ blockquote {
     font-size: 12px;
   }
 
+  #desktopmorris{
+    display: none;
+  }
+
+  #mobilemorris{
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
   .cover .cover-art {
         /* Bruk prosentvis bredde for å skalere med bokens container */
         width: 100% !important; 
@@ -449,15 +476,7 @@ blockquote {
         height: auto;
     }
 
-  .morrisfamilypicture {
-  max-width: 50%;
-  height: auto;
-  display: block;
-  border-radius: 10px;
-  transform: rotate(-100deg);
-  margin: 0 100px;
   
-}
 
 .notebook{
   max-width: 40%;
@@ -514,10 +533,9 @@ blockquote {
   /* Justerer bilderotasjon og størrelser for mobil */
   .morrisfamilypicture,
   .notebook {
-    /* Fjerner rotasjon for å spare plass */
-    transform: rotate(0deg) !important; 
+   
     /* Lar bildet fylle mer av mobilskjermen */
-    max-width: 90% !important; 
+    max-width: 70% !important; 
     /* Fjerner store, roterte marginer */
     margin: 20px auto !important; 
   }
@@ -540,5 +558,9 @@ blockquote {
   /* Justerer stor overskriftstørrelse */
   h3 {
     font-size: 38px !important;
+  }
+
+  .staaendebilde{
+    margin-top: 3rem;
   }
 }
