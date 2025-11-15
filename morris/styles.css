@@ -88,11 +88,7 @@ body {
   
 }
 
-.site-header {
-  max-width: var(--w);
-  margin: 16px auto 8px;
-  padding: 0 12px;
-}
+
 
 .site-header h1 {
   margin: 0 0 4px 0;
