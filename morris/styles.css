@@ -34,7 +34,7 @@ body {
  
 }
 
-p, blockquote, figcaption{
+p, blockquote, figcaption, li{
    font-family: "Special Elite", monospace;
     font-weight: 400;
     font-style: normal;
@@ -380,6 +380,31 @@ blockquote {
   opacity: .9;
 }
 
+.fact-box {
+  margin: 2rem;
+  padding: 0.8rem 1rem;
+  border-left: 3px solid #7a5e3b;
+  background: rgba(240, 230, 210, 0.6);
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+.fact-box h4 {
+  margin: 0 0 0.4rem 0;
+  font-size: 0.95rem;
+  color: #7a5e3b;
+}
+
+.fact-box ul {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+.fact-box li {
+  margin-bottom: 0.2rem;
+}
+
+
 .cover .ornament {
   height: 2px;
   width: 60%;
@@ -440,6 +465,18 @@ blockquote {
 
 /* Mobil / smale skjermer: én side om gangen */
 
+#morrisandsigne {
+  max-width: 50%;
+  height: auto;
+  align-self: center;
+}
+
+
+
+
+
+
+
 @media (max-width: 800px) {
 
   :root {
@@ -447,8 +484,8 @@ blockquote {
     --h: calc(var(--w) * 2.05);
   }
 
-  p{
-    font-size: 12px;
+  p, li{
+    font-size: 13px;
   }
 
   #desktopmorris{
@@ -560,7 +597,23 @@ blockquote {
     font-size: 38px !important;
   }
 
-  .staaendebilde{
-    margin-top: 3rem;
+  .figure{
+    margin: 0;
+  }
+
+  .mini-timeline{
+    max-width: 80%;
+  }
+
+  .mini-timeline h4{
+    margin-bottom: 0;
+  }
+
+  .mini-timeline ul {
+    margin-top: 0;
+  }
+
+  .mini-timeline ul li {
+    font-size: 12px;
   }
 }
