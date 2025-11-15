@@ -38,6 +38,7 @@ p, blockquote, figcaption{
    font-family: "Special Elite", monospace;
     font-weight: 400;
     font-style: normal;
+   
 }
 
 body {
@@ -205,7 +206,7 @@ body {
   height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+
   transform: translateZ(0);
   will-change: transform;
 
@@ -213,7 +214,6 @@ body {
   backface-visibility: hidden;
 }
 
-/* Posisjonering venstre/høyre side (kan brukes senere hvis vi vil ha ekte oppslag) */
 
 .page--right {
   right: 0;
@@ -427,11 +427,57 @@ blockquote {
 
   :root {
     --w: min(94vw, 540px);
-    --h: calc(var(--w) * 1.35);
+    --h: calc(var(--w) * 2.05);
   }
 
-  /* Hard perm litt smalere og flyttes til høyre */
+  p{
+    font-size: 12px;
+  }
 
+  .cover .cover-art {
+        /* Bruk prosentvis bredde for å skalere med bokens container */
+        width: 100% !important; 
+        /* La høyden skalere automatisk basert på innholdet */
+        height: 100% !important; 
+        /* Fjern fast skygge/størrelse som forstyrrer mobilvisning */
+        box-shadow: none; 
+    }
+    
+    /* Veldig viktig: Sørg for at selve bildet inne i cover-art fyller plassen */
+    .cover .cover-art img {
+        width: 100%;
+        height: auto;
+    }
+
+  .morrisfamilypicture {
+  max-width: 50%;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+  transform: rotate(-100deg);
+  margin: 0 100px;
+  
+}
+
+.notebook{
+  max-width: 40%;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+  margin: 0;
+  transform: rotate(-90deg);
+}
+
+.grensebevis{
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+  margin: 100px auto 0 auto;
+  
+}
+
+  /* Hard perm litt smalere og flyttes til høyre */
   .book.hardcover::before {
     left: auto;
     right: 12px;
@@ -445,7 +491,6 @@ blockquote {
   }
 
   /* Single mode: siden fyller hele bredden */
-
   .book.single .page {
     width: 100%;
     right: 0;
@@ -458,10 +503,42 @@ blockquote {
   }
 
   /* Navigasjonen er sticky nederst på siden */
-
   .controls {
     position: sticky;
     bottom: 8px;
     background: transparent;
+  }
+
+  /* --- SPESIFIKKE JUSTERINGER FOR INNHOLD PÅ MOBIL --- */
+
+  /* Justerer bilderotasjon og størrelser for mobil */
+  .morrisfamilypicture,
+  .notebook {
+    /* Fjerner rotasjon for å spare plass */
+    transform: rotate(0deg) !important; 
+    /* Lar bildet fylle mer av mobilskjermen */
+    max-width: 90% !important; 
+    /* Fjerner store, roterte marginer */
+    margin: 20px auto !important; 
+  }
+
+  /* Fikser stor margin på grensebevis-bildet */
+  .grensebevis {
+    margin-top: 20px !important;
+  }
+  
+  /* Fikser bredden på stående bilder */
+  .staaendebilde {
+    max-width: 70% !important;
+  }
+
+  /* Justerer portrettfigurer til å bli bredere */
+  .figure_portrait img {
+    width: 70% !important; 
+  }
+
+  /* Justerer stor overskriftstørrelse */
+  h3 {
+    font-size: 38px !important;
   }
 }
