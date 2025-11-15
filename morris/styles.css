@@ -1,6 +1,4 @@
-/* =========================================================
-   1. ROTVARIABLER (FARGER, TYPOGRAFI, STØRRELSER)
-   ========================================================= */
+
 
 :root {
   --paper: #f6f3ee;
@@ -17,12 +15,10 @@
   --h: calc(var(--w) / 1.5);
 
   --radius: 12px;
-  --font: 17px/1.6 Georgia, ui-serif, serif;
+  --font: 16px/1.6 Georgia, ui-serif, serif;
 }
 
-/* =========================================================
-   2. GENERELL RESET / BASE
-   ========================================================= */
+
 
 * {
   box-sizing: border-box;
@@ -44,6 +40,13 @@ p, blockquote, figcaption, li{
 #mobilemorris{
   display: none;
 }
+
+#desktopmorris{
+  display: block;
+  width: 92%;
+  height: 96%;
+}
+
 
 body {
   margin: 0;
@@ -171,7 +174,7 @@ body {
   top: 0;
   bottom: 0;
   width: 50%;
-  padding: 26px clamp(16px, 1.8vw, 26px);
+  padding: 40px clamp(16px, 1.8vw, 26px);
   background:
     linear-gradient(180deg, #faf7f2, #f3efe9),
     repeating-linear-gradient(0deg,
@@ -357,6 +360,7 @@ blockquote {
   flex-direction: column;
   justify-content: center;
   gap: 10px;
+  align-items: center;
 }
 
 /* VIKTIG: Sørg for at SELVE bildet fyller sin container */
@@ -593,7 +597,7 @@ blockquote {
   
   /* Fikser bredden på stående bilder */
   .staaendebilde {
-    max-width: 70% !important;
+    max-width: 66% !important;
   }
 
   /* Justerer portrettfigurer til å bli bredere */
