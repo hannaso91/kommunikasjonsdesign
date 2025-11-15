@@ -31,6 +31,13 @@
 html,
 body {
   height: 100%;
+ 
+}
+
+p{
+   font-family: "Special Elite", monospace;
+    font-weight: 400;
+    font-style: normal;
 }
 
 body {
@@ -41,11 +48,27 @@ body {
   font: var(--font);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+ 
+
 }
 
-/* =========================================================
-   3. SIDETOPP / HEADER
-   ========================================================= */
+.morrisfamilypicture {
+  max-width: 50%;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+  transform: rotate(-100deg);
+  margin: 0 100px;
+}
+
+.notebook{
+  max-width: 40%;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+  margin: 0;
+  transform: rotate(-90deg);
+}
 
 .site-header {
   max-width: var(--w);
@@ -235,6 +258,10 @@ h2.title {
 h3 {
   margin: .2em 0 .1em;
   color: var(--accent);
+  font-size: 50px;
+  font-family: "Great Vibes", cursive;
+  font-weight: 400;
+  font-style: normal;
 }
 
 .lead,
