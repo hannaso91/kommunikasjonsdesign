@@ -103,3 +103,4 @@
   updateStatus();
   mq.addEventListener('change', updateMode);
 })();
+

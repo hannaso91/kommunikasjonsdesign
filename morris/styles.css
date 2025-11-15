@@ -34,7 +34,7 @@ body {
  
 }
 
-p{
+p, blockquote, figcaption{
    font-family: "Special Elite", monospace;
     font-weight: 400;
     font-style: normal;
@@ -59,6 +59,7 @@ body {
   border-radius: 10px;
   transform: rotate(-100deg);
   margin: 0 100px;
+  
 }
 
 .notebook{
@@ -68,6 +69,15 @@ body {
   border-radius: 10px;
   margin: 0;
   transform: rotate(-90deg);
+}
+
+.grensebevis{
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+  margin: 100px auto 0 auto;
+  
 }
 
 .site-header {
@@ -397,6 +407,14 @@ blockquote {
 .status {
   margin-left: 6px;
   color: var(--ink-soft);
+}
+
+.staaendebilde {
+  max-width: 45%;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+  margin: 0 auto;
 }
 
 /* =========================================================
