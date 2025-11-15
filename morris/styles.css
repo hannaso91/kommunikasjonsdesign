@@ -7,7 +7,7 @@
   --ink: #0f0e0d;
   --ink-soft: #2f2a25;
   --accent: #6d4f2f;
-  --accent2: #3a6ea5;
+ 
 
   --shadow-soft: 0 8px 18px rgba(0, 0, 0, .12);
   --shadow-page: 0 4px 12px rgba(0, 0, 0, .12);
@@ -324,6 +324,9 @@ blockquote {
   color: var(--ink-soft);
 }
 
+blockquote {
+  color: #7a5e3b;
+}
 /* =========================================================
    7. COVER / FORSIDE OG BAKSIDE
    ========================================================= */
@@ -479,6 +482,8 @@ blockquote {
 
 
 
+
+
 @media (max-width: 800px) {
 
   :root {
@@ -515,7 +520,9 @@ blockquote {
         height: auto;
     }
 
-  
+#morrisandsigne {
+  max-width: 60%;
+}
 
 .notebook{
   max-width: 40%;
@@ -591,7 +598,7 @@ blockquote {
 
   /* Justerer portrettfigurer til å bli bredere */
   .figure_portrait img {
-    width: 70% !important; 
+    width: 100% !important; 
   }
 
   /* Justerer stor overskriftstørrelse */
