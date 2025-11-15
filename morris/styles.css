@@ -88,7 +88,13 @@ body {
   
 }
 
-
+.fredrikstad {
+  max-width: 70%;
+  height: auto;
+  display: block;
+  margin: 0;
+  align-self: center;
+}
 
 .site-header h1 {
   margin: 0 0 4px 0;
