@@ -466,7 +466,7 @@ blockquote {
 /* Mobil / smale skjermer: én side om gangen */
 
 #morrisandsigne {
-  max-width: 50%;
+  max-width: 40%;
   height: auto;
   align-self: center;
 }
