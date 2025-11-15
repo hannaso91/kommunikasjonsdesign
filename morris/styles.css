@@ -14,7 +14,7 @@
 
   /* Bokbredde og høyde (desktop default) */
   --w: min(1200px, 92vw);
-  --h: calc(var(--w) / 1.45);
+  --h: calc(var(--w) / 1.5);
 
   --radius: 12px;
   --font: 17px/1.6 Georgia, ui-serif, serif;
