@@ -673,90 +673,7 @@
 
     // ---- Sitat-sekvens i chat-bobla ---- //
 
-const quoteBlock = document.querySelector("#bjorvand-quotes");
 
-if (quoteBlock) {
-  const quoteElement = quoteBlock.querySelector("blockquote");
-  const authorElement = quoteBlock.querySelector(".quote-block__author");
-  const typingIndicator = quoteBlock.querySelector(".quote-block__typing");
-
-  // Her legger du alle sitatene du vil at skal dukke opp etter tur
-  const quotes = [
-    {
-      text: "«Digitale medier splitter oppmerksomheten vår, øker forventningene til underholdning, og gir ofte mindre mening enn vi tror.»",
-      author: "Susanne Bjorvand · psykolog"
-    },
-    {
-      text: "«Vi ser at stadig flere barn og unge søker hjelp for oppmerksomhetsvansker – særlig etter covid.»",
-      author: "Susanne Bjorvand · psykolog"
-    },
-    {
-      text: "«Hjernen kan trenes. Barn trenger fantasilek, bøker og pauser fra skjerm for å styrke oppmerksomheten.»",
-      author: "Susanne Bjorvand · psykolog"
-    }
-  ];
-
-  let currentQuoteIndex = 0;
-  let quoteSequenceStarted = false;
-
-  // Funksjon som oppdaterer innholdet i bobla
-  function showQuote(index) {
-    const q = quotes[index];
-    quoteElement.textContent = q.text;
-    authorElement.textContent = q.author;
-  }
-
-  function runQuoteSequence() {
-    if (quoteSequenceStarted) return;
-    quoteSequenceStarted = true;
-
-    // Start med første sitat (det som allerede står, men vi setter det likevel)
-    showQuote(0);
-
-    // Så skal de neste komme etter litt tid
-    let index = 1;
-
-    function next() {
-      if (index >= quotes.length) return; // stopp når vi er ferdige
-
-      // Vis "skriver..." en liten stund før neste sitat
-      typingIndicator.classList.add("is-active");
-
-      setTimeout(() => {
-        typingIndicator.classList.remove("is-active");
-        showQuote(index);
-        index++;
-
-        // Vent noen sekunder før neste igjen
-        if (index < quotes.length) {
-          setTimeout(next, 3500); // tid sitat er synlig før neste "skriver..."
-        }
-      }, 1500); // hvor lenge "skriver..." vises
-    }
-
-    // Start sekvensen litt etter at bobla har dukket opp
-    setTimeout(next, 4000);
-  }
-
-  // Vi vil ikke starte sekvensen før bobla faktisk er i viewport
-  const quoteObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          runQuoteSequence();
-          quoteObserver.unobserve(entry.target);
-        }
-      });
-    },
-    {
-      threshold: 0.4
-    }
-  );
-
-  quoteObserver.observe(quoteBlock);
-}
-
-// ---- Chat med spørsmål fra "bruker" og svar fra Susanne ---- //
 
 const chat = document.querySelector("#bjorvand-quotes");
 
@@ -768,11 +685,11 @@ if (chat) {
   const conversation = [
     {
       from: "user",
-      text: "Hva tenker du skjer med hjernen når vi kjeder oss mindre enn før?"
+      text: "Hva er kjedsomhet?"
     },
     {
       from: "susanne",
-      text: "«Kjedsomhet aktiverer default mode network i hjernen – et nettverk vi trenger for kreativitet, hvile og følelsesprosessering.»"
+      text: "Et misforhold mellom det vi gjør, og det vi opplever som viktig eller meningsfullt, eller om oppgaven er understimulerende eller overstimulerende"
     },
     {
       from: "user",
@@ -780,7 +697,7 @@ if (chat) {
     },
     {
       from: "susanne",
-      text: "«Ja, konstante digitale stimuli reduserer toleransen vår for stille øyeblikk. Det gjør mange mer urolige, selv om de er 'opptatte'.»"
+      text: "Ja, konstante digitale stimuli reduserer toleransen vår for stille øyeblikk. Det gjør mange mer urolige, selv om de er 'opptatte'."
     },
     {
       from: "user",
@@ -788,7 +705,7 @@ if (chat) {
     },
     {
       from: "susanne",
-      text: "«Vi ser flere barn som søker hjelp for oppmerksomhetsvansker – spesielt etter covid.»"
+      text: "Vi ser flere barn som søker hjelp for oppmerksomhetsvansker – spesielt etter covid."
     },
     {
       from: "user",
@@ -796,7 +713,7 @@ if (chat) {
     },
     {
       from: "susanne",
-      text: "«Hjernen kan trenes. Barn trenger skjermpauser, fantasilek, bøker og muligheten til å kjede seg innimellom.»"
+      text: "Barn trenger skjermpauser, fantasilek, bøker og muligheten til å kjede seg innimellom."
     }
   ];
 
