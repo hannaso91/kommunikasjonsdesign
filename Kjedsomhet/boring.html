@@ -29,7 +29,12 @@
     body {
       margin: 0;
       font-family: var(--font-body);
-      background: radial-gradient(circle at top, #111827 0, #020617 55%);
+     
+      background: url("assets/Bakgrunn_kjedsomhet.png");
+      background-repeat: no-repeat;
+      background-size: cover;      
+      background-position: center;  
+      background-attachment: fixed;
       color: var(--text);
       line-height: 1.6;
     }
@@ -75,28 +80,28 @@
     }
 
     .hero__content {
-  position: relative;
-  max-width: var(--max-width);
-  margin: 0 auto;
+      position: relative;
+      max-width: var(--max-width);
+      margin: 0 auto;
 
-  opacity: 0;
-  transform: translateY(14px) scale(0.98);
-  animation: heroIn 1.4s ease-out forwards;
-}
+      opacity: 0;
+      transform: translateY(14px) scale(0.98);
+      animation: heroIn 1.4s ease-out forwards;
+    }
 
-@keyframes heroIn {
-  0% {
-    opacity: 0;
-    transform: translateY(18px) scale(0.97);
-  }
-  60% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-  100% {
-    opacity: 1;
-  }
-}
+    @keyframes heroIn {
+      0% {
+        opacity: 0;
+        transform: translateY(18px) scale(0.97);
+      }
+      60% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+      100% {
+        opacity: 1;
+      }
+    }
 
 
     .hero__label {
@@ -126,76 +131,176 @@
 
     /* Scroll-hint i bunnen av hero */
 
-.scroll-hint {
-  margin-top: 2rem;
-  font-size: 0.8rem;
+    .scroll-hint {
+      margin-top: 2rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      display: inline-flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      align-items: flex-start;
+      opacity: 0;
+      animation: fadeInHint 1.5s ease forwards 1.5s; /* dukker opp etter litt tid */
+    }
+
+    .scroll-hint__arrow {
+      width: 1px;
+      height: 32px;
+      background: linear-gradient(to bottom, rgba(156, 163, 175, 0.2), rgba(156, 163, 175, 0.9));
+      position: relative;
+      overflow: visible;
+    }
+
+    .scroll-hint__arrow::after {
+      content: "";
+      position: absolute;
+      left: -4px;
+      bottom: -1px;
+      width: 9px;
+      height: 9px;
+      border-right: 1px solid rgba(156, 163, 175, 0.9);
+      border-bottom: 1px solid rgba(156, 163, 175, 0.9);
+      transform: rotate(45deg);
+      animation: arrowDown 1.4s infinite ease-in-out;
+    }
+
+    @keyframes arrowDown {
+      0% {
+        transform: translateY(-4px) rotate(45deg);
+      }
+      50% {
+        transform: translateY(10px) rotate(45deg);
+      }
+      100% {
+        transform: translateY(-4px) rotate(45deg);
+      }
+    }
+
+    @keyframes fadeInHint {
+      from {
+        opacity: 0;
+        transform: translateY(6px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+      .reveal--left {
+      transform: translateX(-24px);
+    }
+
+    .reveal--right {
+      transform: translateX(24px);
+    }
+
+    .reveal.is-visible.reveal--left,
+    .reveal.is-visible.reveal--right {
+      transform: translateX(0);
+    }
+
+
+    /* Modus-bryter: aktivitet vs hvile */
+
+    /* --- Modus-toggle: aktivitet vs hvile --- */
+
+.mode-toggle {
+  margin-top: 1.5rem;
+  padding: 1.3rem 1.2rem 1.1rem;
+  border-radius: 1.2rem;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  max-width: 420px;
+}
+
+.mode-toggle__label {
+  font-size: 0.9rem;
   color: var(--muted);
-  display: inline-flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  align-items: flex-start;
-  opacity: 0;
-  animation: fadeInHint 1.5s ease forwards 1.5s; /* dukker opp etter litt tid */
+  margin-bottom: 0.7rem;
 }
 
-.scroll-hint__arrow {
-  width: 1px;
-  height: 32px;
-  background: linear-gradient(to bottom, rgba(156, 163, 175, 0.2), rgba(156, 163, 175, 0.9));
+.mode-toggle__track {
   position: relative;
-  overflow: visible;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  background: rgba(15, 23, 42, 0.95);
+  border-radius: 999px;
+  padding: 0.2rem;
+  border: 1px solid rgba(55, 65, 81, 0.9);
+  margin-bottom: 0.7rem;
+  overflow: hidden;
 }
 
-.scroll-hint__arrow::after {
-  content: "";
+.mode-toggle__option {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem 0.3rem 0.45rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  color: var(--muted);
+  user-select: none;
+}
+
+.mode-toggle__emoji {
+  font-size: 1.1rem;
+}
+
+.mode-toggle__text {
+  font-size: 0.78rem;
+}
+
+/* Den bevegelige "thumben" som glir mellom høyre/venstre */
+
+.mode-toggle__thumb {
   position: absolute;
-  left: -4px;
-  bottom: -1px;
-  width: 9px;
-  height: 9px;
-  border-right: 1px solid rgba(156, 163, 175, 0.9);
-  border-bottom: 1px solid rgba(156, 163, 175, 0.9);
-  transform: rotate(45deg);
-  animation: arrowDown 1.4s infinite ease-in-out;
+  top: 3px;
+  bottom: 3px;
+  left: 3px; /* start ved mosjon */
+  width: calc(50% - 4px);
+  background: rgba(34, 197, 94, 0.18);
+  border-radius: 999px;
+  box-shadow: 0 0 20px rgba(34, 197, 94, 0.45);
+  border: 1px solid rgba(34, 197, 94, 0.7);
+  transition: left 0.28s ease, background 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
 }
 
-@keyframes arrowDown {
-  0% {
-    transform: translateY(-4px) rotate(45deg);
-  }
-  50% {
-    transform: translateY(10px) rotate(45deg);
-  }
-  100% {
-    transform: translateY(-4px) rotate(45deg);
-  }
+/* Når vi er i hvilemodus flyttes thumben til høyre */
+.mode-toggle--rest .mode-toggle__thumb {
+  left: calc(50% + 1px);
+  background: rgba(56, 189, 248, 0.2);
+  border-color: rgba(56, 189, 248, 0.8);
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.45);
 }
 
-@keyframes fadeInHint {
-  from {
-    opacity: 0;
-    transform: translateY(6px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-  .reveal--left {
-  transform: translateX(-24px);
+/* Aktiv tekstfarge */
+
+.mode-toggle--exercise .mode-toggle__option--left,
+.mode-toggle--rest .mode-toggle__option--right {
+  color: #e5fce0;
+  font-weight: 600;
 }
 
-.reveal--right {
-  transform: translateX(24px);
+.mode-toggle--exercise .mode-toggle__option--right,
+.mode-toggle--rest .mode-toggle__option--left {
+  color: var(--muted);
 }
 
-.reveal.is-visible.reveal--left,
-.reveal.is-visible.reveal--right {
-  transform: translateX(0);
+/* Undertekst */
+
+.mode-toggle__description {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--muted);
 }
 
 
-    /* Story-layout */
 
     .story {
       max-width: var(--max-width);
@@ -222,7 +327,7 @@
       font-size: 0.85rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--muted);
+      color: var(--text);
       margin-bottom: 0.5rem;
     }
 
@@ -249,16 +354,28 @@
       margin: 4rem -1.5rem;
     }
 
-    .full-image__inner {
-      position: relative;
-      min-height: 40vh;
-      background-image: url("https://images.pexels.com/photos/5081395/pexels-photo-5081395.jpeg?auto=compress&cs=tinysrgb&w=1600");
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      display: flex;
-      align-items: flex-end;
-    }
+    .full-image_inner {
+        position: relative;
+        width: 100%;
+        height: 70vh; /* eller hva du bruker */
+        overflow: hidden;
+      }
+
+      /* Videoen som fyller hele seksjonen */
+      .full-image_inner .full-video {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        min-width: 100%;
+        min-height: 100%;
+        width: auto;
+        height: auto;
+        transform: translate(-50%, -50%);
+        object-fit: cover;  /* VIKTIG! Gjør den som background-size: cover */
+        z-index: -1;        /* legger videoen bak innhold */
+        filter: brightness(60%); /* valgfritt, gjør videoen litt mørkere */
+      }
+
 
     .full-image__inner::before {
       content: "";
@@ -563,28 +680,23 @@
     <section class="chapter">
       <div class="chapter__sidebar">
         <p class="chapter__number">01</p>
-        <p class="chapter__title">Verden som aldri er stille</p>
+        <p class="chapter__title">Hva skjer i hjernen når vi kjeder oss?</p>
       </div>
-
       <div class="chapter__content">
         <p class="lead reveal">
-          Det er tidlig morgen. Før frokosten er servert, har mobilen allerede vibrert ni ganger.
-        </p>
-        <p class="reveal">
-          TikTok. Minecraft. Messenger. Snap. Vi lever i en tid der alt er tilgjengelig hele tiden, og likevel føler mange på en økende uro.
-        </p>
-        <p class="reveal">
-          Men hva skjer egentlig med oss når vi aldri rekker å kjede oss?
+          Men hva skjer inne i hjernen når man kjeder seg? Kjedsomhet er knyttet til økt aktivitet i hjernens «default mode» nettverk. 
+          Det er et nettverk som er aktivt når vi ikke er fokusert på en spesifikk oppgave. Samtidig reduseres aktiviteten i områder for oppmerksomhetskontroll og selvregulering. 
+          Kort fortalt så gjør kjedsomhet oss mer mottakelige for impulser, og motiverer oss til å søke nye, mer meningsfulle oppgaver. 
         </p>
       </div>
     </section>
 
->
+
     <section class="full-image reveal">
-      <div class="full-image__inner">
-        <p class="full-image__caption">
-          Skjermlys fyller rommet – også når dagen egentlig er over.
-        </p>
+      <div class="full-image_inner">
+        <video class="full-video" autoplay muted loop playsinline>
+          <source src="assets/Hjerne_animasjon.mp4" type="video/mp4">
+        </video>
       </div>
     </section>
 
@@ -618,42 +730,92 @@
       </div>
     </section>
 
-
-
-
-  
     <section class="chapter">
       <div class="chapter__sidebar">
         <p class="chapter__number">03</p>
-        <p class="chapter__title">Barn, skjermer og uro</p>
+        <p class="chapter__title">Når kroppen er psyksik aktiv, men fysisk passiv</p>
       </div>
 
       <div class="chapter__content">
         <p class="reveal">
-          Særlig barn og unge vokser opp i en hverdag der kjedsomhet nesten er borte. På skolen blir flere miljøer papirløse, og i fritiden er apper designet for å holde på oppmerksomheten deres så lenge som mulig.
+          Mangel på kjedsomhet, eller mangel på aktivitet, kan påvirke mennesker negativt. 
+          Bjorvand forteller at kroppen har et sympatisk og et parasympatisk nervesystem, en for aktivitet og en for hvile. 
+          Det er viktig at kroppen kan bytte mellom disse ulike «modusene» da det er skadelig å sitte i en av de over lang tid..
         </p>
         <p class="reveal">
-          Samtidig øker antallet som utredes for oppmerksomhetsvansker. Mange fagfolk peker på at hjernen trenger trening: i å være til stede, i å tåle stillhet, i å kjede seg.
+          Det påvirker kroppen fysisk og psykisk. Det man ser med skjermbruk er at kroppen havner i en situasjon der de er psykisk aktive, men fysisk passive. 
+          Det blir med andre ord vanskeligere å skille de to fra hverandre, og få et tydelig skille mellom aktivitet og hvile.
         </p>
       </div>
     </section>
 
-   
     <section class="chapter">
       <div class="chapter__sidebar">
-        <p class="chapter__number">04</p>
-        <p class="chapter__title">Kanskje er ikke kjedsomhet fienden</p>
+        <p class="chapter__number">03b</p>
+        <p class="chapter__title">Aktivitet vs hvile i kroppen</p>
       </div>
 
       <div class="chapter__content">
         <p class="reveal">
-          Kjedsomhet kan gi rom til å tenke, føle, hvile og skape – slik mennesker gjorde før skjermene tok over hvert eneste mellomrom.
+          Her kan du utforske hvordan kroppen veksler mellom aktivitet og hvile.
+        </p>
+
+        <div class="mode-toggle reveal" id="modeToggle">
+          <div class="mode-toggle__label">Hvordan er kroppen din nå?</div>
+
+          <div class="mode-toggle__track">
+            <div class="mode-toggle__option mode-toggle__option--left">
+              <span class="mode-toggle__emoji">🏃‍♀️</span>
+              <span class="mode-toggle__text">Mosjon</span>
+            </div>
+            <div class="mode-toggle__option mode-toggle__option--right">
+              <span class="mode-toggle__emoji">🛌</span>
+              <span class="mode-toggle__text">Hvile</span>
+            </div>
+            <div class="mode-toggle__thumb"></div>
+          </div>
+
+          <p class="mode-toggle__description" id="modeDescription">
+            Kroppen er i aktivitetsmodus: høyere puls, mer fokus, mer energi.
+          </p>
+        </div>
+      </div>
+    </section>
+   
+    <section class="chapter">
+      <div class="chapter__sidebar">
+        <p class="chapter__number">04</p>
+        <p class="chapter__title">Kan kjedsomhet forklare økningen i psykiske lidelser?</p>
+      </div>
+
+      <div class="chapter__content">
+        <p class="reveal">
+          Men det kan ikke sies med sikkerhet at dette er hovedgrunnen til de økende tallene for psykiske lidelser.
         </p>
         <p class="reveal">
-          Spørsmålet er kanskje ikke om teknologien er problemet, men om vi tør å skru den av innimellom.
+          Bjorvand forteller at «Vi ser sammenhenger mellom oppmerksomhetsfunksjon og følelsesregulering og utvikling av psykiske lidelser.
+          Det blir likevel forenklende per i dag å bekrefte en direkte sammenheng mellom økt prevalens av psykiske lidelser og kjedsomhet».
+        </p>
+      </div>
+    </section>
+
+    <div class="quote-chat__bubble quote-chat__bubble--susanne is-visible">
+      «Det er likevel påfallende mange de siste årene som søker hjelp og utredning for oppmerksomhetsvansker hos barn i dag. Dette tallet har økt drastisk de siste årene - særlig etter covid»
+    </div>
+
+
+    <section class="chapter">
+      <div class="chapter__sidebar">
+        <p class="chapter__number">04</p>
+        <p class="chapter__title">Hva trenger barn og unge i dag?</p>
+      </div>
+
+      <div class="chapter__content">
+        <p class="reveal">
+          En stor bekymring er dagens unge. I en tid der flere skoler blir papirløse, og apper er laget for å gjøre barn avhengige, er det viktig å tenke på barnas beste.
         </p>
         <p class="reveal">
-          Kanskje er det først i stillheten at vi finner ut hvordan vi egentlig har det.
+          Bjorvand forteller at hjernen kan trenes opp, hun anbefaler å gi mennesker, særlig de i utvikling, trening for hjernens oppmerksomhetsspenn ved å la de engasjere i fantasilek, lese bøker, eller gåturer gjerne i naturen.
         </p>
       </div>
     </section>
@@ -793,7 +955,7 @@ if (chat) {
     next();
   }
 
-  const observer = new IntersectionObserver(
+  const chatobserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((e) => {
         if (e.isIntersecting) {
@@ -805,10 +967,58 @@ if (chat) {
     { threshold: 0.25 }
   );
 
-  observer.observe(chat);
+  chatobserver.observe(chat);
 }
 
+// ---- Modus-bryter: mosjon vs hvile ---- //
 
+// ---- Modus-toggle: mosjon vs hvile ---- //
+
+const modeToggle = document.getElementById("modeToggle");
+const modeDescription = document.getElementById("modeDescription");
+
+if (modeToggle && modeDescription) {
+  // start i aktivitetsmodus
+  let isExercise = true;
+  modeToggle.classList.add("mode-toggle--exercise");
+
+  function updateMode() {
+    if (isExercise) {
+      modeToggle.classList.add("mode-toggle--exercise");
+      modeToggle.classList.remove("mode-toggle--rest");
+      modeDescription.textContent =
+        "I aktivitetsmodus er hjernen mer skjerpet og søker oppgaver med mening. Men uten fysisk bevegelse kan kroppen fortsatt være passiv – akkurat det Bjorvand advarer mot.";
+    } else {
+      modeToggle.classList.remove("mode-toggle--exercise");
+      modeToggle.classList.add("mode-toggle--rest");
+      modeDescription.textContent =
+        "I hvilemodus får hjernen ro til å falle tilbake i default mode-nettverket. Her bearbeides tanker og følelser – det rommet som ofte forsvinner når vi fyller alle pauser med skjerm.";
+    }
+  }
+
+  // Klikk på hele tracken eller alternativene
+  const track = modeToggle.querySelector(".mode-toggle__track");
+  if (track) {
+    track.addEventListener("click", (event) => {
+      const target = event.target;
+
+      // hvis du klikker spesifikt på en side:
+      if (target.closest(".mode-toggle__option--left")) {
+        isExercise = true;
+      } else if (target.closest(".mode-toggle__option--right")) {
+        isExercise = false;
+      } else {
+        // klikker midt på → bare toggler
+        isExercise = !isExercise;
+      }
+
+      updateMode();
+    });
+  }
+
+  // sett starttilstand
+  updateMode();
+}
 
 
   </script>
