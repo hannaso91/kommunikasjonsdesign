@@ -10,20 +10,22 @@
   <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Press+Start+2P&display=swap" rel="stylesheet">
 
   <style>
-    /* ------------------------------
-       Base & layout
-    -------------------------------- */
     *, *::before, *::after {
       box-sizing: border-box;
     }
 
     :root {
-      --bg: #000000;
-      --card-bg: rgba(255, 255, 255, 0.9);
-      --text-main: #ffffff;
-      --text-dark: #000000;
-      --accent: #cc0000;
+      --bg: #02040a;
+      --card-bg: rgba(8, 10, 20, 0.9);
+      --card-bg-light: rgba(255, 255, 255, 0.95);
+      --text-main: #f9fafb;
+      --text-muted: #9ca3af;
+      --text-dark: #020617;
+      --accent-red: #ff3b3b;
+      --accent-yellow: #ffe45e;
+      --accent-green: #65ff8f;
       --max-width: 960px;
+      --border-radius: 14px;
     }
 
     body {
@@ -40,7 +42,6 @@
       background-attachment: fixed;
     }
 
-    /* iOS/Mobil liker ikke background-attachment: fixed */
     @media (max-width: 768px) {
       body {
         background-attachment: scroll;
@@ -50,14 +51,31 @@
     .page {
       max-width: var(--max-width);
       margin: 0 auto;
+      padding: 0 1rem 4rem;
+      position: relative;
+    }
+
+    /* Pixelramme rundt hele historien */
+    .page::before {
+      content: "";
+      position: fixed;
+      inset: 6px;
+      margin: 0 auto;
+      max-width: var(--max-width);
+      border: 3px solid rgba(255, 255, 255, 0.1);
+      pointer-events: none;
+      z-index: 50;
+      box-shadow:
+        0 0 0 1px rgba(0, 0, 0, 0.8),
+        0 0 16px rgba(0, 0, 0, 0.9);
     }
 
     main {
-      padding-bottom: 5rem;
+      padding-bottom: 6rem;
     }
 
     section {
-      padding: 6rem 1.5rem;
+      padding: 6rem 0 4rem;
       min-height: 60vh;
       display: flex;
       flex-direction: column;
@@ -67,10 +85,14 @@
 
     h1, h2 {
       text-align: center;
-      margin: 2rem auto 1rem;
+      margin: 0 0 1.5rem;
       font-weight: bold;
       color: var(--text-main);
-      text-shadow: 3px 3px var(--accent);
+      text-shadow: 3px 3px #000;
+    }
+
+    h1 {
+      font-size: 20px;
     }
 
     h2 {
@@ -89,46 +111,240 @@
       border-radius: 10px;
     }
 
-    /* ------------------------------
-       Scroll progress bar
-    -------------------------------- */
+    /* Scroll-progress på toppen */
     #scroll-progress {
       position: fixed;
       top: 0;
       left: 0;
-      height: 12px;
+      height: 10px;
       width: 0%;
       z-index: 1000;
-      background-color: #cc0000;
-      border-bottom: 2px solid #000;
+      background: linear-gradient(to right, #ff3b3b, #ffe45e, #65ff8f);
+      box-shadow: 0 0 10px rgba(0,0,0,0.8);
     }
 
-    /* ------------------------------
-       Cards / content-boxer
-    -------------------------------- */
+    /* Bevis-meter nederst */
+    .case-meter {
+      position: fixed;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1001;
+      padding: 0.5rem 0.8rem;
+      border-radius: 999px;
+      background: rgba(10, 10, 20, 0.95);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .case-meter__dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent-red);
+      box-shadow: 0 0 10px rgba(255, 59, 59, 0.8);
+      animation: pulse-dot 1s infinite alternate;
+    }
+
+    .case-meter__percent {
+      color: var(--accent-yellow);
+    }
+
+    @keyframes pulse-dot {
+      0% { transform: scale(1); opacity: 0.7; }
+      100% { transform: scale(1.3); opacity: 1; }
+    }
+
+    /* HERO-intro */
+    #hero {
+      padding-top: 6rem;
+      padding-bottom: 4rem;
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-inner {
+      width: 100%;
+      max-width: 720px;
+      padding: 2.5rem 1.8rem 2rem;
+      border-radius: var(--border-radius);
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.95), rgba(2, 6, 23, 0.95));
+      border: 2px solid rgba(148, 163, 184, 0.5);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.9);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-inner::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.03),
+        rgba(255,255,255,0.03) 2px,
+        transparent 2px,
+        transparent 4px
+      );
+      mix-blend-mode: soft-light;
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .hero-kicker {
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.8rem;
+    }
+
+    .hero-title {
+      font-size: 18px;
+      margin-bottom: 1rem;
+      color: var(--accent-yellow);
+      text-shadow: 3px 3px #000;
+    }
+
+    .hero-sub {
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-meta {
+      font-size: 9px;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.7rem 1.2rem;
+      border-radius: 999px;
+      border: 2px solid rgba(250, 250, 250, 0.5);
+      text-transform: uppercase;
+      font-size: 9px;
+      cursor: pointer;
+      background: rgba(15,23,42,0.9);
+      color: var(--text-main);
+      text-decoration: none;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+    }
+
+    .hero-cta span {
+      font-size: 12px;
+    }
+
+    .hero-cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 0 18px rgba(250, 250, 250, 0.25);
+      border-color: var(--accent-yellow);
+    }
+
+    .hero-arrow {
+      display: block;
+      margin: 1.2rem auto 0;
+      width: 1px;
+      height: 28px;
+      background: linear-gradient(to bottom, transparent, rgba(148,163,184,0.8));
+      position: relative;
+      overflow: visible;
+      opacity: 0.8;
+    }
+
+    .hero-arrow::after {
+      content: "";
+      position: absolute;
+      left: -4px;
+      bottom: -4px;
+      width: 9px;
+      height: 9px;
+      border-right: 2px solid rgba(148,163,184,0.9);
+      border-bottom: 2px solid rgba(148,163,184,0.9);
+      transform: rotate(45deg);
+      animation: arrow-bounce 1.2s infinite ease-in-out;
+    }
+
+    @keyframes arrow-bounce {
+      0% { transform: translateY(-3px) rotate(45deg); }
+      50% { transform: translateY(4px) rotate(45deg); }
+      100% { transform: translateY(-3px) rotate(45deg); }
+    }
+
+    /* Cards / content */
     .content-box {
       width: 100%;
-      max-width: 700px;
+      max-width: 720px;
       margin: 1.5rem auto;
       padding: 2rem 1.5rem;
       background: var(--card-bg);
-      border-radius: 15px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+      border-radius: var(--border-radius);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
+      color: var(--text-main);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .content-box--light {
+      background: var(--card-bg-light);
       color: var(--text-dark);
+      border-color: rgba(15, 23, 42, 0.4);
     }
 
     .content-box h2 {
-      color: var(--text-dark);
-      text-shadow: none;
+      color: var(--accent-yellow);
+      text-shadow: 2px 2px #000;
       margin-top: 0;
+      margin-bottom: 1rem;
     }
 
-    /* ------------------------------
-       Reveal-on-scroll animasjon
-    -------------------------------- */
+    .content-box--light h2 {
+      color: var(--accent-red);
+      text-shadow: none;
+    }
+
+    .chapter-tag {
+      display: inline-block;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      padding: 0.3rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.9);
+      color: var(--accent-yellow);
+      margin-bottom: 0.8rem;
+    }
+
+    .chapter-tag--red {
+      background: rgba(127, 29, 29, 0.9);
+      color: #fee2e2;
+    }
+
+    p.lead {
+      font-size: 11px;
+    }
+
+    .muted {
+      color: var(--text-muted);
+      font-size: 10px;
+    }
+
+    /* Reveal on scroll */
     .reveal {
       opacity: 0;
-      transform: translateY(20px);
+      transform: translateY(22px);
       transition: opacity 0.6s ease, transform 0.6s ease;
     }
 
@@ -137,9 +353,7 @@
       transform: translateY(0);
     }
 
-    /* ------------------------------
-       KU – scrollytelling
-    -------------------------------- */
+    /* KU – scrollytelling */
     #cow-wrapper {
       padding: 0;
       margin: 0;
@@ -163,21 +377,33 @@
       height: 100%;
       object-fit: cover;
       border-radius: 0;
+      filter: saturate(1.1) contrast(1.1);
+    }
+
+    .cow-slide::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top, transparent, rgba(0,0,0,0.85));
+      pointer-events: none;
     }
 
     .imgText {
       position: relative;
       z-index: 2;
-      background: rgba(0, 0, 0, 0.75);
+      background: rgba(0, 0, 0, 0.82);
       color: var(--text-main);
-      padding: 1.5rem;
-      border-radius: 8px;
-      max-width: 480px;
+      padding: 1.4rem 1.1rem;
+      border-radius: 12px;
+      max-width: 460px;
       text-align: center;
       margin: 0 1rem;
       opacity: 0;
       transform: translateY(20px);
       transition: opacity 0.6s ease, transform 0.6s ease;
+      border: 1px solid rgba(248, 250, 252, 0.18);
+      box-shadow: 0 14px 30px rgba(0,0,0,0.9);
+      font-size: 10px;
     }
 
     .cow-slide.is-active .imgText {
@@ -185,24 +411,26 @@
       transform: translateY(0);
     }
 
-    /* ------------------------------
-       Dropdown (<details>)
-    -------------------------------- */
+    /* Dropdown */
     .dropdown {
       width: 100%;
-      max-width: 700px;
+      max-width: 720px;
       margin: 2rem auto;
-      padding: 1.5rem 1.2rem;
-      border-radius: 10px;
+      padding: 1.4rem 1.2rem;
+      border-radius: var(--border-radius);
       border: 2px solid #000;
-      background-color: rgba(128, 208, 16, 0.9);
+      background-color: rgba(128, 208, 16, 0.96);
       color: #000;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.8);
     }
 
     .dropdown summary {
       cursor: pointer;
       list-style: none;
-      font-size: 11px;
+      font-size: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
     .dropdown summary::-webkit-details-marker {
@@ -210,30 +438,29 @@
     }
 
     .dropdown summary::after {
-      content: " +";
-      font-size: 11px;
+      content: "+";
+      font-size: 12px;
     }
 
     .dropdown[open] summary::after {
-      content: " –";
+      content: "–";
     }
 
     .dropdown p {
       font-family: "Press Start 2P", monospace;
       color: #000;
       margin-top: 1rem;
+      font-size: 10px;
     }
 
-    /* ------------------------------
-       Video-boks inne i artikkel
-    -------------------------------- */
     #video-display {
       width: 100%;
-      max-width: 700px;
+      max-width: 720px;
       margin: 3rem auto;
       padding: 1.5rem 0.5rem;
-      background: rgba(0, 0, 0, 0.8);
-      border-radius: 15px;
+      background: rgba(0, 0, 0, 0.86);
+      border-radius: var(--border-radius);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.9);
     }
 
     #Video {
@@ -244,9 +471,7 @@
       display: block;
     }
 
-    /* ------------------------------
-       Caselaunch – sticky bilde
-    -------------------------------- */
+    /* Caselaunch */
     #caselaunch {
       padding-top: 4rem;
       padding-bottom: 4rem;
@@ -257,7 +482,8 @@
       top: 10px;
       width: 100%;
       max-width: 800px;
-      border-radius: 12px;
+      border-radius: var(--border-radius);
+      box-shadow: 0 22px 40px rgba(0,0,0,0.9);
     }
 
     .reveal-text {
@@ -266,15 +492,13 @@
     }
 
     .glitch-title {
-      color: var(--accent);
+      color: var(--accent-red);
       font-size: 16px;
       margin: 2rem auto 1rem;
       text-shadow: 3px 3px #000;
     }
 
-    /* ------------------------------
-       Siste video – mobil vs desktop
-    -------------------------------- */
+    /* Siste video */
     #dmodelmobil,
     #dmodeldesktop {
       padding-top: 4rem;
@@ -288,16 +512,17 @@
     #dmodelmobil video,
     #dmodeldesktop video {
       max-width: 100%;
-      border-radius: 12px;
+      border-radius: var(--border-radius);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.9);
     }
 
     @media (min-width: 768px) {
       section {
-        padding: 7rem 2rem;
+        padding: 7rem 0 4rem;
       }
 
       .dropdown {
-        max-width: 600px;
+        max-width: 640px;
       }
 
       #dmodelmobil {
@@ -321,48 +546,68 @@
 
   <div class="page">
     <main>
-      <!-- KU: scrollytelling del -->
+      <!-- HERO -->
+      <section id="hero">
+        <div class="hero-inner reveal">
+          <div class="hero-kicker">SCROLLYTALE / TRUE GAMBLE EDITION</div>
+          <h1 class="hero-title">KUSAKEN: FRA FJØS TIL 5000$-SKIN</h1>
+          <p class="hero-sub">
+            En ku på avveie. En streamer med millionhus. To rivaliserende gambling-giganter.<br>
+            Dette er historien om hvordan et dyr fra Romeriket ble valuta i et digitalt våpenskap.
+          </p>
+          <p class="hero-meta muted">
+            Basert på ekte hendelser fra Halden, Tistedal og et ganske spesifikt hjørne av internett.
+          </p>
+          <a href="#cow-wrapper" class="hero-cta">
+            <span>▶</span> PRESS START TO SCROLL
+          </a>
+          <div class="hero-arrow"></div>
+        </div>
+      </section>
+
+      <!-- KU-scrollytelling -->
       <div id="cow-wrapper">
         <section class="cow-slide">
           <img src="Bilder/Kyr_norskenaturen.png" alt="Pixelert bilde av noen kuer som gresser i den norske naturen">
           <p class="imgText">
-            Se for deg livet som en ung ku. Du bruker dagene dine på drøvtygge gress sammen med andre kuer på gården du bor på et sted i Romerriket.
+            Se for deg livet som en ung ku. Du bruker dagene dine på drøvtygge gress sammen med andre kuer på gården du bor på et sted i Romeriket.
           </p>
         </section>
 
         <section class="cow-slide">
           <img src="Bilder/cow_barn.png" alt="Pixelert bilde av en ku som står inne i et fjøs">
           <p class="imgText">
-            En kald dag i januar hvor du står inne i det varme fjøset kommer det noen fremmede til gården som snakker et språk du ikke forstår.
+            En kald dag i januar hvor du står inne i det varme fjøset, kommer det noen fremmede til gården som snakker et språk du ikke forstår.
           </p>
         </section>
 
         <section class="cow-slide">
           <img src="Bilder/cow_transport.png" alt="Pixelert bilde av en ku som blir transportert i en henger">
           <p class="imgText">
-            De har penger og plutselig blir du dratt fra det varme fjøset og inn i en henger bak en bil. Du skal ikke bli burger, du er på vei til å bli en internettkjendis.
+            De har penger, og plutselig blir du dratt fra det varme fjøset og inn i en henger bak en bil. Du skal ikke bli burger, du er på vei til å bli en internettkjendis.
           </p>
         </section>
       </div>
 
       <!-- Første tekstdel -->
       <section id="firstPart">
-        <h1 class="reveal">GRIMS KU</h1>
-
         <div class="content-box reveal">
-          <p>
+          <span class="chapter-tag">Kapittel 1 · Mannen med millionhuset</span>
+          <p class="lead">
             Det var en helt vanlig onsdag for Sebastian Ring Gjerlaugsen. Gjerlaugsen kjøpte en enebolig for 8 500 000 kr i Tistedal i slutten av året 2022.
-            Hvordan har han råd til det? Han er en Youtuber og streamer under aliaset Grim. På sine kanaler som nå er fjernet, lager han videoer hvor han gambler med ekte penger på skins.
+          </p>
+          <p>
+            Hvordan har han råd til det? Han er Youtuber og streamer under aliaset <b>Grim</b>. På sine kanaler – som nå er fjernet – lager han videoer hvor han
+            gambler med ekte penger på skins.
           </p>
         </div>
 
         <details class="dropdown reveal">
           <summary><b>Hva er skins?</b></summary>
           <p>
-            Skins er kosmetiske endringer på karakterer eller våpen i et spill. Dette konseptet blir også brukt i skytespillet Counter Strike (CS).
-            I CS bruker spillere ekte penger på å skaffe seg disse skinsene. Prisen på et skins påvirkes av to faktorer: hvor sjeldent det er og hvor stor etterspørselen er.
-            Dette gjør at skins kan få høy verdi. Per dags dato er det dyreste skinet i CS, kalt Karambit Case Hardened (Pattern 387 "Blue Gem"), verdt 1.5 millioner dollar,
-            samtidig som noen skins bare kan være verdt noen ører.
+            Skins er kosmetiske endringer på karakterer eller våpen i et spill, blant annet i skytespillet Counter Strike (CS).
+            I CS bruker spillere ekte penger på å skaffe seg disse skinsene. Prisen påvirkes av hvor sjeldent de er og hvor stor etterspørselen er.
+            Noen skins er verdt noen øre. Andre, som Karambit Case Hardened (Pattern 387 "Blue Gem"), er verdt rundt 1,5 millioner dollar.
           </p>
         </details>
 
@@ -375,8 +620,10 @@
         <div class="content-box reveal">
           <p>
             På videoene åpner han cases hvor våpen med høy verdi flyr forbi på skjermen.
-            Spenningen er til å føle på. Det er akkurat som casino-maskiner i Las Vegas, men det er bare ett tastetrykk unna.
-            Det er mange som liker å se på disse videoene, og mange av dem er mindreårige.
+            Spenningen er til å ta og føle på. Det er akkurat som casino-maskiner i Las Vegas – men her er det bare ett tastetrykk unna.
+          </p>
+          <p>
+            Mange liker å se på. Mange av dem er mindreårige.
           </p>
         </div>
 
@@ -384,38 +631,43 @@
           <summary><b>Hva er case?</b></summary>
           <p>
             Cases er en måte å skaffe seg skins i CS. Spillere får et case i uka hvis de spiller nok.
-            Du må kjøpe en nøkkel til et case for å kunne åpne det. Dette koster rundt 30 kr.
-            Caset har skins som varierer fra vanlige verdt under én krone til veldig sjeldne verdt flere tusen kroner.
-            Det er tilfeldig hvilket skin du får, men sannsynligheten for å få et vanlig skin er mye høyere enn for et sjeldent skin.
-            Dette skaper spenning som ligner på gambling.
+            For å åpne det må du kjøpe en nøkkel, som koster rundt 30 kr.
+            Innholdet kan være alt fra helt vanlige skins verdt under én krone, til sjeldne skins verdt flere tusen.
+            Sjansen for å få noe dyrt er ekstremt liten – og det er nettopp det som gjør det så likt gambling.
           </p>
         </details>
       </section>
 
       <!-- Andre del -->
       <section id="secondPart">
-        <div class="content-box reveal">
+        <div class="content-box content-box--light reveal">
+          <span class="chapter-tag chapter-tag--red">Kapittel 2 · Rivalene</span>
           <h2>Rivaliseringen starter</h2>
-          <p>Grim tjener godt på å promotere gambling for gamblingnettsiden CSGO Roll.</p>
+          <p>
+            Grim tjener godt på å promotere gambling for gamblingnettsiden <b>CSGO Roll</b>.
+          </p>
           <img src="Bilder/Rivallogoenmothverandre.png" alt="Pixelert bilde av to rivaliserende logoer">
+          <p class="muted">
+            Deres største konkurrent? CSGO Empire. To sider, samme målgruppe: spillere som er villige til å legge igjen mye penger.
+          </p>
         </div>
 
         <details class="dropdown reveal">
           <summary><b>Hva skjer mellom Roll og Empire?</b></summary>
           <p>
-            Det er et annet selskap som ikke er så fornøyd med at Roll blir promotert.
-            Dette er Roll sin erkefiende CSGO Empire. Begge disse selskapene driver nettsider hvor brukere kan gamble skins og penger for å prøve å få bedre skins som er verdt mer.
-            Gambling er veldig stort innen Counter Strike og nesten alle de profesjonelle e-sportlagene har en gambling-sponsor.
-            Det hjelper heller ikke at gambling er en del av selve spillet.
-            Dette skaper et stort marked med folk som er villige til å legge igjen mye penger. Det er disse Empire og Roll slåss om.
+            CSGO Empire er ikke særlig fornøyd med at Roll blir frontet av store profiler.
+            Begge selskapene driver nettsider hvor brukere kan gamble skins og penger for å prøve å få bedre skins.
+            Gambling er tett knyttet til Counter Strike – nesten alle profesjonelle e-sportlag har en gambling-sponsor.
+            Markedet er enormt, og både Empire og Roll vil ha de samme spillerne.
           </p>
         </details>
 
         <div class="content-box reveal">
           <p>
-            Empire hadde en svart kampanje i oktober 2023 mot Grim.
-            Deres tilhengere reiser til Halden med banner og flyere som de sprer utover Halden.
-            Den fredelige gaten i Tistedal fylles av høylytte protester fra mennesker iført finlandshetter og med høygaffler i hendene.
+            I oktober 2023 setter Empire inn støtet. De kjører en svart kampanje mot Grim.
+          </p>
+          <p>
+            Tilhengere reiser til Halden med bannere og flyers. Den fredelige gata i Tistedal fylles av høylytte protester fra mennesker iført finlandshetter og med høygaffler i hendene.
           </p>
         </div>
       </section>
@@ -423,15 +675,25 @@
       <!-- Tilbake til kua -->
       <section id="backtocow">
         <div class="content-box reveal">
+          <span class="chapter-tag">Kapittel 3 · Det absurde høydepunktet</span>
           <h2>DET ABSURDE HØYDEPUNKTET</h2>
-          <p><b>Hva har dette å gjøre med kuen som er på reisefot fra gården sin i Romeriket 1,5 år senere?</b></p>
+          <p><b>Hva har dette å gjøre med kua på reisefot fra gården sin i Romeriket?</b></p>
           <img src="Bilder/cowtram.png" alt="Pixelert illustrasjon av ku på trikk">
           <p>
-            For det er ikke hvilket som helst sted denne kua havner. Den finnes bundet til en trapp som tilhører en enebolig i Tistedal.
-            Eieren av denne boligen? Sebastian Ring Gjerlaugsen aka Grim. Politiet blir kontaktet og kuen blir sendt til en lokal bonde før eieren av kua kommer og henter den.
-            Kuen var i god form og nok fornøyd med å være tilbake i det varme fjøset på en gård i Romeriket et sted.
-            Saken ble henlagt da verken kueier eller Gjerlaugsen hadde lyst til å anmelde, og Mattilsynet konkluderte med at det ikke hadde skjedd brudd på dyrevelferden.
-            Den unge kua sitt eventyr var over, men det digitale fotsporet hadde strukket seg enda lengre enn avisartikkelen som dekket saken.
+            For det er ikke hvilket som helst sted denne kua havner. Den blir funnet bundet til en trapp som tilhører en enebolig i Tistedal.
+          </p>
+          <p>
+            Eieren av boligen? Sebastian Ring Gjerlaugsen – aka Grim.
+          </p>
+          <p>
+            Politiet blir kontaktet, og kua blir sendt til en lokal bonde før den endelig hentes av eieren fra Romeriket.
+            Kua skal ha vært i god form, og virket fornøyd med å være tilbake i det varme fjøset.
+          </p>
+          <p>
+            Saken blir henlagt. Verken kueier eller Gjerlaugsen ønsker å anmelde, og Mattilsynet konkluderer med at det ikke har skjedd brudd på dyrevelferden.
+          </p>
+          <p>
+            Men det digitale fotsporet til kua? Det er langt fra over.
           </p>
         </div>
       </section>
@@ -441,55 +703,78 @@
         <img src="Bilder/Bilde av Case launchen.png" alt="Tweet som annonserer lanseringen av et nytt case">
         <div class="reveal-text">
           <div class="content-box reveal">
+            <span class="chapter-tag chapter-tag--red">Kapittel 4 · Når et dyr blir loot</span>
             <p>
-              12. februar 2025 lanserer CSGO Empire sine nye cases på X (tidligere Twitter). Blant de nye casene er det et som ser ekstra interessant ut.
-              Caset med navnet “Man” – når du ser nærmere, ser du et bilde av en ku satt sammen med et moderne hus som ligner på et kjent hus i Tistedalsveien.
+              12. februar 2025 lanserer CSGO Empire sine nye cases på X (tidligere Twitter).
+              Blant de nye casene er det ett som skiller seg ut.
+            </p>
+            <p>
+              Caset heter <b>“Man”</b>. Når du ser nærmere på det, ser du en ku – satt sammen med et moderne hus som ligner mistenkelig på et kjent hus i Tistedalsveien.
             </p>
             <h2 class="glitch-title">GRIM’S COW: $5 000</h2>
             <p>
-              Inne på Empire sin egen side kan du se hvilke skins du kan få i casen. Det er ett “skin” som skiller seg ut, for det er ikke et skin, det er en ku.
-              Navnet? Grim’s cow, verdt 5 000 dollar, og med en 0,07% sjanse skal det litt til for at den blir din.
+              Inne på Empire sin side kan du se hvilke skins du kan få i casen. Ett “skin” skiller seg ut – for det er ikke et skin.
+              Det er en ku.
             </p>
             <p>
-              Med disse bevisene kan vi bare anta at det var Empire som sto bak hele reisen til kua.
-              Empire har ikke ønsket å kommentere på saken og vi kan derfor ikke bekrefte 100% at de står bak, men sannsynligheten er ganske høy.
-              Hvordan kua har det nå vet vi heller ikke. Vi klarte ikke å spore opp bonden som eide den.
+              Navnet? <b>Grim’s cow</b>. Verdi: 5 000 dollar. Sjansen for å få den: 0,07%.
+            </p>
+            <p>
+              Med disse brikkene er det nærliggende å tro at det er Empire som sto bak hele ku-stuntet.
+              De har ikke ønsket å kommentere saken. Vi kan ikke være 100% sikre – men sannsynligheten er ganske høy.
+            </p>
+            <p>
+              Hvor kua er nå? Det vet vi ikke. Bonden som eide den, fant vi aldri.
             </p>
           </div>
         </div>
       </section>
 
-      <!-- Siste video – mobil & desktop -->
+      <!-- Siste video -->
       <section id="dmodelmobil">
-        <video id="final-video-mobil" controls playsinline muted preload="auto">
-          <source src="Bilder/Kusaken_video_1080x1920.mp4" type="video/mp4">
-        </video>
+        <div class="content-box reveal">
+          <span class="chapter-tag">Bonus · Saken oppsummert</span>
+          <video id="final-video-mobil" controls playsinline muted preload="auto">
+            <source src="Bilder/Kusaken_video_1080x1920.mp4" type="video/mp4">
+          </video>
+        </div>
       </section>
 
       <section id="dmodeldesktop">
-        <video id="final-video-desktop" controls playsinline muted preload="auto">
-          <source src="Bilder/Kusaken_video_1080p.mp4" type="video/mp4">
-        </video>
+        <div class="content-box reveal content-box--light">
+          <span class="chapter-tag chapter-tag--red">Bonus · Saken oppsummert</span>
+          <video id="final-video-desktop" controls playsinline muted preload="auto">
+            <source src="Bilder/Kusaken_video_1080p.mp4" type="video/mp4">
+          </video>
+        </div>
       </section>
     </main>
   </div>
 
+  <!-- Bevis-meter -->
+  <div class="case-meter">
+    <div class="case-meter__dot"></div>
+    <span>Bevis samlet:</span>
+    <span class="case-meter__percent" id="evidencePercent">0%</span>
+  </div>
+
   <script>
-    // Scroll progress bar
     const scrollBar = document.getElementById("scroll-progress");
+    const evidenceSpan = document.getElementById("evidencePercent");
 
     function updateScrollProgress() {
       const scrollTop = window.scrollY || document.documentElement.scrollTop;
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
       const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
       scrollBar.style.width = progress + "%";
+      evidenceSpan.textContent = Math.round(progress) + "%";
     }
 
     window.addEventListener("scroll", updateScrollProgress);
     window.addEventListener("resize", updateScrollProgress);
     updateScrollProgress();
 
-    // Reveal on scroll (IntersectionObserver)
+    // Reveal on scroll
     const revealElements = document.querySelectorAll(".reveal");
 
     const revealObserver = new IntersectionObserver(
@@ -501,14 +786,12 @@
           }
         });
       },
-      {
-        threshold: 0.2
-      }
+      { threshold: 0.2 }
     );
 
     revealElements.forEach((el) => revealObserver.observe(el));
 
-    // Ku-slides: aktiver tekst per slide
+    // Ku-slides
     const cowSlides = document.querySelectorAll(".cow-slide");
 
     const cowObserver = new IntersectionObserver(
@@ -520,14 +803,11 @@
           }
         });
       },
-      {
-        threshold: 0.5
-      }
+      { threshold: 0.5 }
     );
 
     cowSlides.forEach((slide, index) => {
       cowObserver.observe(slide);
-      // Første slide aktiv til å begynne med
       if (index === 0) {
         slide.classList.add("is-active");
       }
