@@ -938,7 +938,7 @@ if (chat) {
       entries.forEach((e) => {
         if (e.isIntersecting) {
           runChat();
-          observer.unobserve(e.target);
+          chatobserver.unobserve(e.target);
         }
       });
     },
