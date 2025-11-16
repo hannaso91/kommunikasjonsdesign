@@ -38,8 +38,6 @@
       line-height: 1.6;
     }
 
-    /* Lesefremdrifts-linje øverst */
-
     .reading-progress {
       position: fixed;
       top: 0;
@@ -56,8 +54,6 @@
       background: linear-gradient(to right, #22c55e, #facc15);
       transform-origin: left;
     }
-
-    /* Hero-seksjon */
 
     .hero {
       position: relative;
@@ -128,8 +124,6 @@
       color: var(--muted);
     }
 
-    /* Scroll-hint i bunnen av hero */
-
     .scroll-hint {
       margin-top: 2rem;
       font-size: 0.8rem;
@@ -139,7 +133,7 @@
       gap: 0.4rem;
       align-items: flex-start;
       opacity: 0;
-      animation: fadeInHint 1.5s ease forwards 1.5s; /* dukker opp etter litt tid */
+      animation: fadeInHint 1.5s ease forwards 1.5s; 
     }
 
     .scroll-hint__arrow {
@@ -198,108 +192,96 @@
       transform: translateX(0);
     }
 
+    .mode-toggle {
+      margin-top: 1.5rem;
+      padding: 1.3rem 1.2rem 1.1rem;
+      border-radius: 1.2rem;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      max-width: 420px;
+    }
 
-    /* Modus-bryter: aktivitet vs hvile */
+    .mode-toggle__label {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 0.7rem;
+    }
 
-    /* --- Modus-toggle: aktivitet vs hvile --- */
+    .mode-toggle__track {
+      position: relative;
+      display: flex;
+      align-items: stretch;
+      justify-content: space-between;
+      background: rgba(15, 23, 42, 0.95);
+      border-radius: 999px;
+      padding: 0.2rem;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      margin-bottom: 0.7rem;
+      overflow: hidden;
+    }
 
-.mode-toggle {
-  margin-top: 1.5rem;
-  padding: 1.3rem 1.2rem 1.1rem;
-  border-radius: 1.2rem;
-  background: rgba(15, 23, 42, 0.9);
-  border: 1px solid rgba(148, 163, 184, 0.4);
-  max-width: 420px;
-}
+    .mode-toggle__option {
+      position: relative;
+      z-index: 2;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
+      align-items: center;
+      justify-content: center;
+      padding: 0.35rem 0.3rem 0.45rem;
+      font-size: 0.8rem;
+      cursor: pointer;
+      color: var(--muted);
+      user-select: none;
+    }
 
-.mode-toggle__label {
-  font-size: 0.9rem;
-  color: var(--muted);
-  margin-bottom: 0.7rem;
-}
+    .mode-toggle__emoji {
+      font-size: 1.1rem;
+    }
 
-.mode-toggle__track {
-  position: relative;
-  display: flex;
-  align-items: stretch;
-  justify-content: space-between;
-  background: rgba(15, 23, 42, 0.95);
-  border-radius: 999px;
-  padding: 0.2rem;
-  border: 1px solid rgba(55, 65, 81, 0.9);
-  margin-bottom: 0.7rem;
-  overflow: hidden;
-}
-
-.mode-toggle__option {
-  position: relative;
-  z-index: 2;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 0.1rem;
-  align-items: center;
-  justify-content: center;
-  padding: 0.35rem 0.3rem 0.45rem;
-  font-size: 0.8rem;
-  cursor: pointer;
-  color: var(--muted);
-  user-select: none;
-}
-
-.mode-toggle__emoji {
-  font-size: 1.1rem;
-}
-
-.mode-toggle__text {
-  font-size: 0.78rem;
-}
-
-/* Den bevegelige "thumben" som glir mellom høyre/venstre */
-
-.mode-toggle__thumb {
-  position: absolute;
-  top: 3px;
-  bottom: 3px;
-  left: 3px; /* start ved mosjon */
-  width: calc(50% - 4px);
-  background: rgba(34, 197, 94, 0.18);
-  border-radius: 999px;
-  box-shadow: 0 0 20px rgba(34, 197, 94, 0.45);
-  border: 1px solid rgba(34, 197, 94, 0.7);
-  transition: left 0.28s ease, background 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
-}
-
-/* Når vi er i hvilemodus flyttes thumben til høyre */
-.mode-toggle--rest .mode-toggle__thumb {
-  left: calc(50% + 1px);
-  background: rgba(56, 189, 248, 0.2);
-  border-color: rgba(56, 189, 248, 0.8);
-  box-shadow: 0 0 20px rgba(56, 189, 248, 0.45);
-}
-
-/* Aktiv tekstfarge */
-
-.mode-toggle--exercise .mode-toggle__option--left,
-.mode-toggle--rest .mode-toggle__option--right {
-  color: #e5fce0;
-  font-weight: 600;
-}
-
-.mode-toggle--exercise .mode-toggle__option--right,
-.mode-toggle--rest .mode-toggle__option--left {
-  color: var(--muted);
-}
-
-/* Undertekst */
-
-.mode-toggle__description {
-  margin: 0;
-  font-size: 0.85rem;
-  color: var(--muted);
-}
+    .mode-toggle__text {
+      font-size: 0.78rem;
+    }
 
 
+    .mode-toggle__thumb {
+      position: absolute;
+      top: 3px;
+      bottom: 3px;
+      left: 3px; 
+      width: calc(50% - 4px);
+      background: rgba(34, 197, 94, 0.18);
+      border-radius: 999px;
+      box-shadow: 0 0 20px rgba(34, 197, 94, 0.45);
+      border: 1px solid rgba(34, 197, 94, 0.7);
+      transition: left 0.28s ease, background 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+    }
+
+    .mode-toggle--rest .mode-toggle__thumb {
+      left: calc(50% + 1px);
+      background: rgba(56, 189, 248, 0.2);
+      border-color: rgba(56, 189, 248, 0.8);
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.45);
+    }
+
+
+    .mode-toggle--exercise .mode-toggle__option--left,
+    .mode-toggle--rest .mode-toggle__option--right {
+      color: #e5fce0;
+      font-weight: 600;
+    }
+
+    .mode-toggle--exercise .mode-toggle__option--right,
+    .mode-toggle--rest .mode-toggle__option--left {
+      color: var(--muted);
+    }
+
+    .mode-toggle__description {
+      margin: 0;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
 
     .story {
       max-width: var(--max-width);
@@ -316,7 +298,7 @@
 
     .chapter__sidebar {
       position: sticky;
-      top: 5rem; /* “Henger” litt når man scroller ned */
+      top: 5rem; 
       align-self: flex-start;
       padding-right: 1rem;
       border-right: 1px solid rgba(148, 163, 184, 0.3);
@@ -340,14 +322,10 @@
       font-size: 1rem;
     }
 
-    /* Første avsnitt i kapittel */
-
     .lead {
       font-size: 1.15rem;
       font-weight: 500;
     }
-
-    /* Fullbredde bilde/seksjon */
 
     .full-image {
       margin: 4rem -1.5rem;
@@ -356,11 +334,10 @@
     .full-image_inner {
         position: relative;
         width: 100%;
-        height: 70vh; /* eller hva du bruker */
+        height: 70vh; 
         overflow: hidden;
       }
 
-      /* Videoen som fyller hele seksjonen */
       .full-image_inner .full-video {
         position: absolute;
         top: 50%;
@@ -370,9 +347,9 @@
         width: auto;
         height: auto;
         transform: translate(-50%, -50%);
-        object-fit: cover;  /* VIKTIG! Gjør den som background-size: cover */
-        z-index: -1;        /* legger videoen bak innhold */
-        filter: brightness(60%); /* valgfritt, gjør videoen litt mørkere */
+        object-fit: cover;  
+        z-index: -1;        
+        filter: brightness(60%); 
       }
 
 
@@ -391,221 +368,203 @@
       font-size: 0.95rem;
     }
 
-    /* Sitatblokk */
-
-    /* CHAT-STYLE sitatblokk */
-
-.quote-block {
-  position: relative;
-  margin: 4rem 0 2rem;
-  padding: 1rem 1.1rem 0.7rem;
-  max-width: 28rem;
-  margin-left: auto;       /* flytter bobla mot høyre, som en sendt melding */
-  margin-right: 0;
-  background: #020617;
-  border-radius: 1.4rem 1.4rem 0.4rem 1.4rem; /* litt skarpere hjørne nederst til venstre */
-  border: 1px solid rgba(148, 163, 184, 0.6);
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.8);
-}
-
-.quote-chat__messages {
-  display: flex;
-  flex-direction: column;
-  gap: 1.6rem;
-
-  /* viktig: gjør at bobler som er "align-self: flex-start" +
-     "align-self: flex-end" faktisk flytter seg horisontalt */
-  width: 100%;
-}
 
 
-/* Halen på bobla */
-.quote-block::after {
-  content: "";
-  position: absolute;
-  right: 14px;
-  bottom: -7px;
-  width: 14px;
-  height: 14px;
-  background: #020617;
-  border-right: 1px solid rgba(148, 163, 184, 0.6);
-  border-bottom: 1px solid rgba(148, 163, 184, 0.6);
-  transform: rotate(45deg);
-}
+    .quote-block {
+      position: relative;
+      margin: 4rem 0 2rem;
+      padding: 1rem 1.1rem 0.7rem;
+      max-width: 28rem;
+      margin-left: auto;      
+      margin-right: 0;
+      background: #020617;
+      border-radius: 1.4rem 1.4rem 0.4rem 1.4rem; 
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.8);
+    }
 
-.quote-block blockquote {
-  margin: 0 0 0.4rem;
-  font-size: 0.98rem;
-  font-style: normal;
-}
+    .quote-chat__messages {
+      display: flex;
+      flex-direction: column;
+      gap: 1.6rem;
+      width: 100%;
+    }
 
-.quote-block__author {
-  margin: 0;
-  font-size: 0.8rem;
-  color: var(--muted);
-  text-align: right;
-}
+    .quote-block::after {
+      content: "";
+      position: absolute;
+      right: 14px;
+      bottom: -7px;
+      width: 14px;
+      height: 14px;
+      background: #020617;
+      border-right: 1px solid rgba(148, 163, 184, 0.6);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.6);
+      transform: rotate(45deg);
+    }
 
-/* "Skriver..."-prikker under teksten */
-/* Chat container */
-.quote-chat {
-  margin: 4rem auto;
-  max-width: 420px;              /* ser mer ut som en mobilskjerm */
-  padding: 1.4rem 1rem 1.6rem;
-  border-radius: 2rem;
-  background: radial-gradient(circle at top, #0b1120, #020617);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
-  border: 1px solid rgba(148, 163, 184, 0.35);
-}
+    .quote-block blockquote {
+      margin: 0 0 0.4rem;
+      font-size: 0.98rem;
+      font-style: normal;
+    }
 
-.quote-chat__messages {
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-  width: 100%;
-}
+    .quote-block__author {
+      margin: 0;
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-align: right;
+    }
 
+    .quote-chat {
+      margin: 4rem auto;
+      max-width: 420px;             
+      padding: 1.4rem 1rem 1.6rem;
+      border-radius: 2rem;
+      background: radial-gradient(circle at top, #0b1120, #020617);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+    }
 
-/* Felles boblestil */
-.quote-chat__bubble {
-  position: relative;
-  max-width: 75%;
-  padding: 0.55rem 0.75rem;
-  border-radius: 1.1rem;
-  font-size: 0.92rem;
-  line-height: 1.4;
-  word-wrap: break-word;
-  opacity: 0;
-  transform: translateY(6px);
-  transition: opacity 0.25s ease, transform 0.25s ease;
-}
+    .quote-chat__messages {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      width: 100%;
+    }
 
-/* Når synlig */
-.quote-chat__bubble.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
+    .quote-chat__bubble {
+      position: relative;
+      max-width: 75%;
+      padding: 0.55rem 0.75rem;
+      border-radius: 1.1rem;
+      font-size: 0.92rem;
+      line-height: 1.4;
+      word-wrap: break-word;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
 
-/* >>> DINE MELDINGER (spørsmål) – VENSTRE, GRØNN <<< */
-.quote-chat__bubble--user {
-  background: #7ACBE8;
-  color: #d1fae5;
-  align-self: flex-end;
-  border-radius: 1.1rem 1.1rem 0.3rem 1.1rem;
-}
+    .quote-chat__bubble.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-/* hale */
-.quote-chat__bubble--user::after {
-  content: "";
-  position: absolute;
-  left: -4px;
-  bottom: 4px;
-  width: 10px;
-  height: 10px;
-  background: #7ACBE8;
-  border-bottom-right-radius: 4px;
-  transform: rotate(45deg);
-}
-
-/* >>> SUSANNES SVAR – HØYRE, BLÅ <<< */
-.quote-chat__bubble--susanne {
-  background: #0f172a;
-  color: #e0e7ff;
-  align-self: flex-start;
-  border-radius: 1.1rem 1.1rem 1.1rem 0.3rem;
-}
-
-/* hale */
-.quote-chat__bubble--susanne::after {
-  content: "";
-  position: absolute;
-  right: -4px;
-  bottom: 4px;
-  width: 10px;
-  height: 10px;
-  background: #0f172a;
-  border-bottom-left-radius: 4px;
-  transform: rotate(45deg);
-}
-
-.quote-chat__typing {
-  align-self: flex-start;           /* ser ut som om Susanne skriver */
-  margin-top: 0.2rem;
-  padding: 0.35rem 0.55rem;
-  background: #e5e5ea;
-  border-radius: 1rem 1rem 1rem 0.3rem;
-  display: flex;
-  gap: 4px;
-  opacity: 0;
-  transform: translateY(4px);
-  transition: opacity 0.2s ease, transform 0.2s ease;
-}
-
-.quote-chat__typing.is-active {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.quote-chat__typing span {
-  width: 6px;
-  height: 6px;
-  border-radius: 999px;
-  background: #8e8e93;
-  animation: typingDots 1.2s infinite ease-in-out;
-}
-
-.quote-chat__typing span:nth-child(2) { animation-delay: 0.15s; }
-.quote-chat__typing span:nth-child(3) { animation-delay: 0.3s; }
-
-@keyframes typingDots {
-  0%, 80%, 100% { opacity: 0.3; transform: translateY(0); }
-  40% { opacity: 1; transform: translateY(-2px); }
-}
+    .quote-chat__bubble--user {
+      background: #7ACBE8;
+      color: #d1fae5;
+      align-self: flex-end;
+      border-radius: 1.1rem 1.1rem 0.3rem 1.1rem;
+    }
 
 
-.quote-block__typing {
-  display: flex;
-  justify-content: flex-end;
-  gap: 4px;
-  margin-top: 0.5rem;
-  padding-bottom: 0.2rem;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
+    .quote-chat__bubble--user::after {
+      content: "";
+      position: absolute;
+      left: -4px;
+      bottom: 4px;
+      width: 10px;
+      height: 10px;
+      background: #7ACBE8;
+      border-bottom-right-radius: 4px;
+      transform: rotate(45deg);
+    }
 
-.quote-block__typing.is-active {
-  opacity: 1;
-}
+    .quote-chat__bubble--susanne {
+      background: #0f172a;
+      color: #e0e7ff;
+      align-self: flex-start;
+      border-radius: 1.1rem 1.1rem 1.1rem 0.3rem;
+    }
 
-.quote-block__typing span {
-  width: 6px;
-  height: 6px;
-  border-radius: 999px;
-  background: rgba(148, 163, 184, 0.9);
-  animation: typing 1s infinite ease-in-out;
-}
+    .quote-chat__bubble--susanne::after {
+      content: "";
+      position: absolute;
+      right: -4px;
+      bottom: 4px;
+      width: 10px;
+      height: 10px;
+      background: #0f172a;
+      border-bottom-left-radius: 4px;
+      transform: rotate(45deg);
+    }
 
-.quote-block__typing span:nth-child(2) {
-  animation-delay: 0.15s;
-}
+    .quote-chat__typing {
+      align-self: flex-start;           
+      margin-top: 0.2rem;
+      padding: 0.35rem 0.55rem;
+      background: #e5e5ea;
+      border-radius: 1rem 1rem 1rem 0.3rem;
+      display: flex;
+      gap: 4px;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
 
-.quote-block__typing span:nth-child(3) {
-  animation-delay: 0.3s;
-}
+    .quote-chat__typing.is-active {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-@keyframes typing {
-  0%, 80%, 100% {
-    opacity: 0.2;
-    transform: translateY(0);
-  }
-  40% {
-    opacity: 1;
-    transform: translateY(-3px);
-  }
-}
+    .quote-chat__typing span {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #8e8e93;
+      animation: typingDots 1.2s infinite ease-in-out;
+    }
+
+    .quote-chat__typing span:nth-child(2) { animation-delay: 0.15s; }
+    .quote-chat__typing span:nth-child(3) { animation-delay: 0.3s; }
+
+    @keyframes typingDots {
+      0%, 80%, 100% { opacity: 0.3; transform: translateY(0); }
+      40% { opacity: 1; transform: translateY(-2px); }
+    }
 
 
-    /* Scroll-reveal effekter */
+    .quote-block__typing {
+      display: flex;
+      justify-content: flex-end;
+      gap: 4px;
+      margin-top: 0.5rem;
+      padding-bottom: 0.2rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .quote-block__typing.is-active {
+      opacity: 1;
+    }
+
+    .quote-block__typing span {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.9);
+      animation: typing 1s infinite ease-in-out;
+    }
+
+    .quote-block__typing span:nth-child(2) {
+      animation-delay: 0.15s;
+    }
+
+    .quote-block__typing span:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+
+    @keyframes typing {
+      0%, 80%, 100% {
+        opacity: 0.2;
+        transform: translateY(0);
+      }
+      40% {
+        opacity: 1;
+        transform: translateY(-3px);
+      }
+    }
 
     .reveal {
       opacity: 0;
@@ -617,8 +576,6 @@
       opacity: 1;
       transform: translateY(0);
     }
-
-    /* Responsiv tilpasning */
 
     @media (max-width: 768px) {
       .chapter {
@@ -645,8 +602,6 @@
       }
     }
 
-    /* ---- Typing Ending Section ---- */
-
     .ending-section {
       margin-top: 6rem;
       padding: 4rem 1rem;
@@ -663,12 +618,11 @@
       white-space: normal;
     }
 
-    /* Teksten skrives inn */
+ 
     .ending-typing {
       display: inline;
     }
 
-    /* Blinking cursor */
     .ending-cursor {
       display: inline-block;
       width: 10px;
@@ -708,10 +662,7 @@
     </div>
   </header>
 
- 
   <main class="story">
-
-  
     <section class="chapter">
       <div class="chapter__sidebar">
         <p class="chapter__number">01</p>
@@ -726,7 +677,6 @@
       </div>
     </section>
 
-
     <section class="full-image reveal">
       <div class="full-image_inner">
         <video class="full-video" autoplay muted loop playsinline>
@@ -735,7 +685,6 @@
       </div>
     </section>
 
-   
     <section class="chapter">
       <div class="chapter__sidebar">
         <p class="chapter__number">02</p>
@@ -755,11 +704,9 @@
       </div>
     </section>
 
-    
     <section class="quote-chat reveal" id="bjorvand-quotes">
       <div class="quote-chat__messages"></div>
 
-      <!-- skriver-prikker -->
       <div class="quote-chat__typing">
         <span></span><span></span><span></span>
       </div>
@@ -770,7 +717,6 @@
         <p class="chapter__number">03</p>
         <p class="chapter__title">Når kroppen er psyksik aktiv, men fysisk passiv</p>
       </div>
-
       <div class="chapter__content">
         <p class="reveal">
           Mangel på kjedsomhet, eller mangel på aktivitet, kan påvirke mennesker negativt. 
@@ -781,9 +727,7 @@
           Det påvirker kroppen fysisk og psykisk. Det man ser med skjermbruk er at kroppen havner i en situasjon der de er psykisk aktive, men fysisk passive. 
           Det blir med andre ord vanskeligere å skille de to fra hverandre, og få et tydelig skille mellom aktivitet og hvile.
         </p>
-        
-      </div>
-      
+      </div>  
     </section>
 
     <section class="chapter">
@@ -840,7 +784,6 @@
       «Det er likevel påfallende mange de siste årene som søker hjelp og utredning for oppmerksomhetsvansker hos barn i dag. Dette tallet har økt drastisk de siste årene - særlig etter covid»
     </div>
 
-
     <section class="chapter">
       <div class="chapter__sidebar">
         <p class="chapter__number">04</p>
@@ -857,20 +800,15 @@
       </div>
     </section>
 
-  
     <section class="ending-section reveal">
       <div class="ending-typing-container">
         <p id="endingTyping" class="ending-typing"></p>
         <span class="ending-cursor"></span>
       </div>
     </section>
-
-
-
   </main>
 
   <script>
-    
     const revealElements = document.querySelectorAll(".reveal");
 
     const observer = new IntersectionObserver(
@@ -889,7 +827,6 @@
 
     revealElements.forEach((el) => observer.observe(el));
 
-   
     const progressBar = document.querySelector(".reading-progress__bar");
 
     function updateReadingProgress() {
@@ -906,9 +843,6 @@
 
     
     updateReadingProgress();
-
-    // ---- Sitat-sekvens i chat-bobla ---- //
-
 
 
 const chat = document.querySelector("#bjorvand-quotes");
@@ -961,7 +895,6 @@ if (chat) {
     div.textContent = text;
     messagesContainer.appendChild(div);
 
-    // animasjon
     requestAnimationFrame(() => {
       setTimeout(() => div.classList.add("is-visible"), 40);
     });
@@ -982,12 +915,10 @@ if (chat) {
       const msg = conversation[index];
 
       if (msg.from === "user") {
-        // Brukeren "sender" melding direkte
         addBubble(msg);
         index++;
         setTimeout(next, 1800);
       } else {
-        // Susanne skriver...
         typing.classList.add("is-active");
 
         setTimeout(() => {
@@ -995,7 +926,7 @@ if (chat) {
           addBubble(msg);
           index++;
           setTimeout(next, 2500);
-        }, 1600); // typing-tid
+        }, 1600); 
       }
     }
 
@@ -1017,15 +948,13 @@ if (chat) {
   chatobserver.observe(chat);
 }
 
-// ---- Modus-bryter: mosjon vs hvile ---- //
 
-// ---- Modus-toggle: mosjon vs hvile ---- //
 
 const modeToggle = document.getElementById("modeToggle");
 const modeDescription = document.getElementById("modeDescription");
 
 if (modeToggle && modeDescription) {
-  // start i aktivitetsmodus
+
   let isExercise = true;
   modeToggle.classList.add("mode-toggle--exercise");
 
@@ -1043,19 +972,15 @@ if (modeToggle && modeDescription) {
     }
   }
 
-  // Klikk på hele tracken eller alternativene
   const track = modeToggle.querySelector(".mode-toggle__track");
   if (track) {
     track.addEventListener("click", (event) => {
       const target = event.target;
-
-      // hvis du klikker spesifikt på en side:
       if (target.closest(".mode-toggle__option--left")) {
         isExercise = true;
       } else if (target.closest(".mode-toggle__option--right")) {
         isExercise = false;
       } else {
-        // klikker midt på → bare toggler
         isExercise = !isExercise;
       }
 
@@ -1063,11 +988,8 @@ if (modeToggle && modeDescription) {
     });
   }
 
-  // sett starttilstand
   updateMode();
 }
-
-// ---- Typing Effekt for Avslutningen ---- //
 
 const endingText = 
 `Spørsmålet som gjenstår, er kanskje ikke hva kjedsomhet gjør med oss.
