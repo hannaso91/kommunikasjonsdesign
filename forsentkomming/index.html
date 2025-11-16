@@ -6,9 +6,492 @@
     <link rel="stylesheet" href="styletolate.scss">
 
     <title>Se på meg, jeg gir faen i alle andre</title>
+
+    <style>
+        * { 
+    margin: 0;
+    padding: 0; 
+    box-sizing: border-box; 
+} 
+
+main{
+    margin-top: 60px;
+    font-family: 'source serif 4', serif;
+}
+
+#introVideoDesktop {
+    display: none;
+}
+
+.desktop-side-bar {
+    display: none; 
+    position: fixed; 
+    top: 0;
+    width: 15%; 
+    height: 100vh; 
+    z-index: -1; 
+    
+    background: linear-gradient(
+        to bottom, 
+        #d8dbe0, 
+        #b0b9c2     
+    );
+    
+}
+
+.left-bar {
+    left: 0;
+}
+
+.right-bar {
+    right: 0;
+}
+
+
+
+img, video { 
+    max-width: 100%;
+    height: auto; 
+    display: block; 
+} 
+
+body {  
+    font-size: 16px; 
+    line-height: 1.5; 
+    background: linear-gradient(180deg, #f5f5f5 0%, #dce0e6 60%, #bfc8d2 100%);
+    color: #111;
+
+ } 
+
+ /* — Lys bakgrunn bak teksten (variant 2) — */
+.textbox {
+  background: linear-gradient(to right, rgba(255,255,255,0.9) 40%, rgba(255,255,255,0.6) 100%);
+  padding: 1.5rem 2rem;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  margin: 2rem 0;
+  line-height: 1.7;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin: 3rem 1rem;
+}
+
+/* Liten "hover-effekt" for mer liv når man leser */
+.textbox:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+ 
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at center, transparent 60%, rgba(0,0,0,0.2) 100%);
+  pointer-events: none;
+}
+
+
+ header{ 
+    padding: 0.5rem; 
+    margin: 5rem auto 5rem auto;
+
+    video{
+        display: block;
+        margin: 2 auto;
+        width: 100%;
+        height: auto;   
+    }
+} 
+    
+#main_heading { 
+        text-align: center; 
+        padding-bottom: 3rem; 
+
+        h1{ 
+            font-size: 1.5rem; 
+        } 
+        
+        p{ 
+            font-size: 11px; 
+        } 
+} 
+
+#intro { 
+
+    position: relative;
+    
+    h2{ 
+        font-size: 16px; 
+        text-align: center; 
+        padding-bottom: 1rem; 
+    } 
+    
+    p{ 
+        padding: 1rem; 
+    } 
+}
+
+#busicon { 
+    position: absolute; 
+    width: 22%; 
+    left: 0; 
+    top: 94svh; 
+    will-change: transform; 
+    transform: translateX(-100%);
+    
+} 
+
+#firstPart {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 5rem;
+    margin-top: 3rem;
+
+    p{
+        flex: 1;
+    }
+
+    figure{
+        margin-right: 1rem;
+    }
+
+}
+
+.hiddenText {
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  text-align: center;
+  margin-top: 60%;
+  
+}
+
+.hiddenText.visible {
+  opacity: 1;
+}
+
+#stigpicture {
+    width: 150px;
+    height: auto;
+
+}
+
+.figcaption{
+    font-size: 12px;
+}
+
+#pictureContainer {
+    position: relative;
+}
+
+.stickyFrame {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.stickyImage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 5s linear;
+}
+
+.stickyFrame::after { 
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3); 
+    pointer-events: none;
+}
+
+.quotes {
+    position: relative;
+    z-index: 10;
+    color: white;
+    width: 90%;
+    max-width: 700px;
+    text-align: center;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+}
+
+.backgroundText {
+    font-size: 1.2rem;
+    font-weight: 600;
+    line-height: 1.4;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.backgroundText.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#cardcontainer{
+    margin-bottom: 20%;
+}
+
+#card-swipe {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  padding: 1rem;
+  padding-bottom: 3rem;
+  margin-top: 5rem;
+  max-width: 680px;
+  scrollbar-width: none; 
+}
+
+#card-swipe p {
+    scroll-snap-align: center;
+    flex: 0 0 90%;           
+    max-width: 90%;
+    background: #7f7c77;
+    color: #fff;
+    border-radius: 14px;
+    padding: 1.25rem 1.5rem;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    font-style: italic;
+    line-height: 1.6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 160px;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    
+}
+
+.swipe-navigastion {
+    display: none;
+}
+
+
+
+
+
+.image-universityroom {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 1.2s ease-out;
+    transform: scale(1);
+}
+
+.image-universityroom.zoomed {
+    transform: scale(1.08);
+}
+
+#preventLate {
+    h2{
+        margin-top: 25rem;
+        margin-bottom: 25rem;
+        position: relative;
+        font-weight: 700;
+        font-size: 1.8rem;
+        text-align: center;
+        color: #1c1c1c;
+        z-index: 2;
+    }
+}
+
+#preventLate h2::before {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.7), transparent 70%);
+  z-index: -1;
+  animation: pulseLight 4s ease-in-out infinite alternate;
+}
+
+#text-after-sticky h2 {
+
+        margin: 400px auto;
+    
+}
+
+
+#questionContainer {
+    background-color: #92afbf;
+    border-radius: 12px;
+    padding: 2rem;
+    margin: 4rem auto;
+    max-width: 500px; 
+    box-shadow: 0 10px 30px rgba(16, 62, 85, 0.2); 
+    
+    text-align: center;
+}
+
+#question {
+    font-size: 1.4rem;
+    color: #103E55;
+    margin-bottom: 1.5rem;
+}
+
+.buttonSvar {
+    background:#103E55;
+    color:#fff;
+    font-size: 1.1rem;
+    padding: 0.8rem 1.8rem; 
+    margin: 0.5rem;
+    border-radius: 30px; 
+    transition: all 0.2s ease
+}
+.buttonSvar:hover { background:#145a7a; }
+
+.buttonSvar.active {
+    background: #4CA1AF; 
+    box-shadow: 0 0 15px rgba(76, 161, 175, 0.6);
+}
+
+#result {
+    margin-top:1rem;
+    font-weight:bold;
+    color:#103E55;
+    opacity:0;
+    transition:opacity 0.4s;
+}
+#result.visible { opacity:1; }
+
+
+
+
+
+
+@media (min-width: 768px) {
+    
+    #introVideoMobil{
+        display: none;
+    }
+
+    #introVideoDesktop {
+    display: block;
+}
+    
+    .desktop-side-bar {
+        display: block; 
+    }
+    
+    .site-wrapper {
+        position: relative;
+        z-index: 1;
+    }
+    
+    #busicon {
+        display: none;
+    }
+
+    #firstPart {
+        text-align: left;
+    }
+
+    .hiddenText {
+        font-size: 1.2rem;
+        opacity: 1;
+        margin-top: 0;
+    }
+
+    main {
+        max-width: 700px; 
+        margin: 0 auto;
+        padding-top: 2rem;
+    }
+
+    .site-wrapper {
+        position: relative;
+        z-index: 1;
+    }
+
+
+    header video {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    body {
+        font-size: 18px; 
+    }
+    #main_heading h1 {
+        font-size: 3rem; 
+    }
+    
+    #intro h2 {
+        font-size: 2rem; 
+    }
+
+    #cardcontainer{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #card-swipe p:hover {
+    transform: scale(1.03); 
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4); 
+    }
+
+    .swipe-navigastion {
+        display: flex;
+        gap: 20px;
+        margin-top: 1rem;
+        justify-content: center;
+
+    }
+
+    .nav-button {
+        background: #103E55; 
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        margin: 0 10px;
+        cursor: pointer;
+        border-radius: 20px; 
+        font-weight: 700; 
+        letter-spacing: 0.5px; 
+        
+    
+        transition: all 0.3s ease; 
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    }
+
+.nav-button:hover {
+    background: #145a7a; 
+    transform: translateY(-2px); 
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); 
+}
+
+.nav-button:active {
+    background: #0d3244; 
+    transform: translateY(0); 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+    
+}
+    
+    </style>
 </head>
 <body>
-    <div class="parallax-bg" aria-hidden="true"></div>
     <div class="site-wrapper">
         <div class="desktop-side-bar left-bar"></div> 
         <div class="desktop-side-bar right-bar"></div> 
@@ -16,14 +499,13 @@
         <img src="forsentkomming/Asset 3buss.svg" id="busicon" alt="en buss illustrasjon hvor bussen kjører over skjermen basert på scrolling"/>
 
         <header>
-            <video id="introVideoMobil" controls playsinline>
-                <source src="forsentkomming/Komme_for_sent_9x16.mp4" type="video/mp4"> 
+            <video class="video" id="introVideoMobil" controls playsinline>
+                <source src="Komme_for_sent_9x16.mp4" type="video/mp4"> 
             </video>
-            <video id="introVideoDesktop" controls playsinline>
-                <source src="forsentkomming/Komme_for_sent_kommuniksjonsdesign(1).mp4" type="video/mp4"> 
+            <video class="video" id="introVideoDesktop" controls playsinline>
+                <source src="Komme_for_sent_kommuniksjonsdesign(1).mp4" type="video/mp4"> 
             </video>
         </header>
-        <div id="read-progress" aria-hidden="true"></div>
         <main>
             <section id="main_heading">
                 <h1 ><b>«Se på meg, jeg gir faen i alle andre»</b></h1>
@@ -31,13 +513,7 @@
                 <p>Dato: 30.09.2025</p>
             </section>
             <section id="intro">
-                <p class="introlede reveal">
-                    Hvorfor kommer noen for sent – og hvor mye ødelegger det egentlig for resten av rommet?
-                </p>
-                <article>
-                    <p class="dropcap">
-                    <strong>Stig Henning Johansen</strong>, foreleser ved Høgskolen i Østfold, peker på …
-                    </p>
+                
                 <article>
                     <p>
                         <b>Stig Henning Johansen, som er foreleser innen IT og kommunikasjon ved Høgskolen i Østfold, mener dette er problemet til studenter som kommer for sent. 
@@ -50,13 +526,13 @@
                             kommer det fram i undersøkelsen.
                         </p>
                         <figure>
-                            <img src="forsentkomming/Stig.jpg" alt="bilde av foreleser Stig" id="stigpicture"/>
+                            <img src="Stig.jpg" alt="bilde av foreleser Stig" id="stigpicture"/>
                             <figcaption class="figcaption">Stig Henning Johansen</figcaption>
                         </figure>
                     </div>
                     <div id="pictureContainer">
                         <div class="stickyFrame">
-                            <img src="forsentkomming/signe.jpg" alt="bilde av en student som kommer for sent til forelesning" class="stickyImage"/>
+                            <img src="signe.jpg" alt="bilde av en student som kommer for sent til forelesning" class="stickyImage"/>
                             <div class="quotes">
                                 <p class="backgroundText" id="quote-1">«Man kan være avhengig av å ta en buss med en ruteplan som passer dårlig med forelesningstidspunktene.»</p>
                                 <p class="backgroundText" id="quote-2">«Noen få kommer for seint fordi de har omsorgsansvar for barn og da er det mange ting som ikke går som planlagt»</p>
@@ -73,8 +549,8 @@
                         <p>"Det er ikke mange, men de som kommer for sent ødelegger så mye for alle oss andre" - Ann-Charlott Karlsen</p>
                     </article>
                     <div class="swipe-navigastion">
-                        <button class="nav-button" id="prev-btn">Tilbake</button>
-                        <button class="nav-button" id="next-btn">Frem</button> 
+                        <button class="nav-button" id="prev-btn"><img src="arrow_back_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png"/></button>
+                        <button class="nav-button" id="next-btn"><img src="arrow_forward_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png"/></button> 
                     </div>
                     
                 </div>
@@ -82,32 +558,34 @@
                     <h2>Så kommer spørsmålet: hva kan gjøres for å forhindre at studenter kommer for sent?</h2>
                     
                     <div class="prevent-late-sticky-container">
-                        <figure class="sticky-image-section">
-                            <img src="forsentkomming/dom-fou-YRMWVcdyhmI-unsplash.jpg" alt="bilde av en foreleseningssalg på en skole med høyere utdanning" class="image-universityroom"/>
-                            <figcaption class="figcaption">Klasserommet: Der kampen foregår</figcaption>
-                        </figure>
+                        <video class="video" id="doorVideo" controls playsinline>
+                            <source src="door_open.mp4" type="video/mp4"> 
+                        </video>
                     </div>
 
                     <div class="text-after-sticky">
-                        <p>
-                            Johansen svarer her at det er en del av dagens studentkultur. 
-                            Han mener at studenter må holde andre studenter ansvarlig for å forstyrre forelesningen. <em>«Drit i læreren, tenk på oss. Du forstyrrer for medstudenter»</em>
-                        </p>
-                        <p>
-                            Johansen deler at det på en dårlig dag kan gjøre at han føler seg lite verdsatt 
-                        </p>
-                        <p>
-                            «Jeg blir irritert det forstyrrer flyten jeg har. Jeg har brukt tid på å planlegge og når det blir avbrytelser da så får jeg ikke ut det jeg vil. 
-                            Mangel på respekt, det er en avtale mellom parter at vi starter da. Jeg blir negativ i hue mitt så det påvirker kvalitet, motivasjon og humør. 
-                            Skjer det ofte og du har en kjip dag så føler du deg mindre verdsatt og at det du gjør som foreleser ikke er bra nok. Det kan tas personlig. 
-                            Treffer meg som foreleser, meg personlig og forelesningen.»
-                        </p>
-                        <p>
-                            Nettopp dette er det flere som nevner i den anonyme undersøkelsen. Selv de som ikke lar seg forstyrre av dette selv så ser de at det <em>«tydelig forstyrrer og distraherer andre studenter som allerede er på plass.»</em> 
-                            Få av foreleserne har tro på at skolen kan gjøre stort med dette problemet, men Ann-Charlott Karlsen mener en ide kan være lys eller en info skjerm for å indikere at det foregår forelesninger i de ulike rommene. 
-                            I tillegg til å påvirke medelever kan det tyde på at dette påvirker forelesernes mentale helse. <em>«Man føler seg litt liten»</em> kan Karlsen fortelle.
-                        </p>
-                        <h2 style="text-align: center; margin-top: 3rem; font-size: 1.8rem;">
+                        <div class="textbox">
+                            <p>
+                                Johansen svarer her at det er en del av dagens studentkultur. 
+                                Han mener at studenter må holde andre studenter ansvarlig for å forstyrre forelesningen. <em>«Drit i læreren, tenk på oss. Du forstyrrer for medstudenter»</em>
+                            </p>
+                        
+                            <p>
+                                Johansen deler at det på en dårlig dag kan gjøre at han føler seg lite verdsatt 
+                            </p>
+                            <p>
+                                «Jeg blir irritert det forstyrrer flyten jeg har. Jeg har brukt tid på å planlegge og når det blir avbrytelser da så får jeg ikke ut det jeg vil. 
+                                Mangel på respekt, det er en avtale mellom parter at vi starter da. Jeg blir negativ i hue mitt så det påvirker kvalitet, motivasjon og humør. 
+                                Skjer det ofte og du har en kjip dag så føler du deg mindre verdsatt og at det du gjør som foreleser ikke er bra nok. Det kan tas personlig. 
+                                Treffer meg som foreleser, meg personlig og forelesningen.»
+                            </p>
+                            <p>
+                                Nettopp dette er det flere som nevner i den anonyme undersøkelsen. Selv de som ikke lar seg forstyrre av dette selv så ser de at det <em>«tydelig forstyrrer og distraherer andre studenter som allerede er på plass.»</em> 
+                                Få av foreleserne har tro på at skolen kan gjøre stort med dette problemet, men Ann-Charlott Karlsen mener en ide kan være lys eller en info skjerm for å indikere at det foregår forelesninger i de ulike rommene. 
+                                I tillegg til å påvirke medelever kan det tyde på at dette påvirker forelesernes mentale helse. <em>«Man føler seg litt liten»</em> kan Karlsen fortelle.
+                            </p>
+                        </div>
+                        <h2 style="text-align: center;  font-size: 1.8rem;">
                             HANDLER DET EGENTLIG OM TID? ELLER HOLDNING?
                         </h2>
                         
@@ -130,6 +608,278 @@
     
     <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
-    <script src="tolate.js"></script>
+    <script>
+        const bus = document.getElementById('busicon');
+const hiddenTexts = document.querySelectorAll('.hiddenText');
+
+function setHiddenTextsVisible(isVisible) {
+  hiddenTexts.forEach(p => p.classList.toggle('visible', isVisible));
+}
+
+window.addEventListener('scroll', () => {
+  const scrollPosition = window.scrollY;
+  const movingSpeed = scrollPosition * 0.7;
+  bus.style.transform = `translateX(${movingSpeed}px)`;
+
+  const rect = bus.getBoundingClientRect();
+  const outOfView = rect.left > window.innerWidth;
+
+  setHiddenTextsVisible(outOfView);
+});
+
+
+//stopp av video når video er utenfor skjermen
+const video = document.querySelectorAll("video")
+
+window.addEventListener('scroll', () => {
+  const rect = video.getBoundingClientRect(); // henter posisjonen til videoen, kilder til denne https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect
+
+  const visible = rect.bottom > 0 && rect.top < window.innerHeight;// Sjekker om videoen er synlig i vinduet
+
+  if (!visible) { // hvis videoen ikke er synlig
+    video.pause(); // pause video
+  } else {
+    video.play(); // spill hvis den er synlig
+  }
+});
+
+// tolate.js
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Finn alle videoelementer du vil kontrollere
+  const videos = document.querySelectorAll("video");
+
+  // Opprett en observer som sjekker når videoen er synlig
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const video = entry.target;
+      if (entry.isIntersecting) {
+        // Spill av når videoen er synlig
+        video.play();
+      } else {
+        // Stopp når videoen ikke er i bildet
+        video.pause();
+      }
+    });
+  }, { threshold: 0.5 }); // 0.5 betyr at minst 50% må være synlig
+
+  // Koble observeren til hver video
+  videos.forEach(video => observer.observe(video));
+});
+
+
+
+
+//bilde stopper opp i skrollingen, mens resten av siden fortsetter å skrolle
+document.addEventListener('DOMContentLoaded', () => {
+    const pictureContainer = document.getElementById('pictureContainer');
+    const quote1 = document.getElementById('quote-1');
+    const quote2 = document.getElementById('quote-2');
+    const quote3 = document.getElementById('quote-3');
+
+    if (!pictureContainer || !quote1 || !quote2 || !quote3) return; // Sikkerhetssjekk
+
+    // Få den absolutte Y-posisjonen til containeren ved lasting
+    const containerStart = pictureContainer.offsetTop; 
+
+    window.addEventListener('scroll', () => {
+        
+        const scrollPosition = window.scrollY;
+        
+        // Den totale scrollbare avstanden INNI containeren (300vh - 100vh sticky ramme)
+        const totalScrollDistance = pictureContainer.offsetHeight - window.innerHeight;
+        
+        // Beregner hvor langt vi har scrollet inn i containerens 'sticky' område.
+        let scrollInside = scrollPosition - containerStart; 
+        
+        // Progress fra 0 (start av container) til 1 (slutt av container)
+        let progress = scrollInside / totalScrollDistance;
+        
+        // Sikrer at progress holder seg mellom 0 og 1
+        progress = Math.max(0, Math.min(1, progress));
+
+        // ... (etter at 'progress' er beregnet) ...
+        const stickyImage = document.querySelector('.stickyImage');
+        const parallaxShift = progress * 50; // Flytt bildet 50px opp totalt (fra 0 til 1)
+
+        const zoomLevel = 1 + (progress * 0.15);
+
+        stickyImage.style.transform = `translateY(${parallaxShift}px) scale(${zoomLevel})`; 
+        // OBS: Hvis du vil zoome samtidig, bruk: `translateY(${parallaxShift}px) scale(1.05)`
+
+        // --- Timingen for quotes ---
+        
+        // Tekst 1: vises mellom 5% og 30% av scroll-avstanden
+        if (progress > 0.05 && progress < 0.3) {
+            quote1.classList.add('show');
+        } else {
+            quote1.classList.remove('show');
+        }
+
+        // Tekst 2: vises mellom 35% og 60% av scroll-avstanden
+        if (progress > 0.35 && progress < 0.6) {
+            quote2.classList.add('show');
+        } else {
+            quote2.classList.remove('show');
+        }
+
+        // Tekst 3: vises fra 65% og utover
+        if (progress > 0.65) {
+            quote3.classList.add('show');
+        } else {
+            quote3.classList.remove('show');
+        }
+    });
+});
+
+
+
+//svar på spørsmål kode
+const buttons = document.querySelectorAll('.buttonSvar');
+const result = document.getElementById('result');
+
+const questionContainer = document.getElementById('questionContainer'); 
+
+buttons.forEach(btn => {
+  btn.addEventListener('click', () => {
+
+    const choice = btn.textContent
+    
+    result.textContent = `Registrerer ditt svar...`;
+    result.classList.add('visible');
+    
+    buttons.forEach(b => {
+        b.classList.remove('active');
+        b.disabled = true; 
+    });
+    
+    btn.classList.add('active'); 
+
+    setTimeout(() => {
+    const neiCount = Math.floor(Math.random() * 60) + 40; 
+    result.innerHTML = `${neiCount}% stemte ${choice}. Hva tenker du om dette resultatet? Del artikkelen og se hva dine venner mener!`;
+}, 1000);
+    
+  });
+});
+
+//swipe på kort ved desktop
+
+//swipe på kort ved desktop
+const cardContainer = document.getElementById('card-swipe'); 
+const prevBtn = document.getElementById('prev-btn');
+const nextBtn = document.getElementById('next-btn');
+
+if (cardContainer && prevBtn && nextBtn) {
+    // NYTT FIX: Tvinger containeren til å rulle helt til venstre (første kort)
+    cardContainer.scrollTo({ 
+        left: 0, 
+        behavior: 'instant' // Bruker 'instant' for å unngå en synlig animasjon ved lasting
+    }); 
+
+    const cards = cardContainer.querySelectorAll('p'); 
+    let currentIndex = 0; // Starter alltid på første kort (indeks 0)
+
+    function updateButtonState() {
+        // Deaktiverer Tilbake-knappen på første kort, Frem-knappen på siste
+        prevBtn.disabled = currentIndex === 0;
+        nextBtn.disabled = currentIndex === cards.length - 1;
+    }
+
+    function goToCard(index) {
+        // Sikrer at indeksen er innenfor grensene (0 til antall kort - 1)
+        currentIndex = Math.max(0, Math.min(index, cards.length - 1));
+        
+        // Utfører den jevne rullingen til riktig kort
+        cards[currentIndex].scrollIntoView({
+            behavior: 'smooth',
+            block: 'nearest',
+            inline: 'center'
+        });
+        
+        updateButtonState();
+    }
+
+    prevBtn.addEventListener('click', () => {
+        goToCard(currentIndex - 1);
+    });
+
+    nextBtn.addEventListener('click', () => {
+        goToCard(currentIndex + 1);
+    });
+
+    // Initialiser knappestatusen når siden lastes
+    updateButtonState();
+}
+
+
+(function () {
+  const figure = document.querySelector('#preventLate .sticky-image-section');
+  if (!figure) return;
+
+  // Les konfig fra CSS-variabler, med sikre defaults
+  function readConfig() {
+    const cs = getComputedStyle(figure);
+    const max = parseFloat(cs.getPropertyValue('--overlay-max')) || 0.75;
+    const distRaw = (cs.getPropertyValue('--darken-distance') || '120vh').trim();
+    const distPx = distRaw.endsWith('vh')
+      ? (parseFloat(distRaw) / 100) * window.innerHeight
+      : distRaw.endsWith('px')
+        ? parseFloat(distRaw)
+        : window.innerHeight * 1.2;
+    return { max, distPx };
+  }
+
+  // Startpunktet for mørkning settes når figuren treffer toppen av viewport
+  // Vi måler avstand fra dokument-top til figur-top (statisk), og trekker fra scrollY.
+  let figDocTop = 0;
+  function measureFigureTop() {
+    // getBoundingClientRect().top + scrollY gir pos i dokumentkoordinater
+    figDocTop = figure.getBoundingClientRect().top + window.scrollY;
+  }
+
+  function update() {
+    const { max, distPx } = readConfig();
+
+    // Hvor langt har vi scrollet "forbi" punktet der figuren møter toppen?
+    const passed = Math.max(window.scrollY - figDocTop, 0);
+    const t = Math.min(Math.max(passed / distPx, 0), 1); // 0 → 1
+    const alpha = Number((t * max).toFixed(3));
+
+    figure.style.setProperty('--overlay-alpha', alpha);
+  }
+
+  // Throttle via rAF for bedre ytelse
+  let ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      update();
+      ticking = false;
+    });
+  }
+
+  // Init – vi må måle figuren etter at layout er klar
+  function init() {
+    measureFigureTop();
+    update();
+  }
+
+  // Kjør init når DOM er klar (og kjør en gang til etter bilder har lastet)
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init, { once: true });
+  } else {
+    init();
+  }
+  window.addEventListener('load', () => { measureFigureTop(); update(); }, { once: true });
+
+  // Events
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', () => { measureFigureTop(); update(); });
+})();
+
+
+    </script>
 </body>
 </html>
