@@ -645,6 +645,47 @@
       }
     }
 
+    /* ---- Typing Ending Section ---- */
+
+    .ending-section {
+      margin-top: 6rem;
+      padding: 4rem 1rem;
+      text-align: left;
+      max-width: 750px;
+    }
+
+    .ending-typing-container {
+      position: relative;
+      font-size: 1.4rem;
+      line-height: 1.7;
+      color: #f1f5f9;
+      min-height: 6rem;
+      white-space: pre-wrap;
+    }
+
+    /* Teksten skrives inn */
+    .ending-typing {
+      display: inline;
+    }
+
+    /* Blinking cursor */
+    .ending-cursor {
+      display: inline-block;
+      width: 10px;
+      height: 20px;
+      background: #f1f5f9;
+      margin-left: 6px;
+      animation: blink 0.9s step-end infinite;
+      border-radius: 2px;
+      transform: translateY(3px);
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 0; }
+      50% { opacity: 1; }
+    }
+
+
   </style>
 </head>
 <body>
@@ -815,6 +856,16 @@
         </p>
       </div>
     </section>
+
+  
+    <section class="ending-section reveal">
+      <div class="ending-typing-container">
+        <p id="endingTyping" class="ending-typing"></p>
+        <span class="ending-cursor"></span>
+      </div>
+    </section>
+
+
 
   </main>
 
@@ -1015,6 +1066,50 @@ if (modeToggle && modeDescription) {
   // sett starttilstand
   updateMode();
 }
+
+// ---- Typing Effekt for Avslutningen ---- //
+
+const endingText = 
+`Spørsmålet som gjenstår, er kanskje ikke hva kjedsomhet gjør med oss.
+
+Men hva vi går glipp av når vi aldri kjenner på den.
+
+For bak hvert stille øyeblikk ligger muligheten til å være litt mer menneske –
+og litt mindre påkoblet.`;
+
+const endingElement = document.getElementById("endingTyping");
+const endingSection = document.querySelector(".ending-section");
+let endingStarted = false;
+
+function typeEnding(text, element, speed = 35) {
+  let i = 0;
+
+  function typingStep() {
+    if (i < text.length) {
+      element.textContent += text.charAt(i);
+      i++;
+      setTimeout(typingStep, speed);
+    }
+  }
+
+  typingStep();
+}
+
+const endingObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting && !endingStarted) {
+        endingStarted = true;
+        typeEnding(endingText, endingElement);
+        endingObserver.unobserve(entry.target);
+      }
+    });
+  },
+  { threshold: 0.4 }
+);
+
+endingObserver.observe(endingSection);
+
 
 
   </script>
