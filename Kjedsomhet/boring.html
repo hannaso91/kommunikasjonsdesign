@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <title>Kjedsomhet – Spesial</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    /* Basis */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #05070a;
+  --bg-alt: #0b0f16;
+  --text: #f5f5f5;
+  --muted: #9ca3af;
+  --accent: #facc15;
+  --accent-soft: rgba(250, 204, 21, 0.1);
+  --max-width: 900px;
+  --transition: 0.6s ease;
+  --font-body: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background: radial-gradient(circle at top, #111827 0, #020617 55%);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* Lesefremdrifts-linje øverst */
+
+.reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: rgba(15, 23, 42, 0.8);
+  z-index: 1000;
+}
+
+.reading-progress__bar {
+  width: 0;
+  height: 100%;
+  background: linear-gradient(to right, #22c55e, #facc15);
+  transform-origin: left;
+}
+
+/* Hero-seksjon */
+
+.hero {
+  position: relative;
+  min-height: 80vh;
+  display: flex;
+  align-items: flex-end;
+  padding: 4rem 1.5rem;
+  color: #f9fafb;
+  background-image: url("https://images.pexels.com/photos/4100423/pexels-photo-4100423.jpeg?auto=compress&cs=tinysrgb&w=1600");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; /* Litt “parallax”-følelse */
+}
+
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top, rgba(15, 23, 42, 0.3), rgba(15, 23, 42, 0.95));
+}
+
+.hero__content {
+  position: relative;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.hero__label {
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+  margin-bottom: 0.8rem;
+}
+
+.hero__title {
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  margin: 0 0 1rem;
+}
+
+.hero__ingress {
+  font-size: 1.1rem;
+  max-width: 38rem;
+  color: #e5e7eb;
+  margin-bottom: 1rem;
+}
+
+.hero__meta {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+/* Story-layout */
+
+.story {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 3rem 1.5rem 5rem;
+}
+
+.chapter {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 2.2fr);
+  gap: 2rem;
+  margin: 4rem 0;
+}
+
+.chapter__sidebar {
+  position: sticky;
+  top: 5rem; /* “Henger” litt når man scroller ned */
+  align-self: flex-start;
+  padding-right: 1rem;
+  border-right: 1px solid rgba(148, 163, 184, 0.3);
+}
+
+.chapter__number {
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+}
+
+.chapter__title {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.chapter__content p {
+  margin: 0 0 1.2rem;
+  font-size: 1rem;
+}
+
+/* Første avsnitt i kapittel */
+
+.lead {
+  font-size: 1.15rem;
+  font-weight: 500;
+}
+
+/* Fullbredde bilde/seksjon */
+
+.full-image {
+  margin: 4rem -1.5rem;
+}
+
+.full-image__inner {
+  position: relative;
+  min-height: 40vh;
+  background-image: url("https://images.pexels.com/photos/5081395/pexels-photo-5081395.jpeg?auto=compress&cs=tinysrgb&w=1600");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  display: flex;
+  align-items: flex-end;
+}
+
+.full-image__inner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.1));
+}
+
+.full-image__caption {
+  position: relative;
+  padding: 2.5rem 2rem;
+  max-width: var(--max-width);
+  color: #e5e7eb;
+  font-size: 0.95rem;
+}
+
+/* Sitatblokk */
+
+.quote-block {
+  margin: 4rem 0;
+  padding: 2rem 1.8rem;
+  border-radius: 1rem;
+  background: radial-gradient(circle at top left, var(--accent-soft), rgba(15, 23, 42, 0.95));
+  border: 1px solid rgba(250, 204, 21, 0.2);
+}
+
+.quote-block blockquote {
+  margin: 0 0 0.8rem;
+  font-size: 1.1rem;
+  font-style: italic;
+}
+
+.quote-block__author {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+/* Scroll-reveal effekter */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity var(--transition), transform var(--transition);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Responsiv tilpasning */
+
+@media (max-width: 768px) {
+  .chapter {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .chapter__sidebar {
+    position: static;
+    border-right: none;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.3);
+    padding-bottom: 0.8rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .full-image {
+    margin: 3rem -1.5rem;
+  }
+
+  .hero {
+    align-items: center;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- Lesefremdrifts-linje -->
+  <div class="reading-progress">
+    <div class="reading-progress__bar"></div>
+  </div>
+
+  <!-- Hero-seksjon -->
+  <header class="hero">
+    <div class="hero__overlay"></div>
+    <div class="hero__content">
+      <p class="hero__label">NRK Spesial</p>
+      <h1 class="hero__title">Kjeder vi oss i hjel?</h1>
+      <p class="hero__ingress">
+        I en verden som aldri stopper, sliter stadig flere med å finne ro. Hva skjer når stillheten forsvinner?
+      </p>
+      <p class="hero__meta">Tekst: Ditt navn · Foto: Illustrasjon</p>
+    </div>
+  </header>
+
+  <!-- Hovedinnhold -->
+  <main class="story">
+
+    <!-- Kapittel 1 -->
+    <section class="chapter">
+      <div class="chapter__sidebar">
+        <p class="chapter__number">01</p>
+        <p class="chapter__title">Verden som aldri er stille</p>
+      </div>
+
+      <div class="chapter__content">
+        <p class="lead reveal">
+          Det er tidlig morgen. Før frokosten er servert, har mobilen allerede vibrert ni ganger.
+        </p>
+        <p class="reveal">
+          TikTok. Minecraft. Messenger. Snap. Vi lever i en tid der alt er tilgjengelig hele tiden, og likevel føler mange på en økende uro.
+        </p>
+        <p class="reveal">
+          Men hva skjer egentlig med oss når vi aldri rekker å kjede oss?
+        </p>
+      </div>
+    </section>
+
+    <!-- Fullbredde bilde / parallax-seksjon -->
+    <section class="full-image reveal">
+      <div class="full-image__inner">
+        <p class="full-image__caption">
+          Skjermlys fyller rommet – også når dagen egentlig er over.
+        </p>
+      </div>
+    </section>
+
+    <!-- Kapittel 2 -->
+    <section class="chapter">
+      <div class="chapter__sidebar">
+        <p class="chapter__number">02</p>
+        <p class="chapter__title">Hva kjedsomhet egentlig er</p>
+      </div>
+
+      <div class="chapter__content">
+        <p class="reveal">
+          Psykolog Susanne Bjorvand beskriver kjedsomhet som «et misforhold mellom det vi gjør, og det vi opplever som viktig eller meningsfullt».
+        </p>
+        <p class="reveal">
+          Kjedsomhet er ikke bare tom tid. Det er et signal: noe i oss prøver å fortelle oss at vi trenger noe annet, noe mer meningsfullt.
+        </p>
+        <p class="reveal">
+          Når vi fyller alle pauser med skjermer, underholdning og innhold, kan dette signalet bli overdøvet.
+        </p>
+      </div>
+    </section>
+
+    <!-- Sitatseksjon -->
+    <section class="quote-block reveal">
+      <blockquote>
+        «Digitale medier splitter oppmerksomheten vår, øker forventningene til underholdning, og gir ofte mindre mening enn vi tror.»
+      </blockquote>
+      <p class="quote-block__author">Susanne Bjorvand, psykolog</p>
+    </section>
+
+    <!-- Kapittel 3 -->
+    <section class="chapter">
+      <div class="chapter__sidebar">
+        <p class="chapter__number">03</p>
+        <p class="chapter__title">Barn, skjermer og uro</p>
+      </div>
+
+      <div class="chapter__content">
+        <p class="reveal">
+          Særlig barn og unge vokser opp i en hverdag der kjedsomhet nesten er borte. På skolen blir flere miljøer papirløse, og i fritiden er apper designet for å holde på oppmerksomheten deres så lenge som mulig.
+        </p>
+        <p class="reveal">
+          Samtidig øker antallet som utredes for oppmerksomhetsvansker. Mange fagfolk peker på at hjernen trenger trening: i å være til stede, i å tåle stillhet, i å kjede seg.
+        </p>
+      </div>
+    </section>
+
+    <!-- Avslutning -->
+    <section class="chapter">
+      <div class="chapter__sidebar">
+        <p class="chapter__number">04</p>
+        <p class="chapter__title">Kanskje er ikke kjedsomhet fienden</p>
+      </div>
+
+      <div class="chapter__content">
+        <p class="reveal">
+          Kjedsomhet kan gi rom til å tenke, føle, hvile og skape – slik mennesker gjorde før skjermene tok over hvert eneste mellomrom.
+        </p>
+        <p class="reveal">
+          Spørsmålet er kanskje ikke om teknologien er problemet, men om vi tør å skru den av innimellom.
+        </p>
+        <p class="reveal">
+          Kanskje er det først i stillheten at vi finner ut hvordan vi egentlig har det.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    // Scroll-reveal: gjør elementer synlige når de kommer inn i viewport
+const revealElements = document.querySelectorAll(".reveal");
+
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-visible");
+        // Hvis du ikke vil at de skal "forsvinne" igjen når du scroller opp:
+        observer.unobserve(entry.target);
+      }
+    });
+  },
+  {
+    threshold: 0.15
+  }
+);
+
+revealElements.forEach((el) => observer.observe(el));
+
+// Lesefremdrifts-linje
+const progressBar = document.querySelector(".reading-progress__bar");
+
+function updateReadingProgress() {
+  const scrollTop = window.scrollY || document.documentElement.scrollTop;
+  const docHeight =
+    document.documentElement.scrollHeight - window.innerHeight;
+
+  const progress = docHeight > 0 ? scrollTop / docHeight : 0;
+  progressBar.style.width = `${progress * 100}%`;
+}
+
+window.addEventListener("scroll", updateReadingProgress);
+window.addEventListener("resize", updateReadingProgress);
+
+// Kjør én gang ved start
+updateReadingProgress();
+
+  </script>
+</body>
+</html>
