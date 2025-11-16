@@ -1,602 +1,537 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="no">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Press+Start+2P&display=swap" rel="stylesheet">
-    <title>Kusaken - Scrollytelling Spesial</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kusaken – Scrollytelling Spesial</title>
 
-    <style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Press+Start+2P&display=swap" rel="stylesheet">
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <style>
+    /* ------------------------------
+       Base & layout
+    -------------------------------- */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
 
-        body {
-            background-color: #000;
-            background-image: url('Bilder/Bakgrunnsbilde.png');
-            background-attachment: fixed;
-            background-size: cover;
-            font-family: 'Press Start 2P', monospace;
-            font-size: 11px;
-            line-height: 1.5;
-            color: #fff;
-            transition: background-color 0.5s ease;
-            max-width: 1920px; /* Lagt til for konsistens på VELDIG store skjermer */
-            margin: 0 auto; /* Sentrerer body på VELDIG store skjermer */
-        }
+    :root {
+      --bg: #000000;
+      --card-bg: rgba(255, 255, 255, 0.9);
+      --text-main: #ffffff;
+      --text-dark: #000000;
+      --accent: #cc0000;
+      --max-width: 960px;
+    }
 
-        #scroll-progress {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 16px;
-            width: 0%;
-            z-index: 1000;
-            box-sizing: border-box; 
-            
-            /* Tydeligere pixel-kanter */
-            border: 2px solid #000;
-            border-top: 3px solid #000;
-            border-bottom: 5px solid #000; 
+    body {
+      margin: 0;
+      font-family: "Press Start 2P", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", monospace;
+      font-size: 11px;
+      line-height: 1.5;
+      color: var(--text-main);
+      background-color: var(--bg);
+      background-image: url("Bilder/Bakgrunnsbilde.png");
+      background-position: center top;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
 
-            /* STEG-FOR-STEG GRADIENT for å tvinge frem pixelering/striper: */
-            background-color: #CC0000; /* Fallback farge */
-            background-image: 
-                repeating-linear-gradient(
-                    to bottom, 
-                    #FF6666, /* Lyseste rød */
-                    #FF6666 4px,
-                    #CC0000 4px, /* Standard rød */
-                    #CC0000 8px,
-                    #990000 8px, /* Mørkeste rød (skygging) */
-                    #990000 12px
-                );
-            background-size: 100% 16px; /* Viktig: Må matche høyden på baren */
-            
-            /* Sørger for at bildegjengivelsen er skarp */
-            image-rendering: pixelated; 
-        }
-     
-        section {
-            padding: 10vh 5vw;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            z-index: 10;
-        }
+    /* iOS/Mobil liker ikke background-attachment: fixed */
+    @media (max-width: 768px) {
+      body {
+        background-attachment: scroll;
+      }
+    }
 
-        .content-box {
-            width: 90%;
-            max-width: 700px;
-            margin: 1.5rem auto;
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 15px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-            color: #000;
-            transition: transform 0.3s ease;
-        }
+    .page {
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
 
-        h1, h2 {
-            text-align: center;
-            margin: 3rem auto;
-            font-weight: bold;
-            color: #fff;
-            text-shadow: 3px 3px #cc0000;
-        }
+    main {
+      padding-bottom: 5rem;
+    }
 
+    section {
+      padding: 6rem 1.5rem;
+      min-height: 60vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
 
-        .content-box h2 {
-            color: #000;
-            text-shadow: none;
-            margin-top: 1rem;
-        }
+    h1, h2 {
+      text-align: center;
+      margin: 2rem auto 1rem;
+      font-weight: bold;
+      color: var(--text-main);
+      text-shadow: 3px 3px var(--accent);
+    }
 
-        p {
-            margin: 1rem 0;
-        }
+    h2 {
+      font-size: 14px;
+    }
 
-        img, video {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            margin: 2rem auto;
-            border-radius: 10px;
-        }
+    p {
+      margin: 1rem 0;
+    }
 
+    img, video {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 2rem auto;
+      border-radius: 10px;
+    }
 
-        #cow-wrapper {
-            padding: 0;
-            min-height: 350vh;
-            background-color: #000;
-        }
+    /* ------------------------------
+       Scroll progress bar
+    -------------------------------- */
+    #scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 12px;
+      width: 0%;
+      z-index: 1000;
+      background-color: #cc0000;
+      border-bottom: 2px solid #000;
+    }
 
-        .cow-slide {
-            position: sticky;
-            top: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-        }
+    /* ------------------------------
+       Cards / content-boxer
+    -------------------------------- */
+    .content-box {
+      width: 100%;
+      max-width: 700px;
+      margin: 1.5rem auto;
+      padding: 2rem 1.5rem;
+      background: var(--card-bg);
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+      color: var(--text-dark);
+    }
 
-        .cow-slide img {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 0;
-            opacity: 1;
-        }
+    .content-box h2 {
+      color: var(--text-dark);
+      text-shadow: none;
+      margin-top: 0;
+    }
 
-        .imgText {
-            position: absolute;
-            background-color: rgba(0, 0, 0, 0.7);
-            color: #ffffff;
-            padding: 20px;
-            border-radius: 6px;
-            text-align: center;
-            width: 80%;
-            max-width: 500px;
-            font-size: 14px;
-            z-index: 20;
-            opacity: 0;
-        }
+    /* ------------------------------
+       Reveal-on-scroll animasjon
+    -------------------------------- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
 
-        #firstPart {
-            background-color: transparent;
-            z-index: 10;
-        }
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-        .dropdown {
-            border: 2px solid #000;
-            background-color: rgba(128, 208, 16, 0.9);
-            color: #000;
-            margin: 10rem auto 5rem auto;
-            transform: translateX(0);
-            padding: 2rem;
-        }
-        .dropdown summary { color: #000; }
-        .dropdown p { font-family: 'Press start 2P', sans-serif; color: #000;  }
+    /* ------------------------------
+       KU – scrollytelling
+    -------------------------------- */
+    #cow-wrapper {
+      padding: 0;
+      margin: 0;
+    }
 
-        #video-container {
-            height: 250vh;
-            position: relative;
-            background: rgba(0, 0, 0, 0.8);
-            margin: 4rem auto;
-            width: 90%;
-            max-width: 700px;
-            border-radius: 15px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-around;
-            align-items: center;
-        }
+    .cow-slide {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      padding: 0;
+    }
 
+    .cow-slide img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 0;
+    }
 
-        #video-display {
-            height: auto;
-            position: relative;
-            background: rgba(0, 0, 0, 0.8);
-            margin: 4rem auto;
-            width: 90%;
-            max-width: 700px;
-            border-radius: 15px;
-            overflow: hidden;
-            padding: 20px 0;
-        }
-        #Video {
-            position: relative;
-            top: auto;
-            left: auto;
-            transform: none;
-            width: 90%;
-            max-height: 70vh;
-            object-fit: contain;
-            z-index: 1;
-            margin: 0 auto;
-            display: block;
-        }
+    .imgText {
+      position: relative;
+      z-index: 2;
+      background: rgba(0, 0, 0, 0.75);
+      color: var(--text-main);
+      padding: 1.5rem;
+      border-radius: 8px;
+      max-width: 480px;
+      text-align: center;
+      margin: 0 1rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
 
+    .cow-slide.is-active .imgText {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-        .video-overlay-text {
-            display: none;
-        }
+    /* ------------------------------
+       Dropdown (<details>)
+    -------------------------------- */
+    .dropdown {
+      width: 100%;
+      max-width: 700px;
+      margin: 2rem auto;
+      padding: 1.5rem 1.2rem;
+      border-radius: 10px;
+      border: 2px solid #000;
+      background-color: rgba(128, 208, 16, 0.9);
+      color: #000;
+    }
 
-        .video-overlay-text {
-            position: relative;
-            top: auto;
-            left: auto;
-            width: 100%;
-            height: auto;
-            z-index: 3;
-            pointer-events: none;
-            padding: 10px;
-        }
+    .dropdown summary {
+      cursor: pointer;
+      list-style: none;
+      font-size: 11px;
+    }
 
-        .video-overlay-text p {
+    .dropdown summary::-webkit-details-marker {
+      display: none;
+    }
 
-            position: relative;
-            top: auto;
-            left: auto;
-            transform: none;
+    .dropdown summary::after {
+      content: " +";
+      font-size: 11px;
+    }
 
+    .dropdown[open] summary::after {
+      content: " –";
+    }
 
-            background: rgba(0, 0, 0, 0.9);
-            padding: 15px;
-            border-radius: 8px;
-            width: 80%;
-            max-width: 400px;
-            text-align: center;
-            font-size: 10px;
-            opacity: 0;
-            margin: 2rem auto;
-            color: #fff;
-            pointer-events: auto;
-        }
+    .dropdown p {
+      font-family: "Press Start 2P", monospace;
+      color: #000;
+      margin-top: 1rem;
+    }
 
+    /* ------------------------------
+       Video-boks inne i artikkel
+    -------------------------------- */
+    #video-display {
+      width: 100%;
+      max-width: 700px;
+      margin: 3rem auto;
+      padding: 1.5rem 0.5rem;
+      background: rgba(0, 0, 0, 0.8);
+      border-radius: 15px;
+    }
 
-        #secondPart {
-            background-color: transparent;
-            padding-top: 5vh;
-        }
-        #secondPart img {
-            max-width: 100%;
-        }
+    #Video {
+      width: 90%;
+      max-height: 70vh;
+      object-fit: contain;
+      margin: 0 auto;
+      display: block;
+    }
 
-        #caselaunch {
-            min-height: 200vh;
-        }
-        #caselaunch img {
-             position: sticky;
-             top: 2vh; /* Justert fra 5vh til 2vh for å flytte bildet høyere opp */
-             width: 90%;
-             max-width: 800px;
-             z-index: 1;
-        }
-        .reveal-text {
-            position: relative;
-            z-index: 2;
-            padding-top: 100vh;
-        }
+    /* ------------------------------
+       Caselaunch – sticky bilde
+    -------------------------------- */
+    #caselaunch {
+      padding-top: 4rem;
+      padding-bottom: 4rem;
+    }
 
-        .glitch-title {
-            color: #cc0000;
-            font-size: 24px;
-            margin: 2rem auto;
-            text-shadow: 4px 4px #000;
-            animation: glitch-anim 0.5s infinite alternate steps(2);
-        }
-        @keyframes glitch-anim {
-            0% { text-shadow: 2px 2px #00ffc8, -2px -2px #ff00ff; transform: translate(2px, 2px); }
-            100% { text-shadow: -2px -2px #00ffc8, 2px 2px #ff00ff; transform: translate(-2px, -2px); }
-        }
+    #caselaunch img {
+      position: sticky;
+      top: 10px;
+      width: 100%;
+      max-width: 800px;
+      border-radius: 12px;
+    }
 
-        #dmodeldesktop {
-            display: none;
-        }
+    .reveal-text {
+      width: 100%;
+      margin-top: 100vh;
+    }
 
-        #dmodelmobil {
-            display: block;
-        }
-        
+    .glitch-title {
+      color: var(--accent);
+      font-size: 16px;
+      margin: 2rem auto 1rem;
+      text-shadow: 3px 3px #000;
+    }
 
-        @media (min-width: 768px) {
+    /* ------------------------------
+       Siste video – mobil vs desktop
+    -------------------------------- */
+    #dmodelmobil,
+    #dmodeldesktop {
+      padding-top: 4rem;
+      padding-bottom: 4rem;
+    }
 
-            .dropdown {
-                max-width: 600px;
-                margin-top: 20rem;
-            }
+    #dmodeldesktop {
+      display: none;
+    }
 
-            #desktopcontainer {
-                margin-top: 100px;
-            }
+    #dmodelmobil video,
+    #dmodeldesktop video {
+      max-width: 100%;
+      border-radius: 12px;
+    }
 
-            #dmodelmobil {
-                 display: none !important;
-            }
+    @media (min-width: 768px) {
+      section {
+        padding: 7rem 2rem;
+      }
 
-            #dmodeldesktop {
-                display: flex !important;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-            }
-        }
-    </style>
+      .dropdown {
+        max-width: 600px;
+      }
+
+      #dmodelmobil {
+        display: none;
+      }
+
+      #dmodeldesktop {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #dmodeldesktop video {
+        max-width: 720px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div id="scroll-progress"></div>
+  <div id="scroll-progress"></div>
+
+  <div class="page">
     <main>
-        <div id="cow-wrapper">
-            <div class="cow-slide" data-slide="1">
-                <img src="Bilder/Kyr_norskenaturen.png" alt="Pixelert bilde av noen kuer som gresser i den norske naturen"/>
-                <p class="imgText">Se for deg livet som en ung ku. Du bruker dagene dine på drøvtygge gress sammen med andre kuer på gården du bor på et sted i Romerriket</p>
-            </div>
+      <!-- KU: scrollytelling del -->
+      <div id="cow-wrapper">
+        <section class="cow-slide">
+          <img src="Bilder/Kyr_norskenaturen.png" alt="Pixelert bilde av noen kuer som gresser i den norske naturen">
+          <p class="imgText">
+            Se for deg livet som en ung ku. Du bruker dagene dine på drøvtygge gress sammen med andre kuer på gården du bor på et sted i Romerriket.
+          </p>
+        </section>
 
-            <div class="cow-slide" data-slide="2">
-                <img src="Bilder/cow_barn.png" alt="Pixelert bilde av en ku som står inne i et fjøs"/>
-                <p class="imgText"> En kald dag i januar hvor du står inne i det varme fjøset kommer det noen fremmede til gården som snakker et språk du ikke forstår.</p>
-            </div>
+        <section class="cow-slide">
+          <img src="Bilder/cow_barn.png" alt="Pixelert bilde av en ku som står inne i et fjøs">
+          <p class="imgText">
+            En kald dag i januar hvor du står inne i det varme fjøset kommer det noen fremmede til gården som snakker et språk du ikke forstår.
+          </p>
+        </section>
 
-            <div class="cow-slide" data-slide="3">
-                <img src="Bilder/cow_transport.png" alt="Pixelert bilde av en ku som blir transportert i en henger"/>
-                <p class="imgText">De har penger og plutselig blir du dratt fra det varme fjøset og inn i en henger bak en bil. Du skal ikke bli burger, du er på vei til å bli en internettkjendis. </p>
-            </div>
+        <section class="cow-slide">
+          <img src="Bilder/cow_transport.png" alt="Pixelert bilde av en ku som blir transportert i en henger">
+          <p class="imgText">
+            De har penger og plutselig blir du dratt fra det varme fjøset og inn i en henger bak en bil. Du skal ikke bli burger, du er på vei til å bli en internettkjendis.
+          </p>
+        </section>
+      </div>
+
+      <!-- Første tekstdel -->
+      <section id="firstPart">
+        <h1 class="reveal">GRIMS KU</h1>
+
+        <div class="content-box reveal">
+          <p>
+            Det var en helt vanlig onsdag for Sebastian Ring Gjerlaugsen. Gjerlaugsen kjøpte en enebolig for 8 500 000 kr i Tistedal i slutten av året 2022.
+            Hvordan har han råd til det? Han er en Youtuber og streamer under aliaset Grim. På sine kanaler som nå er fjernet, lager han videoer hvor han gambler med ekte penger på skins.
+          </p>
         </div>
 
-        <section id="firstPart">
-            <h1>GRIMS KU</h1>
-            <div class="content-box">
-                <p>
-                    Det var en helt vanlig onsdag for Sebastian Ring Gjerlaugsen. Gjerlaugsen kjøpte en enebolig for 8 500 000 kr i Tistedal i slutten av året 2022.
-                    Hvordan har han råd til det? Han  er en Youtuber og streamer under aliaset Grim. På sine kanaler som nå er fjernet, lager han videoer hvor han gambler med ekte penger på skins.
-                </p>
-            </div>
+        <details class="dropdown reveal">
+          <summary><b>Hva er skins?</b></summary>
+          <p>
+            Skins er kosmetiske endringer på karakterer eller våpen i et spill. Dette konseptet blir også brukt i skytespillet Counter Strike (CS).
+            I CS bruker spillere ekte penger på å skaffe seg disse skinsene. Prisen på et skins påvirkes av to faktorer: hvor sjeldent det er og hvor stor etterspørselen er.
+            Dette gjør at skins kan få høy verdi. Per dags dato er det dyreste skinet i CS, kalt Karambit Case Hardened (Pattern 387 "Blue Gem"), verdt 1.5 millioner dollar,
+            samtidig som noen skins bare kan være verdt noen ører.
+          </p>
+        </details>
 
-            <details class="dropdown">
-                <summary><b>Hva er skins?</b></summary>
-                <p>
-                    Skins er kosmetiske endringer på karakterer eller våpen i et spill. Dette konseptet blir også brukt i skytespillet Counter Strike (CS).
-                    I CS bruker spillere ekte penger på å skaffe seg disse skinsene. Prisen på et skins påvirkes av to faktorer, hvor sjeldent det er og hvor stor etterspørselen er.
-                    Dette gjør at skins kan få høy verdi. Per dags dato er det dyreste i skinet i CS kalt Karambit Case Hardened (Pattern 387 "Blue Gem") verdt 1.5 millioner dollar.
-                    Samtidig som noen skins kan bare være verdt noen ører
-                </p>
-            </details>
+        <div id="video-display" class="reveal">
+          <video id="Video" controls playsinline>
+            <source src="Bilder/Case_spin_video_1080x1920.mp4" type="video/mp4">
+          </video>
+        </div>
 
-            <div id="video-display">
-                <video id="Video" controls playsinline>
-                    <source src="Bilder/Case_spin_video_1080x1920.mp4" type="video/mp4">
-                </video>
-            </div>
+        <div class="content-box reveal">
+          <p>
+            På videoene åpner han cases hvor våpen med høy verdi flyr forbi på skjermen.
+            Spenningen er til å føle på. Det er akkurat som casino-maskiner i Las Vegas, men det er bare ett tastetrykk unna.
+            Det er mange som liker å se på disse videoene, og mange av dem er mindreårige.
+          </p>
+        </div>
 
-            <div class="content-box" data-text-step="1">
-                <p>
-                    På videoene åpner han cases hvor våpen med høy verdi flyr forbi på skjermen.
-                    Spenningen er til å føle på. Det er akkurat som casino maskinene i Las Vegas, men det er bare ett tastetrykk unna.
-                    Det er mange som liker å se på disse videoene, og mange av dem er mindreårige
-                </p>
-            </div>
+        <details class="dropdown reveal">
+          <summary><b>Hva er case?</b></summary>
+          <p>
+            Cases er en måte å skaffe seg skins i CS. Spillere får et case i uka hvis de spiller nok.
+            Du må kjøpe en nøkkel til et case for å kunne åpne det. Dette koster rundt 30 kr.
+            Caset har skins som varierer fra vanlige verdt under én krone til veldig sjeldne verdt flere tusen kroner.
+            Det er tilfeldig hvilket skin du får, men sannsynligheten for å få et vanlig skin er mye høyere enn for et sjeldent skin.
+            Dette skaper spenning som ligner på gambling.
+          </p>
+        </details>
+      </section>
 
-            <div class="content-box" data-text-step="2">
-                <p>
-                    Det er akkurat som casino maskinene i Las Vegas, men det er bare ett tastetrykk unna. Det er mange som liker å se på disse videoene, og mange av dem er mindreårige.
-                </p>
-            </div>
+      <!-- Andre del -->
+      <section id="secondPart">
+        <div class="content-box reveal">
+          <h2>Rivaliseringen starter</h2>
+          <p>Grim tjener godt på å promotere gambling for gamblingnettsiden CSGO Roll.</p>
+          <img src="Bilder/Rivallogoenmothverandre.png" alt="Pixelert bilde av to rivaliserende logoer">
+        </div>
 
-            <details class="dropdown">
-                <summary><b>Hva er case?</b></summary>
-                <p>
-                    Cases er en måte å skaffe seg skins på CS. Spillere får et case i uka hvis de spiller nok.
-                    Du må kjøpe en nøkkel til et case for å kunne åpne det. Dette koster rundt 30 kr.
-                    Caset har skins som varierer fra vannlige verdt under én krone  til veldig sjeldnere verdt flere tusen kroner.
-                    Det er tilfeldig hvilket skin du får, men sannsynligheten for å få et vanlig skin er veldig mye høyere enn et sjeldent skin.
-                    Dette skaper spenning som ligner på gambling.
-                </p>
-            </details>
-        </section>
-        <section id="secondPart">
-           <div class="content-box">
-                <h2>Rivaliseringen starter</h2>
-                <p>Grim tjener godt på å promotere gambling for gamblingnettsiden CSGO Roll.</p>
-                <img src="Bilder/Rivallogoenmothverandre.png" alt="Pixelert bilde av to rivaliserende logoer"/>
-           </div>
+        <details class="dropdown reveal">
+          <summary><b>Hva skjer mellom Roll og Empire?</b></summary>
+          <p>
+            Det er et annet selskap som ikke er så fornøyd med at Roll blir promotert.
+            Dette er Roll sin erkefiende CSGO Empire. Begge disse selskapene driver nettsider hvor brukere kan gamble skins og penger for å prøve å få bedre skins som er verdt mer.
+            Gambling er veldig stort innen Counter Strike og nesten alle de profesjonelle e-sportlagene har en gambling-sponsor.
+            Det hjelper heller ikke at gambling er en del av selve spillet.
+            Dette skaper et stort marked med folk som er villige til å legge igjen mye penger. Det er disse Empire og Roll slåss om.
+          </p>
+        </details>
 
+        <div class="content-box reveal">
+          <p>
+            Empire hadde en svart kampanje i oktober 2023 mot Grim.
+            Deres tilhengere reiser til Halden med banner og flyere som de sprer utover Halden.
+            Den fredelige gaten i Tistedal fylles av høylytte protester fra mennesker iført finlandshetter og med høygaffler i hendene.
+          </p>
+        </div>
+      </section>
 
-           <details class="dropdown">
-                <summary><b>Hva skjer mellom roll og empire?</b></summary>
-                <p>
-                    Det er et annet selskap som ikke er så fornøyd med at Roll blir promotert.
-                    Dette er Roll sin erkefiende CSGO Empire. Begge disse selskapene driver nettsider hvor brukere kan gamble skins og penger for å prøve å få bedre skins som da er verdt mer.
-                    Gambling er veldig stort innen Counter Strike og nesten alle de profesjonelle e-sportlagene har en gambling sponsor. Det hjelper heller ikke at gambling er en del av selve spillet.
-                    Dette skaper et stort marked med folk som er villige til å legge igjen mye penger. Det er disse Empire og Roll sloss om.
-                </p>
-            </details>
+      <!-- Tilbake til kua -->
+      <section id="backtocow">
+        <div class="content-box reveal">
+          <h2>DET ABSURDE HØYDEPUNKTET</h2>
+          <p><b>Hva har dette å gjøre med kuen som er på reisefot fra gården sin i Romeriket 1,5 år senere?</b></p>
+          <img src="Bilder/cowtram.png" alt="Pixelert illustrasjon av ku på trikk">
+          <p>
+            For det er ikke hvilket som helst sted denne kua havner. Den finnes bundet til en trapp som tilhører en enebolig i Tistedal.
+            Eieren av denne boligen? Sebastian Ring Gjerlaugsen aka Grim. Politiet blir kontaktet og kuen blir sendt til en lokal bonde før eieren av kua kommer og henter den.
+            Kuen var i god form og nok fornøyd med å være tilbake i det varme fjøset på en gård i Romeriket et sted.
+            Saken ble henlagt da verken kueier eller Gjerlaugsen hadde lyst til å anmelde, og Mattilsynet konkluderte med at det ikke hadde skjedd brudd på dyrevelferden.
+            Den unge kua sitt eventyr var over, men det digitale fotsporet hadde strukket seg enda lengre enn avisartikkelen som dekket saken.
+          </p>
+        </div>
+      </section>
 
-            <div class="content-box">
-                <p>
-                    Empire hadde en svartekampanjen i oktober 2023 mot Grim.
-                    Deres tilhengere reiser til Halden med banner og flyvers som de sprer utover Halden.
-                    Den fredelige gaten i Tistedal fylles høylytte protester fra mennesker iført finnlandshetter og med høygaffler i hendene.
-                </p>
-            </div>
-        </section>
+      <!-- Case-launch -->
+      <section id="caselaunch">
+        <img src="Bilder/Bilde av Case launchen.png" alt="Tweet som annonserer lanseringen av et nytt case">
+        <div class="reveal-text">
+          <div class="content-box reveal">
+            <p>
+              12. februar 2025 lanserer CSGO Empire sine nye cases på X (tidligere Twitter). Blant de nye casene er det et som ser ekstra interessant ut.
+              Caset med navnet “Man” – når du ser nærmere, ser du et bilde av en ku satt sammen med et moderne hus som ligner på et kjent hus i Tistedalsveien.
+            </p>
+            <h2 class="glitch-title">GRIM’S COW: $5 000</h2>
+            <p>
+              Inne på Empire sin egen side kan du se hvilke skins du kan få i casen. Det er ett “skin” som skiller seg ut, for det er ikke et skin, det er en ku.
+              Navnet? Grim’s cow, verdt 5 000 dollar, og med en 0,07% sjanse skal det litt til for at den blir din.
+            </p>
+            <p>
+              Med disse bevisene kan vi bare anta at det var Empire som sto bak hele reisen til kua.
+              Empire har ikke ønsket å kommentere på saken og vi kan derfor ikke bekrefte 100% at de står bak, men sannsynligheten er ganske høy.
+              Hvordan kua har det nå vet vi heller ikke. Vi klarte ikke å spore opp bonden som eide den.
+            </p>
+          </div>
+        </div>
+      </section>
 
-        <section id="backtocow">
-            <div class="content-box">
-                <h2>DET ABSURDE HØYDEPUNKTET</h2>
-                <p><b>Hva har dette å gjøre med kuen som er på reisefot fra gården sin i Romeriket 1,5 år senere?</b></p>
-                <img src="Bilder/cowtram.png" />
-                <p>
-                    For det er ikke hvilket som helst sted denne kua havner. Den finnes bundet til en trapp som tilhører en enebolig i Tistedal.
-                    Eieren av denne boligen? Sebastian Ring Gjerlaugsen aka Grim. Politiet blir kontaktet og kuen blir sendt til en lokal bonde før eieren av kua kommer og henter den.
-                    Kuen var i god form og nok fornøyd med å være tilbake til det varme fjøset på en gård i Romeriket et sted.
-                    Saken ble henlagt da verken kueier eller Gjerlaugsen hadde lyst til å anmelde og Mattilsynet konkluderte med at det ikke hadde skjedd brudd på dyrevelferden.
-                    Den unge kua sitt eventyr var over, men det digitale fotspor hadde strukket seg enda lengre enn avisartikkelen som dekket saken.
-                </p>
-            </div>
-        </section>
+      <!-- Siste video – mobil & desktop -->
+      <section id="dmodelmobil">
+        <video id="final-video-mobil" controls playsinline muted preload="auto">
+          <source src="Bilder/Kusaken_video_1080x1920.mp4" type="video/mp4">
+        </video>
+      </section>
 
-        <section id="caselaunch">
-            <img src="Bilder/Bilde av Case launchen.png" alt="bilde av en tweet som annonserer lanseringen av et nytt case"/>
-            <div class="reveal-text">
-                <div class="content-box">
-                    <p>
-                        12. februar 2025 lanserer CSGO Empire sine nye cases på X (tidligere twitter). Blant de nye casene er det et av dem som ser ekstra interessant ut.
-                        Caset med navnet “Man” når du ser nærmere ser du bilde av en ku satt sammen med et moderne hus som ligner på et kjent hus i Tistedalsveien.
-                    </p>
-                    <h2 class="glitch-title">GRIM’S COW: $5 000</h2>
-                    <p>
-                        Inne på Empire sin egen side kan du se hvilke skins du kan få i casen. Det er et skin som skiller seg ut, for det er ikke et skin, det er en ku.
-                        Navnet? Grim’s cow verdt 5 000 dollar og med en 0,07% sjanse skal det litt til for at den blir din.
-                    </p>
-                    <p>
-                        Med disse bevisene kan vi bare anta at det var Empire som sto bak hele reisen til kua.
-                        Empire har ikke ønsket å kommentere på saken og vi kan derfor ikke bekrefte 100% at de står bak, men sannsynligheten er ganske høy.
-                        Hvordan kua har det vet vi heller ikke. Vi klarte ikke å spore ned bonden som eieren den
-                    </p>
-
-                </div>
-            </div>
-        </section>
-
-        <section id="dmodelmobil" >
-            <video id="final-video-mobil" controls playsinline muted preload="auto">
-                <source src="Bilder/Kusaken_video_1080x1920.mp4" type="video/mp4">
-            </video>
-        </section>
-        <section id="dmodeldesktop" >
-            <video id="final-video-desktop" controls playsinline muted preload="auto">
-                <source src="Bilder/Kusaken_video_1080p.mp4" type="video/mp4">
-            </video>
-        </section>
+      <section id="dmodeldesktop">
+        <video id="final-video-desktop" controls playsinline muted preload="auto">
+          <source src="Bilder/Kusaken_video_1080p.mp4" type="video/mp4">
+        </video>
+      </section>
     </main>
+  </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script>
+    // Scroll progress bar
+    const scrollBar = document.getElementById("scroll-progress");
 
-    <script>
-        gsap.registerPlugin(ScrollTrigger);
+    function updateScrollProgress() {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      scrollBar.style.width = progress + "%";
+    }
 
-        /* Ny GSAP for Scroll Progress Bar */
-        gsap.to("#scroll-progress", {
-            width: "100%", 
-            ease: "none",
-            scrollTrigger: {
-                trigger: "body",
-                start: "top top", 
-                end: "bottom bottom", 
-                scrub: 0.5, 
-            }
+    window.addEventListener("scroll", updateScrollProgress);
+    window.addEventListener("resize", updateScrollProgress);
+    updateScrollProgress();
+
+    // Reveal on scroll (IntersectionObserver)
+    const revealElements = document.querySelectorAll(".reveal");
+
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            revealObserver.unobserve(entry.target);
+          }
         });
-    
-        gsap.utils.toArray("video").forEach((video) => {
+      },
+      {
+        threshold: 0.2
+      }
+    );
 
-            if(video.id === 'Video') {
-                video.muted = true;
-            }
+    revealElements.forEach((el) => revealObserver.observe(el));
 
-            ScrollTrigger.create({
-                trigger: video,
-                start: "top center",
-                end: "bottom center",
+    // Ku-slides: aktiver tekst per slide
+    const cowSlides = document.querySelectorAll(".cow-slide");
 
-                onEnter: () => video.play().catch(e => console.log("Video Play Blocked")),
-                onLeave: () => video.pause(),
-                onEnterBack: () => video.play().catch(e => console.log("Video Play Blocked")),
-                onLeaveBack: () => video.pause()
-            });
+    const cowObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            cowSlides.forEach((slide) => slide.classList.remove("is-active"));
+            entry.target.classList.add("is-active");
+          }
         });
+      },
+      {
+        threshold: 0.5
+      }
+    );
 
-
-        gsap.utils.toArray(".cow-slide").forEach((slide, i) => {
-            const text = slide.querySelector('.imgText');
-
-            if (i === 0) {
-                gsap.set(text, { opacity: 1 });
-            }
-
-            ScrollTrigger.create({
-                trigger: slide,
-                start: "top top",
-                end: "+=120%",
-                pin: true,
-                pinSpacing: false,
-
-                onEnter: () => {
-                    gsap.fromTo(text,
-                        { opacity: 0, y: 50 },
-                        { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }
-                    );
-                },
-                onUpdate: (self) => {
-                    if (self.progress > 0.8 && self.direction === 1) {
-                         gsap.to(text, { opacity: 0, y: -50, duration: 0.4 });
-                    }
-                },
-                onLeaveBack: () => {
-                    gsap.to(text, { opacity: 0, y: 50, duration: 0.3 });
-                },
-                onEnterBack: () => {
-                    gsap.fromTo(text,
-                        { opacity: 0, y: 50 },
-                        { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }
-                    );
-                },
-            });
-        });
-
-
-        gsap.utils.toArray(".dropdown").forEach((dropdown, i) => {
-            const direction = i % 2 === 0 ? -50 : 50;
-
-            gsap.from(dropdown, {
-                x: direction,
-                opacity: 0,
-                duration: 0.6,
-                ease: "power2.out",
-                scrollTrigger: {
-                    trigger: dropdown,
-                    start: "top 80%",
-                    toggleActions: "play none none reverse"
-                }
-            });
-        });
-
-
-        gsap.utils.toArray("#secondPart .content-box, #backtocow .content-box, #caselaunch .content-box").forEach(box => {
-            gsap.from(box, {
-                y: 50,
-                opacity: 0,
-                duration: 0.8,
-                scrollTrigger: {
-                    trigger: box,
-                    start: "top 85%",
-                    toggleActions: "play none none reverse"
-                }
-            });
-        });
-
-
-        gsap.from("#secondPart img", {
-            scale: 0.5,
-            opacity: 0,
-            duration: 1.0,
-            ease: "elastic.out(1, 0.3)",
-            scrollTrigger: {
-                trigger: "#secondPart img",
-                start: "top 80%",
-                toggleActions: "play none none reverse"
-            }
-        });
-
-        const launchImage = document.querySelector('#caselaunch img');
-
-        ScrollTrigger.create({
-            trigger: "#caselaunch",
-            start: "top top",
-            end: "bottom 50%",
-            pin: launchImage,
-            pinSpacing: false,
-
-            onEnter: () => {
-                gsap.fromTo(launchImage,
-                    { scale: 0.9, opacity: 0.5 },
-                    { scale: 1, opacity: 1, duration: 0.8, ease: "power2.out" }
-                );
-            },
-        });
-
-    </script>
+    cowSlides.forEach((slide, index) => {
+      cowObserver.observe(slide);
+      // Første slide aktiv til å begynne med
+      if (index === 0) {
+        slide.classList.add("is-active");
+      }
+    });
+  </script>
 </body>
 </html>
