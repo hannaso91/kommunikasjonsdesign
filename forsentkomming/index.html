@@ -93,7 +93,6 @@ body::before {
 
  header{ 
     padding: 0.5rem; 
-    margin: 5rem auto 5rem auto;
 
     video{
         display: block;
@@ -135,7 +134,7 @@ body::before {
     position: absolute; 
     width: 22%; 
     left: 0; 
-    top: 94svh; 
+    top: 100svh; 
     will-change: transform; 
     transform: translateX(-100%);
     
@@ -380,13 +379,29 @@ body::before {
 
 @media (min-width: 768px) {
     
-    #introVideoMobil{
+    header {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    header video {
+        width: 100% !important;   
+        height: 100% !important;  
+        object-fit: cover !important; 
+        max-width: none !important;  
+        margin: 0 !important;
+    }
+
+    #introVideoMobil {
         display: none;
     }
 
     #introVideoDesktop {
-    display: block;
-}
+        display: block;
+    }
     
     .desktop-side-bar {
         display: block; 
@@ -486,6 +501,12 @@ body::before {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
+#preventLate {
+    h2{
+        margin: 200px auto;
+    }
+}
+
     
 }
     
@@ -499,10 +520,10 @@ body::before {
         <img src="Asset 3buss.svg" id="busicon" alt="en buss illustrasjon hvor bussen kjører over skjermen basert på scrolling"/>
 
         <header>
-            <video class="video" id="introVideoMobil" controls playsinline>
+            <video class="video" id="introVideoMobil" controls muted playsinline>
                 <source src="Komme_for_sent_9x16.mp4" type="video/mp4"> 
             </video>
-            <video class="video" id="introVideoDesktop" controls playsinline>
+            <video class="video" id="introVideoDesktop" controls muted playsinline>
                 <source src="Komme_for_sent_kommuniksjonsdesign(1).mp4" type="video/mp4"> 
             </video>
         </header>
@@ -558,7 +579,7 @@ body::before {
                     <h2>Så kommer spørsmålet: hva kan gjøres for å forhindre at studenter kommer for sent?</h2>
                     
                     <div class="prevent-late-sticky-container">
-                        <video class="video" id="doorVideo" controls playsinline>
+                        <video class="video" id="doorVideo" controls muted playsinline>
                             <source src="door_open.mp4" type="video/mp4"> 
                         </video>
                     </div>
@@ -610,40 +631,40 @@ body::before {
     <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
     <script>
         const bus = document.getElementById('busicon');
-const hiddenTexts = document.querySelectorAll('.hiddenText');
+        const hiddenTexts = document.querySelectorAll('.hiddenText');
 
-function setHiddenTextsVisible(isVisible) {
-  hiddenTexts.forEach(p => p.classList.toggle('visible', isVisible));
-}
+        function setHiddenTextsVisible(isVisible) {
+        hiddenTexts.forEach(p => p.classList.toggle('visible', isVisible));
+        }
 
-window.addEventListener('scroll', () => {
-  const scrollPosition = window.scrollY;
-  const movingSpeed = scrollPosition * 0.7;
-  bus.style.transform = `translateX(${movingSpeed}px)`;
+        window.addEventListener('scroll', () => {
+        const scrollPosition = window.scrollY;
+        const movingSpeed = scrollPosition * 0.7;
+        bus.style.transform = `translateX(${movingSpeed}px)`;
 
-  const rect = bus.getBoundingClientRect();
-  const outOfView = rect.left > window.innerWidth;
+        const rect = bus.getBoundingClientRect();
+        const outOfView = rect.left > window.innerWidth;
 
-  setHiddenTextsVisible(outOfView);
-});
+        setHiddenTextsVisible(outOfView);
+        });
 
 
-//stopp av video når video er utenfor skjermen
-const video = document.querySelectorAll("video")
 
-window.addEventListener('scroll', () => {
-  const rect = video.getBoundingClientRect(); // henter posisjonen til videoen, kilder til denne https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect
+        const video = document.querySelectorAll("video")
 
-  const visible = rect.bottom > 0 && rect.top < window.innerHeight;// Sjekker om videoen er synlig i vinduet
+        window.addEventListener('scroll', () => {
+        const rect = video.getBoundingClientRect(); // henter posisjonen til videoen, kilder til denne https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect
 
-  if (!visible) { // hvis videoen ikke er synlig
-    video.pause(); // pause video
-  } else {
-    video.play(); // spill hvis den er synlig
-  }
-});
+        const visible = rect.bottom > 0 && rect.top < window.innerHeight;// Sjekker om videoen er synlig i vinduet
 
-// tolate.js
+        if (!visible) { // hvis videoen ikke er synlig
+            video.pause(); // pause video
+        } else {
+            video.play(); // spill hvis den er synlig
+        }
+        });
+
+
 
 document.addEventListener("DOMContentLoaded", () => {
   // Finn alle videoelementer du vil kontrollere
@@ -670,16 +691,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-//bilde stopper opp i skrollingen, mens resten av siden fortsetter å skrolle
+
 document.addEventListener('DOMContentLoaded', () => {
     const pictureContainer = document.getElementById('pictureContainer');
     const quote1 = document.getElementById('quote-1');
     const quote2 = document.getElementById('quote-2');
     const quote3 = document.getElementById('quote-3');
 
-    if (!pictureContainer || !quote1 || !quote2 || !quote3) return; // Sikkerhetssjekk
+    if (!pictureContainer || !quote1 || !quote2 || !quote3) return; 
 
-    // Få den absolutte Y-posisjonen til containeren ved lasting
+
     const containerStart = pictureContainer.offsetTop; 
 
     window.addEventListener('scroll', () => {
