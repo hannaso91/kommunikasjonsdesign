@@ -178,7 +178,7 @@ body {
   width: 50%;
   padding: 40px clamp(16px, 1.8vw, 26px);
   background:
-    linear-gradient(180deg, #faf7f2, #f3efe9),
+    linear-gradient(180deg, #f3e7c1, #ffeccf),
     repeating-linear-gradient(0deg,
       #0000,
       #0000 11px,
