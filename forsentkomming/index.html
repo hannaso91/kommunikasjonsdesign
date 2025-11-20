@@ -649,22 +649,22 @@ body::before {
         });
 
 
-//stopp av video når video er utenfor skjermen
-const video = document.querySelectorAll("video")
 
-window.addEventListener('scroll', () => {
-  const rect = video.getBoundingClientRect(); // henter posisjonen til videoen, kilder til denne https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect
+        const video = document.querySelectorAll("video")
 
-  const visible = rect.bottom > 0 && rect.top < window.innerHeight;// Sjekker om videoen er synlig i vinduet
+        window.addEventListener('scroll', () => {
+        const rect = video.getBoundingClientRect(); // henter posisjonen til videoen, kilder til denne https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect
 
-  if (!visible) { // hvis videoen ikke er synlig
-    video.pause(); // pause video
-  } else {
-    video.play(); // spill hvis den er synlig
-  }
-});
+        const visible = rect.bottom > 0 && rect.top < window.innerHeight;// Sjekker om videoen er synlig i vinduet
 
-// tolate.js
+        if (!visible) { // hvis videoen ikke er synlig
+            video.pause(); // pause video
+        } else {
+            video.play(); // spill hvis den er synlig
+        }
+        });
+
+
 
 document.addEventListener("DOMContentLoaded", () => {
   // Finn alle videoelementer du vil kontrollere
@@ -691,16 +691,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-//bilde stopper opp i skrollingen, mens resten av siden fortsetter å skrolle
+
 document.addEventListener('DOMContentLoaded', () => {
     const pictureContainer = document.getElementById('pictureContainer');
     const quote1 = document.getElementById('quote-1');
     const quote2 = document.getElementById('quote-2');
     const quote3 = document.getElementById('quote-3');
 
-    if (!pictureContainer || !quote1 || !quote2 || !quote3) return; // Sikkerhetssjekk
+    if (!pictureContainer || !quote1 || !quote2 || !quote3) return; 
 
-    // Få den absolutte Y-posisjonen til containeren ved lasting
+
     const containerStart = pictureContainer.offsetTop; 
 
     window.addEventListener('scroll', () => {
