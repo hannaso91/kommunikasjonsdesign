@@ -134,7 +134,7 @@ body::before {
     position: absolute; 
     width: 22%; 
     left: 0; 
-    top: 100svh; 
+    top: 98svh; 
     will-change: transform; 
     transform: translateX(-100%);
     
@@ -621,8 +621,7 @@ body::before {
     </div>
 
     
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+ 
     <script>
         const bus = document.getElementById('busicon');
         const hiddenTexts = document.querySelectorAll('.hiddenText');
@@ -632,14 +631,14 @@ body::before {
         }
 
         window.addEventListener('scroll', () => {
-        const scrollPosition = window.scrollY;
-        const movingSpeed = scrollPosition * 0.7;
-        bus.style.transform = `translateX(${movingSpeed}px)`;
+            const scrollPosition = window.scrollY;
+            const movingSpeed = scrollPosition * 0.7;
+            bus.style.transform = `translateX(${movingSpeed}px)`;
 
-        const rect = bus.getBoundingClientRect();
-        const outOfView = rect.left > window.innerWidth;
+            const rect = bus.getBoundingClientRect();
+            const outOfView = rect.left > window.innerWidth;
 
-        setHiddenTextsVisible(outOfView);
+            setHiddenTextsVisible(outOfView);
         });
 
 
@@ -649,36 +648,32 @@ body::before {
         window.addEventListener('scroll', () => {
         const rect = video.getBoundingClientRect(); // henter posisjonen til videoen, kilder til denne https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect
 
-        const visible = rect.bottom > 0 && rect.top < window.innerHeight;// Sjekker om videoen er synlig i vinduet
+        const visible = rect.bottom > 0 && rect.top < window.innerHeight;
 
-        if (!visible) { // hvis videoen ikke er synlig
-            video.pause(); // pause video
+        if (!visible) { 
+            video.pause(); 
         } else {
-            video.play(); // spill hvis den er synlig
+            video.play(); 
         }
         });
 
 
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Finn alle videoelementer du vil kontrollere
+
   const videos = document.querySelectorAll("video");
 
-  // Opprett en observer som sjekker når videoen er synlig
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       const video = entry.target;
       if (entry.isIntersecting) {
-        // Spill av når videoen er synlig
         video.play();
       } else {
-        // Stopp når videoen ikke er i bildet
         video.pause();
       }
     });
-  }, { threshold: 0.5 }); // 0.5 betyr at minst 50% må være synlig
+  }, { threshold: 0.5 }); 
 
-  // Koble observeren til hver video
   videos.forEach(video => observer.observe(video));
 });
 
@@ -701,44 +696,34 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const scrollPosition = window.scrollY;
         
-        // Den totale scrollbare avstanden INNI containeren (300vh - 100vh sticky ramme)
         const totalScrollDistance = pictureContainer.offsetHeight - window.innerHeight;
         
-        // Beregner hvor langt vi har scrollet inn i containerens 'sticky' område.
         let scrollInside = scrollPosition - containerStart; 
         
-        // Progress fra 0 (start av container) til 1 (slutt av container)
         let progress = scrollInside / totalScrollDistance;
         
-        // Sikrer at progress holder seg mellom 0 og 1
         progress = Math.max(0, Math.min(1, progress));
 
-        // ... (etter at 'progress' er beregnet) ...
         const stickyImage = document.querySelector('.stickyImage');
-        const parallaxShift = progress * 50; // Flytt bildet 50px opp totalt (fra 0 til 1)
+        const parallaxShift = progress * 50; 
 
         const zoomLevel = 1 + (progress * 0.15);
 
         stickyImage.style.transform = `translateY(${parallaxShift}px) scale(${zoomLevel})`; 
-        // OBS: Hvis du vil zoome samtidig, bruk: `translateY(${parallaxShift}px) scale(1.05)`
 
-        // --- Timingen for quotes ---
         
-        // Tekst 1: vises mellom 5% og 30% av scroll-avstanden
         if (progress > 0.05 && progress < 0.3) {
             quote1.classList.add('show');
         } else {
             quote1.classList.remove('show');
         }
 
-        // Tekst 2: vises mellom 35% og 60% av scroll-avstanden
         if (progress > 0.35 && progress < 0.6) {
             quote2.classList.add('show');
         } else {
             quote2.classList.remove('show');
         }
 
-        // Tekst 3: vises fra 65% og utover
         if (progress > 0.65) {
             quote3.classList.add('show');
         } else {
@@ -749,7 +734,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-//svar på spørsmål kode
+//På koden under har vi fått hjelp av en bekjent som kan programmering godt. 
+
 const buttons = document.querySelectorAll('.buttonSvar');
 const result = document.getElementById('result');
 
@@ -778,34 +764,29 @@ buttons.forEach(btn => {
   });
 });
 
-//swipe på kort ved desktop
 
-//swipe på kort ved desktop
+// koden under har vi fått hjelp fra en bekjent for å få riktig
 const cardContainer = document.getElementById('card-swipe'); 
 const prevBtn = document.getElementById('prev-btn');
 const nextBtn = document.getElementById('next-btn');
 
 if (cardContainer && prevBtn && nextBtn) {
-    // NYTT FIX: Tvinger containeren til å rulle helt til venstre (første kort)
     cardContainer.scrollTo({ 
         left: 0, 
-        behavior: 'instant' // Bruker 'instant' for å unngå en synlig animasjon ved lasting
+        behavior: 'instant' 
     }); 
 
     const cards = cardContainer.querySelectorAll('p'); 
-    let currentIndex = 0; // Starter alltid på første kort (indeks 0)
+    let currentIndex = 0; 
 
     function updateButtonState() {
-        // Deaktiverer Tilbake-knappen på første kort, Frem-knappen på siste
         prevBtn.disabled = currentIndex === 0;
         nextBtn.disabled = currentIndex === cards.length - 1;
     }
 
     function goToCard(index) {
-        // Sikrer at indeksen er innenfor grensene (0 til antall kort - 1)
         currentIndex = Math.max(0, Math.min(index, cards.length - 1));
         
-        // Utfører den jevne rullingen til riktig kort
         cards[currentIndex].scrollIntoView({
             behavior: 'smooth',
             block: 'nearest',
@@ -823,76 +804,11 @@ if (cardContainer && prevBtn && nextBtn) {
         goToCard(currentIndex + 1);
     });
 
-    // Initialiser knappestatusen når siden lastes
     updateButtonState();
 }
 
 
-(function () {
-  const figure = document.querySelector('#preventLate .sticky-image-section');
-  if (!figure) return;
 
-  // Les konfig fra CSS-variabler, med sikre defaults
-  function readConfig() {
-    const cs = getComputedStyle(figure);
-    const max = parseFloat(cs.getPropertyValue('--overlay-max')) || 0.75;
-    const distRaw = (cs.getPropertyValue('--darken-distance') || '120vh').trim();
-    const distPx = distRaw.endsWith('vh')
-      ? (parseFloat(distRaw) / 100) * window.innerHeight
-      : distRaw.endsWith('px')
-        ? parseFloat(distRaw)
-        : window.innerHeight * 1.2;
-    return { max, distPx };
-  }
-
-  // Startpunktet for mørkning settes når figuren treffer toppen av viewport
-  // Vi måler avstand fra dokument-top til figur-top (statisk), og trekker fra scrollY.
-  let figDocTop = 0;
-  function measureFigureTop() {
-    // getBoundingClientRect().top + scrollY gir pos i dokumentkoordinater
-    figDocTop = figure.getBoundingClientRect().top + window.scrollY;
-  }
-
-  function update() {
-    const { max, distPx } = readConfig();
-
-    // Hvor langt har vi scrollet "forbi" punktet der figuren møter toppen?
-    const passed = Math.max(window.scrollY - figDocTop, 0);
-    const t = Math.min(Math.max(passed / distPx, 0), 1); // 0 → 1
-    const alpha = Number((t * max).toFixed(3));
-
-    figure.style.setProperty('--overlay-alpha', alpha);
-  }
-
-  // Throttle via rAF for bedre ytelse
-  let ticking = false;
-  function onScroll() {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(() => {
-      update();
-      ticking = false;
-    });
-  }
-
-  // Init – vi må måle figuren etter at layout er klar
-  function init() {
-    measureFigureTop();
-    update();
-  }
-
-  // Kjør init når DOM er klar (og kjør en gang til etter bilder har lastet)
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init, { once: true });
-  } else {
-    init();
-  }
-  window.addEventListener('load', () => { measureFigureTop(); update(); }, { once: true });
-
-  // Events
-  window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', () => { measureFigureTop(); update(); });
-})();
 
 
     </script>
