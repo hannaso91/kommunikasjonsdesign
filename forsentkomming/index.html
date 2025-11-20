@@ -63,7 +63,6 @@ body {
 
  } 
 
- /* — Lys bakgrunn bak teksten (variant 2) — */
 .textbox {
   background: linear-gradient(to right, rgba(255,255,255,0.9) 40%, rgba(255,255,255,0.6) 100%);
   padding: 1.5rem 2rem;
@@ -75,7 +74,6 @@ body {
   margin: 3rem 1rem;
 }
 
-/* Liten "hover-effekt" for mer liv når man leser */
 .textbox:hover {
   transform: scale(1.05);
   box-shadow: 0 10px 25px rgba(0,0,0,0.2);
@@ -285,10 +283,6 @@ body::before {
     display: none;
 }
 
-
-
-
-
 .image-universityroom {
     width: 100%;
     height: auto;
@@ -315,14 +309,11 @@ body::before {
 }
 
 
-
 #text-after-sticky h2 {
 
         margin: 400px auto;
     
 }
-
-
 #questionContainer {
     background-color: #92afbf;
     border-radius: 12px;
@@ -659,23 +650,23 @@ body::before {
 
 
 
-document.addEventListener("DOMContentLoaded", () => {
+        document.addEventListener("DOMContentLoaded", () => {
 
-  const videos = document.querySelectorAll("video");
+        const videos = document.querySelectorAll("video");
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      const video = entry.target;
-      if (entry.isIntersecting) {
-        video.play();
-      } else {
-        video.pause();
-      }
-    });
-  }, { threshold: 0.5 }); 
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+            const video = entry.target;
+            if (entry.isIntersecting) {
+                video.play();
+            } else {
+                video.pause();
+            }
+            });
+        }, { threshold: 0.5 }); 
 
-  videos.forEach(video => observer.observe(video));
-});
+        videos.forEach(video => observer.observe(video));
+        });
 
 
 
@@ -806,9 +797,6 @@ if (cardContainer && prevBtn && nextBtn) {
 
     updateButtonState();
 }
-
-
-
 
 
     </script>
