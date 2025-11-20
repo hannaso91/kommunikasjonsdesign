@@ -94,6 +94,7 @@ body {
   display: block;
   margin: 0;
   align-self: center;
+  border-radius: 10px;
 }
 
 .site-header h1 {
@@ -478,6 +479,7 @@ blockquote {
   max-width: 40%;
   height: auto;
   align-self: center;
+  border-radius: 10px;
 }
 
 

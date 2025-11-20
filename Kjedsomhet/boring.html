@@ -38,6 +38,10 @@
       line-height: 1.6;
     }
 
+    a{
+      color: #fff;
+    }
+
     .reading-progress {
       position: fixed;
       top: 0;
@@ -658,7 +662,8 @@
         Samtidig ser man at tallene for mental uhelse er høyere enn noen gang, og de fortsetter å stige. Er denne tilgangen på underholdning bra for mennesker, trenger vi den? 
         Eller kan kjedsomheten være det vi trenger for å tenke, føle, hvile og skape sånn som mennesker gjorde før?
       </p>
-      <p class="hero__meta">Tekst: Signe-Sofie Jansen · Foto: Illustrasjon</p>
+      <p class="hero__meta">Tekst: Signe-Sofie Jansen · Foto: Photo by <a href="https://unsplash.com/@shaikhulud?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Maxim Tolchinskiy</a> on <a href="https://unsplash.com/photos/a-person-lying-on-a-bed-with-a-tablet-1cNX5GffrCE?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+      </p>
     </div>
   </header>
 
@@ -683,6 +688,8 @@
           <source src="assets/Hjerne_animasjon.mp4" type="video/mp4">
         </video>
       </div>
+      <p id="teksttilanim">Illustrasjon laget av Julie Andersen</p>
+
     </section>
 
     <section class="chapter">
@@ -963,12 +970,12 @@ if (modeToggle && modeDescription) {
       modeToggle.classList.add("mode-toggle--exercise");
       modeToggle.classList.remove("mode-toggle--rest");
       modeDescription.textContent =
-        "Du er mentalt 'på', slik mye skjermbruk holder oss. Oppmerksomheten jobber, men kroppen hviler. Det skaper det farlige gapet Bjorvand beskriver – der vi tror vi er i aktivitet, men egentlig mangler den fysiske reguleringen som kroppen trenger.";
+      "Når hjernen er aktiv, øker områder aktiviteten i de frontale og parietale områdene i hjernen. Disse områdene styrer oppmerksomhet og styrker forbindelsene som koordinerer informasjonsflyten i hjernen. Hjernen kan dermed tilpasse seg ulike krav og løser oppgaver lettere og mer effektivt.";
     } else {
       modeToggle.classList.remove("mode-toggle--exercise");
       modeToggle.classList.add("mode-toggle--rest");
       modeDescription.textContent =
-        "Her får hjernen slippe unna konstant stimuli. Default mode-nettverket aktiveres, kreativitet får plass, og kroppen går inn i ekte hvile. Dette er øyeblikkene som forsvinner når hver mikro-pause fylles med telefonen.";
+      "Når hjernen hviler, bearbeider den minner og tanker, den organiserer informasjon og forbereder seg på nye inntrykk. Denne funksjonen er også ansvarlig for vedlikeholdsfunksjoner i kroppen. Derfor er hvile viktig og avgjørende for læring og hukommelse."
     }
   }
 
