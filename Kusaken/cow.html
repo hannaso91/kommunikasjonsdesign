@@ -26,8 +26,8 @@
             line-height: 1.5;
             color: #fff;
             transition: background-color 0.5s ease;
-            max-width: 1920px; /* Lagt til for konsistens på VELDIG store skjermer */
-            margin: 0 auto; /* Sentrerer body på VELDIG store skjermer */
+            max-width: 1920px; 
+            margin: 0 auto; 
         }
 
         #scroll-progress {
@@ -39,26 +39,25 @@
             z-index: 1000;
             box-sizing: border-box; 
             
-            /* Tydeligere pixel-kanter */
+          
             border: 2px solid #000;
             border-top: 3px solid #000;
             border-bottom: 5px solid #000; 
 
-            /* STEG-FOR-STEG GRADIENT for å tvinge frem pixelering/striper: */
-            background-color: #CC0000; /* Fallback farge */
+          
+            background-color: #CC0000; 
             background-image: 
                 repeating-linear-gradient(
                     to bottom, 
-                    #FF6666, /* Lyseste rød */
+                    #FF6666, 
                     #FF6666 4px,
-                    #CC0000 4px, /* Standard rød */
+                    #CC0000 4px, 
                     #CC0000 8px,
-                    #990000 8px, /* Mørkeste rød (skygging) */
+                    #990000 8px, 
                     #990000 12px
                 );
-            background-size: 100% 16px; /* Viktig: Må matche høyden på baren */
+            background-size: 100% 16px;
             
-            /* Sørger for at bildegjengivelsen er skarp */
             image-rendering: pixelated; 
         }
      
@@ -262,7 +261,7 @@
             min-height: 200vh;
         }
         #caselaunch img {
-            position: relative; /* eller bare dropp hele 'position' */
+            position: relative; 
             top: 0;
             width: 90%;
             max-width: 800px;
@@ -497,7 +496,7 @@
     <script>
         gsap.registerPlugin(ScrollTrigger);
 
-        /* Ny GSAP for Scroll Progress Bar */
+        //denne biten med scroll fikk vi hjelp av Anders Berg
         gsap.to("#scroll-progress", {
             width: "100%", 
             ease: "none",
